@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Character : MonoBehaviour
+public class Character : BasicBehaviour
 {
     [SerializeField]
     protected float speed = 4f;
@@ -10,8 +10,9 @@ public class Character : MonoBehaviour
     protected Rigidbody2D rb;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected override void OnStart()
     {
+        base.OnStart();
         rb = GetComponent<Rigidbody2D>();
     }
 

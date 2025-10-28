@@ -8,6 +8,10 @@ public class Player : Character
     private float jumpSpeed = 8f;
     
     //ここにStart()関数を入れますがEventHandlerをつけていないので出来ません。書かないでね。
+    protected override void OnStart()
+    {
+        base.OnStart();
+    }
     
     // Update is called once per frame
     void Update()
