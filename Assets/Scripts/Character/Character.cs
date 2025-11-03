@@ -4,22 +4,19 @@ using UnityEngine.InputSystem;
 public class Character : BasicBehaviour
 {
     [SerializeField]
-    protected float speed = 4f;
+    protected float _speed = 4f;
     
     public LayerMask GroundLayer;
-    protected Rigidbody2D rb;
+    protected Rigidbody2D _body;
     
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void OnStart()
     {
-        base.OnStart();
-        rb = GetComponent<Rigidbody2D>();
+        _body = GetComponent<Rigidbody2D>();
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    protected override void OnUpdate()
     {
-
+        base.OnUpdate();
     }
     
     protected bool isGrounded()

@@ -31,4 +31,14 @@ public class BasicBehaviour : MonoBehaviour
     {
         // 親クラスのUpdate処理
     }
+
+    void FixedUpdate()
+    {
+        OnFixedUpdate();
+    }
+
+    protected virtual void OnFixedUpdate()
+    {
+        
+    }
 }

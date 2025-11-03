@@ -5,7 +5,9 @@ public class Player : Character
     //speedはインスペクターからいじれます
     
     [SerializeField]
-    private float jumpSpeed = 8f;
+    private float _jumpSpeed = 8f;
+    public bool isButtonPress;
+    public GameObject VisualRoot;
     
     //ここにStart()関数を入れますがEventHandlerをつけていないので出来ません。書かないでね。
     protected override void OnStart()
@@ -13,16 +15,37 @@ public class Player : Character
         base.OnStart();
     }
     
-    // Update is called once per frame
-    void Update()
+    protected override void OnUpdate()
     {
-        rb.linearVelocity = new Vector2(Input.GetAxis("Horizontal") * speed, rb.linearVelocity.y);
+        base.OnUpdate();
         
-        Debug.Log(isGrounded());
+        var visualScale = VisualRoot.transform.localScale;
+        
+        _body.linearVelocity = new Vector2(Input.GetAxis("Horizontal") * _speed, _body.linearVelocity.y);
+        
+        if (_body.linearVelocity.x < 0f)
+        {
+            visualScale.x = -Mathf.Abs(visualScale.x);
+            VisualRoot.transform.localScale = visualScale;
+        }
+        else if (_body.linearVelocity.x > 0f)
+        {
+            visualScale.x = Mathf.Abs(visualScale.x);
+            VisualRoot.transform.localScale = visualScale;
+        }
         
         if (isGrounded() && Input.GetKeyDown(KeyCode.Space))
         {
-            rb.linearVelocityY += jumpSpeed;
+            _body.linearVelocityY += _jumpSpeed;
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            isButtonPress = true;
+        }
+        else
+        {
+            isButtonPress = false;
         }
     }
 }
