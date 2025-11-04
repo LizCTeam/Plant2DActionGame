@@ -3,6 +3,7 @@ using UnityEngine;
 using DG.Tweening;
 using IceMilkTea.StateMachine;
 using UnityEditor.Animations;
+using UnityEngine.UI;
 
 public class CageBehaviour : BasicBehaviour
 {
@@ -12,7 +13,10 @@ public class CageBehaviour : BasicBehaviour
     private Animator VegeAnimatior;
     public GameObject Position;
     public GameObject Projectile;
-    
+    public Text Text;
+
+    public float timer = 0f;
+    public bool isGrowing = false;
     
     private ImtStateMachine<CageBehaviour> stateMachine;
     
@@ -27,16 +31,19 @@ public class CageBehaviour : BasicBehaviour
 
     private class NothingState : ImtStateMachine<CageBehaviour>.State
     {
+        
         // 状態へ突入時の処理はこのEnterで行う
         protected internal override void Enter()
         {
+            Context.isGrowing = false;
+            Context.timer = 0f;
             Context.VegeAnimatior.Play("Nothing");
         }
 
         // 状態の更新はこのUpdateで行う
         protected internal override void Update()
         {
-            if (Input.GetKeyDown(KeyCode.L))
+            if (Input.GetKey(KeyCode.L))
             {
                 stateMachine.SendEvent((int)StateEvent.Seeding);
             }
@@ -52,14 +59,19 @@ public class CageBehaviour : BasicBehaviour
     {
         protected internal override void Enter()
         {
+            Context.isGrowing = true;
             Context.VegeAnimatior.Play("Seeding");
         }
         
         protected internal override void Update()
         {
-            if (Input.GetKeyDown(KeyCode.L))
+            if (Input.GetKey(KeyCode.L))
             {
-                stateMachine.SendEvent((int)StateEvent.Watering);
+                Context.timer += Time.deltaTime;
+                if (Context.timer >= 5f)
+                {
+                    stateMachine.SendEvent((int)StateEvent.Watering);
+                }
             }
         }
     }
@@ -72,9 +84,13 @@ public class CageBehaviour : BasicBehaviour
         }
         protected internal override void Update()
         {
-            if (Input.GetKeyDown(KeyCode.L))
+            if (Input.GetKey(KeyCode.L))
             {
-                stateMachine.SendEvent((int)StateEvent.Watering);
+                Context.timer += Time.deltaTime;
+                if (Context.timer >= 15f)
+                {
+                    stateMachine.SendEvent((int)StateEvent.Watering);
+                }
             }
         }
     }
@@ -87,9 +103,13 @@ public class CageBehaviour : BasicBehaviour
         }
         protected internal override void Update()
         {
-            if (Input.GetKeyDown(KeyCode.L))
+            if (Input.GetKey(KeyCode.L))
             {
-                stateMachine.SendEvent((int)StateEvent.Watering);
+                Context.timer += Time.deltaTime;
+                if (Context.timer >= 30f)
+                {
+                    stateMachine.SendEvent((int)StateEvent.Watering);
+                }
             }
         }
     }
@@ -98,6 +118,8 @@ public class CageBehaviour : BasicBehaviour
     {
         protected internal override void Enter()
         {
+            Context.isGrowing = false;
+            Context.timer = 0f;
             Context.VegeAnimatior.Play("Mature");
         }
         protected internal override void Update()
@@ -138,6 +160,7 @@ public class CageBehaviour : BasicBehaviour
     {
         base.OnUpdate();
         stateMachine.Update();
+        Text.text = "Timer : " + timer;
     }
 
     protected override void OnFixedUpdate()
