@@ -68,7 +68,7 @@ public class CageBehaviour : BasicBehaviour
             if (Input.GetKey(KeyCode.L))
             {
                 Context.timer += Time.deltaTime;
-                if (Context.timer >= 5f)
+                if (Context.timer >= 3f)
                 {
                     stateMachine.SendEvent((int)StateEvent.Watering);
                 }
@@ -80,6 +80,7 @@ public class CageBehaviour : BasicBehaviour
     {
         protected internal override void Enter()
         {
+            Context.isGrowing = true;
             Context.VegeAnimatior.Play("Sprout");
         }
         protected internal override void Update()
@@ -87,7 +88,7 @@ public class CageBehaviour : BasicBehaviour
             if (Input.GetKey(KeyCode.L))
             {
                 Context.timer += Time.deltaTime;
-                if (Context.timer >= 15f)
+                if (Context.timer >= 6f)
                 {
                     stateMachine.SendEvent((int)StateEvent.Watering);
                 }
@@ -99,6 +100,7 @@ public class CageBehaviour : BasicBehaviour
     {
         protected internal override void Enter()
         {
+            Context.isGrowing = true;
             Context.VegeAnimatior.Play("Flora");
         }
         protected internal override void Update()
@@ -106,7 +108,7 @@ public class CageBehaviour : BasicBehaviour
             if (Input.GetKey(KeyCode.L))
             {
                 Context.timer += Time.deltaTime;
-                if (Context.timer >= 30f)
+                if (Context.timer >= 9f)
                 {
                     stateMachine.SendEvent((int)StateEvent.Watering);
                 }
