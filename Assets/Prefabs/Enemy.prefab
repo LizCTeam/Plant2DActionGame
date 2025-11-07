@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2601b95771c5ed540855ad76c712bc54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Hurtbox
-  owner: {fileID: 0}
+  owner: {fileID: 710187486709292746}
 --- !u!1 &6149009857972938189
 GameObject:
   m_ObjectHideFlags: 0
