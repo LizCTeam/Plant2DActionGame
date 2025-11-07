@@ -22,7 +22,7 @@ public class Character : BasicBehaviour
     protected bool isGrounded()
     {
         //BoxColliderにあるCastを使って地面の判定をboolで返します。
-        BoxCollider2D c = GetComponent<BoxCollider2D>();
+        Collider2D c = GetComponent<Collider2D>();
         return Physics2D.BoxCast(c.bounds.center, c.bounds.size, 0f, Vector2.down, .1f, GroundLayer);
     }
 }

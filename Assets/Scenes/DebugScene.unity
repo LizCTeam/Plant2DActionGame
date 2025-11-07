@@ -620,7 +620,7 @@ GameObject:
   - component: {fileID: 737206701}
   - component: {fileID: 737206700}
   - component: {fileID: 737206699}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: Ground (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -826,6 +826,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 845780063}
   m_CullTransparentMesh: 1
+--- !u!114 &1017347615 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6586488007683112479, guid: bb97f47542140f144ae654eda6367b93, type: 3}
+  m_PrefabInstance: {fileID: 1276838122}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2989146ec47050f468fff141064890eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Player
 --- !u!1 &1022138567
 GameObject:
   m_ObjectHideFlags: 0
@@ -963,6 +974,79 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2124766211}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1276838122
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 536589048229251436, guid: bb97f47542140f144ae654eda6367b93, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -73.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 536589048229251436, guid: bb97f47542140f144ae654eda6367b93, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 536589048229251436, guid: bb97f47542140f144ae654eda6367b93, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 536589048229251436, guid: bb97f47542140f144ae654eda6367b93, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 536589048229251436, guid: bb97f47542140f144ae654eda6367b93, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 536589048229251436, guid: bb97f47542140f144ae654eda6367b93, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 536589048229251436, guid: bb97f47542140f144ae654eda6367b93, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 536589048229251436, guid: bb97f47542140f144ae654eda6367b93, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 536589048229251436, guid: bb97f47542140f144ae654eda6367b93, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 536589048229251436, guid: bb97f47542140f144ae654eda6367b93, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3515723875825785158, guid: bb97f47542140f144ae654eda6367b93, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6136935583608711820, guid: bb97f47542140f144ae654eda6367b93, type: 3}
+      propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8548776155002285435, guid: bb97f47542140f144ae654eda6367b93, type: 3}
+      propertyPath: Text
+      value: 
+      objectReference: {fileID: 1692761571}
+    - target: {fileID: 8548776155002285435, guid: bb97f47542140f144ae654eda6367b93, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1017347615}
+    - target: {fileID: 8758148487688733650, guid: bb97f47542140f144ae654eda6367b93, type: 3}
+      propertyPath: m_Simulated
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bb97f47542140f144ae654eda6367b93, type: 3}
 --- !u!1 &1295810760
 GameObject:
   m_ObjectHideFlags: 0
@@ -1077,7 +1161,7 @@ GameObject:
   - component: {fileID: 1497735211}
   - component: {fileID: 1497735210}
   - component: {fileID: 1497735209}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: Ground (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1849,3 +1933,4 @@ SceneRoots:
   - {fileID: 336229560}
   - {fileID: 8669424357918433240}
   - {fileID: 1295810764}
+  - {fileID: 1276838122}
