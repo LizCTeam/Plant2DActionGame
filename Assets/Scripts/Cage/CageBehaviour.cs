@@ -11,8 +11,12 @@ public class CageBehaviour : BasicBehaviour
     public Player Player;
     [SerializeField]
     private Animator VegeAnimatior;
+    
     [SerializeField]
     private GameObject CarrotAbilityObject;
+    [SerializeField]
+    private GameObject CornAbilityObject;
+    
     public Text Text;
     
     public float timer = 0f;
@@ -153,6 +157,7 @@ public class CageBehaviour : BasicBehaviour
         stateMachine.SetStartState<NothingState>();
         
         abilities.Add(VegetableType.Carrot, CarrotAbilityObject.GetComponent<CarrotAbility>());
+        abilities.Add(VegetableType.Corn, CornAbilityObject.GetComponent<CornAbility>());
     }
 
     protected override void OnStart()
@@ -175,7 +180,7 @@ public class CageBehaviour : BasicBehaviour
 
     public void AbilityUse()
     {
-        abilities[VegetableType.Carrot]?.UseAbility();
+        abilities[VegetableType.Corn]?.UseAbility();
     }
     
 }

@@ -30,7 +30,39 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6220393352169670784}
+  - {fileID: 3806078367196223936}
   m_Father: {fileID: 6731067949295723703}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3392103930212843314
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6416577030533934575}
+  m_Layer: 7
+  m_Name: CornPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6416577030533934575
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3392103930212843314}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3806078367196223936}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3816890863540199098
 GameObject:
@@ -331,9 +363,59 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CageBehaviour
   Player: {fileID: 0}
   VegeAnimatior: {fileID: 7670275346014391553}
+  CarrotAbilityObject: {fileID: 0}
+  CornAbilityObject: {fileID: 0}
   Text: {fileID: 0}
   timer: 0
   isGrowing: 0
+--- !u!1 &8160908166020765398
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3806078367196223936}
+  - component: {fileID: 8943976487142189335}
+  m_Layer: 7
+  m_Name: CornAbility
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3806078367196223936
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8160908166020765398}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6416577030533934575}
+  m_Father: {fileID: 1239151532408975432}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8943976487142189335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8160908166020765398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74b6e000f210ff340a99af73bc0fe446, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CornAbility
+  Parent: {fileID: 0}
+  Position: {fileID: 3392103930212843314}
+  CornObject: {fileID: 6059058618061238771, guid: 9d069388950008f46b70f1ae2614a2bf, type: 3}
 --- !u!1 &8457069654796546635
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,7 +14,7 @@ public class CornDrill : BasicBehaviour
     {
         base.OnStart();
         GameObject _playerObject = GameObject.FindWithTag("Player");
-        _player = _playerObject.GetComponent<Player>();
+        _player = _playerObject?.GetComponent<Player>();
         _player.speedMultiplier = this._speedMultiplier;
     }
 
