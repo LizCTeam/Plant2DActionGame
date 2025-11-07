@@ -106,19 +106,16 @@ public class PlayerController : BasicBehaviour
 
     private void OnFire(InputAction.CallbackContext context)
     {
-        // 攻撃ボタン押したときの処理を記述
         Debug.Log("OnFire");
     }
 
     private void OnUniqueAction(InputAction.CallbackContext context)
     {
-        // 水やり、種まきボタンを押したときの処理を記述
         Debug.Log("OnUniqueAction");
     }
 
     private void OnSwitching(InputAction.CallbackContext context)
     {
-        // 種の切り替えボタンを押したときの処理を記述
         Debug.Log("OnSwitching");
     }
 
