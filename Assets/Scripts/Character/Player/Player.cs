@@ -6,6 +6,9 @@ public class Player : Character
     
     [SerializeField]
     private float _jumpSpeed = 8f;
+    
+    public float speedMultiplier = 1f;
+    
     public bool isButtonPress;
     public GameObject VisualRoot;
     
@@ -21,7 +24,7 @@ public class Player : Character
         
         var visualScale = VisualRoot.transform.localScale;
         
-        _body.linearVelocity = new Vector2(Input.GetAxis("Horizontal") * _speed, _body.linearVelocity.y);
+        _body.linearVelocity = new Vector2(Input.GetAxis("Horizontal") * _speed * speedMultiplier, _body.linearVelocity.y);
         
         if (_body.linearVelocity.x < 0f)
         {
