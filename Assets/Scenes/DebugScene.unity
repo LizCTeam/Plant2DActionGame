@@ -780,8 +780,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -306, y: 220}
-  m_SizeDelta: {x: 359.9837, y: 110.7713}
+  m_AnchoredPosition: {x: -262, y: 186.5}
+  m_SizeDelta: {x: 452, y: 187}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &845780065
 MonoBehaviour:
@@ -816,8 +816,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "WASD : \u79FB\u52D5\nL : \u6C34\u3084\u308A\n\u5DE6\u30AF\u30EA\u30C3\u30AF
-    : \u958B\u82B1\u6642\u653B\u6483"
+  m_Text: "WASD : \u79FB\u52D5\n\u53F3\u30AF\u30EA\u30C3\u30AF : \u6C34\u3084\u308A\n\u5DE6\u30AF\u30EA\u30C3\u30AF
+    : (\u6E80\u958B\u6642)  \u653B\u6483\nR\uFF1A(\u4F55\u3082\u306A\u3044\u6642) 
+    \u7A2E\u30C1\u30A7\u30F3\u30B8"
 --- !u!222 &845780066
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1375,7 +1376,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 847, y: -342}
+  m_AnchoredPosition: {x: 810, y: -342}
   m_SizeDelta: {x: 1200, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1692761571
@@ -1391,7 +1392,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Text
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.504717, b: 0.504717, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1411,7 +1412,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Timer : 0'
+  m_Text: 'Timer : 0.0'
 --- !u!222 &1692761572
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1432,7 +1433,7 @@ GameObject:
   - component: {fileID: 1822457022}
   - component: {fileID: 1822457021}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: Seed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1569,6 +1570,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8548776155002285435, guid: bb97f47542140f144ae654eda6367b93, type: 3}
       propertyPath: Text
+      value: 
+      objectReference: {fileID: 1692761571}
+    - target: {fileID: 8548776155002285435, guid: bb97f47542140f144ae654eda6367b93, type: 3}
+      propertyPath: SeedText
+      value: 
+      objectReference: {fileID: 1822457021}
+    - target: {fileID: 8548776155002285435, guid: bb97f47542140f144ae654eda6367b93, type: 3}
+      propertyPath: TimerText
       value: 
       objectReference: {fileID: 1692761571}
     m_RemovedComponents: []

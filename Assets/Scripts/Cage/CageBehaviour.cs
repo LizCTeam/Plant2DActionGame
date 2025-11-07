@@ -1,8 +1,11 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using DG.Tweening;
 using IceMilkTea.StateMachine;
 using UnityEditor.Animations;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class CageBehaviour : BasicBehaviour
@@ -17,10 +20,13 @@ public class CageBehaviour : BasicBehaviour
     [SerializeField]
     private GameObject CornAbilityObject;
     
-    public Text Text;
+    public Text TimerText;
+    public Text SeedText;
     
     public float timer = 0f;
     public bool isGrowing = false;
+    
+    public VegetableType currentVegetableType = VegetableType.Carrot;
     
     private ImtStateMachine<CageBehaviour> stateMachine;
     private Dictionary<VegetableType, IHasAbility> abilities = new Dictionary<VegetableType, IHasAbility>();
@@ -48,9 +54,15 @@ public class CageBehaviour : BasicBehaviour
         // 状態の更新はこのUpdateで行う
         protected internal override void Update()
         {
-            if (Input.GetKey(KeyCode.L))
+            if (Mouse.current.rightButton.isPressed)
             {
                 stateMachine.SendEvent((int)StateEvent.Seeding);
+            }
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                Context.SwitchSeed();
+                Context.SeedText.text = "seed : " + Context.currentVegetableType;
             }
         }
 
@@ -70,7 +82,7 @@ public class CageBehaviour : BasicBehaviour
         
         protected internal override void Update()
         {
-            if (Input.GetKey(KeyCode.L))
+            if (Mouse.current.rightButton.isPressed)
             {
                 Context.timer += Time.deltaTime;
                 if (Context.timer >= 3f)
@@ -90,7 +102,7 @@ public class CageBehaviour : BasicBehaviour
         }
         protected internal override void Update()
         {
-            if (Input.GetKey(KeyCode.L))
+            if (Mouse.current.rightButton.isPressed)
             {
                 Context.timer += Time.deltaTime;
                 if (Context.timer >= 6f)
@@ -110,7 +122,7 @@ public class CageBehaviour : BasicBehaviour
         }
         protected internal override void Update()
         {
-            if (Input.GetKey(KeyCode.L))
+            if (Mouse.current.rightButton.isPressed)
             {
                 Context.timer += Time.deltaTime;
                 if (Context.timer >= 9f)
@@ -164,13 +176,14 @@ public class CageBehaviour : BasicBehaviour
     {
         base.OnStart();
         stateMachine.Update();
+        SeedText.text = "seed : " + currentVegetableType;
     }
 
     protected override void OnUpdate()
     {
         base.OnUpdate();
         stateMachine.Update();
-        Text.text = "Timer : " + timer;
+        TimerText.text = "Timer : " + timer;
     }
 
     protected override void OnFixedUpdate()
@@ -180,7 +193,17 @@ public class CageBehaviour : BasicBehaviour
 
     public void AbilityUse()
     {
-        abilities[VegetableType.Corn]?.UseAbility();
+        abilities[currentVegetableType]?.UseAbility();
     }
-    
+
+    public void SwitchSeed()
+    {
+        var maxTypeCount = Enum.GetNames(typeof(VegetableType)).Length;
+        VegetableType type = currentVegetableType + 1;
+        while (!abilities.ContainsKey(type) || abilities[type] == null)
+        {
+            type = (VegetableType)(((int)type + 1) % maxTypeCount);
+        }
+        currentVegetableType = type;
+    }
 }
