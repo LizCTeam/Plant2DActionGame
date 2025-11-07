@@ -11,14 +11,15 @@ public class CageBehaviour : BasicBehaviour
     public Player Player;
     [SerializeField]
     private Animator VegeAnimatior;
-    public GameObject Position;
-    public GameObject Projectile;
+    [SerializeField]
+    private GameObject CarrotAbilityObject;
     public Text Text;
-
+    
     public float timer = 0f;
     public bool isGrowing = false;
     
     private ImtStateMachine<CageBehaviour> stateMachine;
+    private Dictionary<VegetableType, IHasAbility> abilities = new Dictionary<VegetableType, IHasAbility>();
     
     #region 状態遷移(ステート)
     public enum StateEvent
@@ -150,6 +151,8 @@ public class CageBehaviour : BasicBehaviour
         stateMachine.AddTransition<MatureState, NothingState>((int)StateEvent.MatureFinish);
         
         stateMachine.SetStartState<NothingState>();
+        
+        abilities.Add(VegetableType.Carrot, CarrotAbilityObject.GetComponent<CarrotAbility>());
     }
 
     protected override void OnStart()
@@ -172,8 +175,7 @@ public class CageBehaviour : BasicBehaviour
 
     public void AbilityUse()
     {
-        Debug.Log("Ability Use");
-        Instantiate(Projectile, Position.transform.position, Quaternion.identity);
+        abilities[VegetableType.Carrot]?.UseAbility();
     }
     
 }

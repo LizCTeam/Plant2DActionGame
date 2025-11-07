@@ -1,5 +1,37 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &575823228461460607
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1239151532408975432}
+  m_Layer: 7
+  m_Name: Abilities
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1239151532408975432
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 575823228461460607}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6220393352169670784}
+  m_Father: {fileID: 6731067949295723703}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3816890863540199098
 GameObject:
   m_ObjectHideFlags: 0
@@ -203,6 +235,53 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &5441950337421348045
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6220393352169670784}
+  - component: {fileID: 9083350854295387252}
+  m_Layer: 7
+  m_Name: CarrotAbility
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6220393352169670784
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5441950337421348045}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5277524735978946160}
+  m_Father: {fileID: 1239151532408975432}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9083350854295387252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5441950337421348045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b52178633c048a28e802b0cbd985bd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CarrotAbility
+  Position: {fileID: 8457069654796546635}
+  Projectile: {fileID: 1535273453308771460, guid: 05db59f588228a34d86c0c5c59f200ee, type: 3}
 --- !u!1 &6451368512953370266
 GameObject:
   m_ObjectHideFlags: 0
@@ -233,9 +312,9 @@ Transform:
   m_LocalScale: {x: 0.055499997, y: 0.055499997, z: 0.055499997}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 5277524735978946160}
   - {fileID: 2765761872337985606}
   - {fileID: 5649828722299704779}
+  - {fileID: 1239151532408975432}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 19.674}
 --- !u!114 &8917846690234374820
@@ -252,8 +331,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CageBehaviour
   Player: {fileID: 0}
   VegeAnimatior: {fileID: 7670275346014391553}
-  Position: {fileID: 8457069654796546635}
-  Projectile: {fileID: 1535273453308771460, guid: 05db59f588228a34d86c0c5c59f200ee, type: 3}
   Text: {fileID: 0}
   timer: 0
   isGrowing: 0
@@ -267,7 +344,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5277524735978946160}
   m_Layer: 7
-  m_Name: Position
+  m_Name: CarrotPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -282,9 +359,9 @@ Transform:
   m_GameObject: {fileID: 8457069654796546635}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.7, y: 14.9, z: 0}
-  m_LocalScale: {x: 0.7692307, y: 0.45662093, z: 1}
+  m_LocalPosition: {x: -7.7, y: 14.899999, z: 0}
+  m_LocalScale: {x: 0.76923066, y: 0.45662096, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6731067949295723703}
+  m_Father: {fileID: 6220393352169670784}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

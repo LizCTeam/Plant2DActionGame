@@ -826,17 +826,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 845780063}
   m_CullTransparentMesh: 1
---- !u!114 &1017347615 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6586488007683112479, guid: bb97f47542140f144ae654eda6367b93, type: 3}
-  m_PrefabInstance: {fileID: 1276838122}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2989146ec47050f468fff141064890eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Player
 --- !u!1 &1022138567
 GameObject:
   m_ObjectHideFlags: 0
@@ -1037,7 +1026,11 @@ PrefabInstance:
     - target: {fileID: 8548776155002285435, guid: bb97f47542140f144ae654eda6367b93, type: 3}
       propertyPath: Player
       value: 
-      objectReference: {fileID: 1017347615}
+      objectReference: {fileID: 6586488008554938101}
+    - target: {fileID: 8548776155002285435, guid: bb97f47542140f144ae654eda6367b93, type: 3}
+      propertyPath: CarrotAbilityObject
+      value: 
+      objectReference: {fileID: 5108318043200011256}
     - target: {fileID: 8758148487688733650, guid: bb97f47542140f144ae654eda6367b93, type: 3}
       propertyPath: m_Simulated
       value: 1
@@ -1740,6 +1733,11 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &5108318043200011256 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5108318041926318866, guid: bb97f47542140f144ae654eda6367b93, type: 3}
+  m_PrefabInstance: {fileID: 1276838122}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5342693870777120306
 Transform:
   m_ObjectHideFlags: 0
@@ -1771,6 +1769,17 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6586488008554938101 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6586488007683112479, guid: bb97f47542140f144ae654eda6367b93, type: 3}
+  m_PrefabInstance: {fileID: 1276838122}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2989146ec47050f468fff141064890eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Player
 --- !u!61 &6754669562839448496
 BoxCollider2D:
   m_ObjectHideFlags: 0
