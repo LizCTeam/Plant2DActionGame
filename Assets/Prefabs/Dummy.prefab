@@ -262,7 +262,7 @@ MonoBehaviour:
   GroundLayer:
     serializedVersion: 2
     m_Bits: 0
-  DamageText: {fileID: 0}
+  DamageText: {fileID: 5994723405372110434}
 --- !u!1 &5144151053811080638
 GameObject:
   m_ObjectHideFlags: 0
