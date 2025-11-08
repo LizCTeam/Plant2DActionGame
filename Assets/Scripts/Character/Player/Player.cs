@@ -3,10 +3,7 @@ using UnityEngine;
 public class Player : Character
 {
     //speedはインスペクターからいじれます
-    
-    [SerializeField]
-    private float _jumpSpeed = 8f;
-    
+    public float jumpSpeed = 8f;
     public float speedMultiplier = 1f;
     
     public bool isButtonPress;
@@ -39,7 +36,7 @@ public class Player : Character
         
         if (isGrounded() && Input.GetKeyDown(KeyCode.Space))
         {
-            _body.linearVelocityY += _jumpSpeed;
+            _body.linearVelocityY += jumpSpeed;
         }
 
         if (Input.GetMouseButtonDown(0))
