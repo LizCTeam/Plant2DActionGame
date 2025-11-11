@@ -11,7 +11,7 @@ using UnityEngine.UI;
 public class CageBehaviour : BasicBehaviour
 {
     [SerializeField]
-    public Player Player;
+    public PlayerController Player;
     [SerializeField]
     private Animator VegeAnimatior;
     
@@ -58,7 +58,9 @@ public class CageBehaviour : BasicBehaviour
             {
                 stateMachine.SendEvent((int)StateEvent.Seeding);
             }
-
+            
+            //シードの切り替えをPlayerController.csへ移植する
+            //Input.GetKey~~~って書いてあるところをどうするか
             if (Input.GetKeyDown(KeyCode.R))
             {
                 Context.SwitchSeed();
@@ -85,7 +87,7 @@ public class CageBehaviour : BasicBehaviour
             if (Mouse.current.rightButton.isPressed)
             {
                 Context.timer += Time.deltaTime;
-                if (Context.timer >= 3f)
+                if (Context.timer >= 2f)
                 {
                     stateMachine.SendEvent((int)StateEvent.Watering);
                 }
@@ -105,7 +107,7 @@ public class CageBehaviour : BasicBehaviour
             if (Mouse.current.rightButton.isPressed)
             {
                 Context.timer += Time.deltaTime;
-                if (Context.timer >= 6f)
+                if (Context.timer >= 4f)
                 {
                     stateMachine.SendEvent((int)StateEvent.Watering);
                 }
@@ -125,7 +127,7 @@ public class CageBehaviour : BasicBehaviour
             if (Mouse.current.rightButton.isPressed)
             {
                 Context.timer += Time.deltaTime;
-                if (Context.timer >= 9f)
+                if (Context.timer >= 7f)
                 {
                     stateMachine.SendEvent((int)StateEvent.Watering);
                 }
@@ -149,7 +151,7 @@ public class CageBehaviour : BasicBehaviour
                 stateMachine.SendEvent((int)StateEvent.MatureFinish);
             }
         }
-    }
+    } 
     
     #endregion
 

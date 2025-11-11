@@ -1,10 +1,13 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : Character
 {
     //speedはインスペクターからいじれます
     public float jumpSpeed = 8f;
     public float speedMultiplier = 1f;
+    private Vector2 moveInput = Vector2.zero;
     
     public bool isButtonPress;
     public GameObject VisualRoot;
@@ -47,5 +50,24 @@ public class Player : Character
         {
             isButtonPress = false;
         }
+    }
+
+    private void OnMove(InputAction.CallbackContext context)
+    {
+        moveInput =  context.ReadValue<Vector2>();
+        _body.linearVelocity = new Vector2(moveInput.x * _speed * speedMultiplier, _body.linearVelocity.y);
+    }
+
+    private void OnJump(InputAction.CallbackContext context)
+    {
+        if (isGrounded())
+        {
+            _body.linearVelocityY += jumpSpeed;
+        }
+    }
+
+    private void OnUniqueAction(InputAction.CallbackContext context)
+    {
+        isButtonPress = isButtonPress != isButtonPress;
     }
 }
