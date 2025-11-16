@@ -177,14 +177,20 @@ public class CageBehaviour : BasicBehaviour
     {
         base.OnStart();
         stateMachine.Update();
-        SeedText.text = "seed : " + currentVegetableType;
+        if (SeedText != null)
+        {
+            SeedText.text = "seed : " + currentVegetableType;
+        }
     }
 
     protected override void OnUpdate()
     {
         base.OnUpdate();
         stateMachine.Update();
-        TimerText.text = "Timer : " + timer;
+        if (TimerText != null)
+        {
+            TimerText.text = "Timer : " + timer;
+        }
     }
 
     protected override void OnFixedUpdate()
