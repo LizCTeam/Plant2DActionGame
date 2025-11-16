@@ -31,6 +31,9 @@ public class CageBehaviour : BasicBehaviour
     private ImtStateMachine<CageBehaviour> stateMachine;
     private Dictionary<VegetableType, IHasAbility> abilities = new Dictionary<VegetableType, IHasAbility>();
     
+    public event Action<InputAction.CallbackContext> UniqueAction;
+    public event Action<InputAction.CallbackContext> SwitchAction;
+    
     #region 状態遷移(ステート)
     public enum StateEvent
     {
@@ -46,26 +49,22 @@ public class CageBehaviour : BasicBehaviour
         // 状態へ突入時の処理はこのEnterで行う
         protected internal override void Enter()
         {
+            Context.UniqueAction += UniqueAction;
+            Context.SwitchAction += SwitchAction;
             Context.isGrowing = false;
             Context.timer = 0f;
             Context.VegeAnimatior.Play("Nothing");
         }
 
-        // 状態の更新はこのUpdateで行う
-        protected internal override void Update()
+        private void UniqueAction(InputAction.CallbackContext context)
         {
-            if (Mouse.current.rightButton.isPressed)
-            {
-                stateMachine.SendEvent((int)StateEvent.Seeding);
-            }
-            
-            //シードの切り替えをPlayerController.csへ移植する
-            //Input.GetKey~~~って書いてあるところをどうするか
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                Context.SwitchSeed();
-                Context.SeedText.text = "seed : " + Context.currentVegetableType;
-            }
+            stateMachine.SendEvent((int)StateEvent.Seeding);
+        }
+
+        private void SwitchAction(InputAction.CallbackContext context)
+        {
+            Context.SwitchSeed();
+            Context.SeedText.text = "seed : " + Context.currentVegetableType;
         }
 
         // 状態から脱出する時の処理はこのExitで行う
@@ -154,7 +153,7 @@ public class CageBehaviour : BasicBehaviour
     } 
     
     #endregion
-
+    
     protected override void OnAwake()
     {
         base.OnAwake();
@@ -207,5 +206,15 @@ public class CageBehaviour : BasicBehaviour
             type = (VegetableType)(((int)type + 1) % maxTypeCount);
         }
         currentVegetableType = type;
+    }
+
+    public virtual void OnSwitchAction(InputAction.CallbackContext obj)
+    {
+        SwitchAction?.Invoke(obj);
+    }
+
+    public virtual void OnUniqueAction(InputAction.CallbackContext obj)
+    {
+        UniqueAction?.Invoke(obj);
     }
 }
