@@ -6,12 +6,13 @@ using DG.Tweening;
 using IceMilkTea.StateMachine;
 using UnityEditor.Animations;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class CageBehaviour : BasicBehaviour
 {
-    [SerializeField]
-    public PlayerController Player;
+    [FormerlySerializedAs("Player")] [SerializeField]
+    public PlayerController player;
     [SerializeField]
     private Animator VegeAnimatior;
     
@@ -63,13 +64,18 @@ public class CageBehaviour : BasicBehaviour
 
         private void SwitchAction(InputAction.CallbackContext context)
         {
-            Context.SwitchSeed();
-            Context.SeedText.text = "seed : " + Context.currentVegetableType;
+            if (context.phase == InputActionPhase.Started)
+            {
+                Context.SwitchSeed();
+                Context.SeedText.text = "seed : " + Context.currentVegetableType;
+            }
         }
 
         // 状態から脱出する時の処理はこのExitで行う
         protected internal override void Exit()
         {
+            Context.UniqueAction -= UniqueAction;
+            Context.SwitchAction -= SwitchAction;
         }
     }
     
@@ -77,13 +83,14 @@ public class CageBehaviour : BasicBehaviour
     {
         protected internal override void Enter()
         {
+            Context.UniqueAction += UniqueAction;
             Context.isGrowing = true;
             Context.VegeAnimatior.Play("Seeding");
         }
         
         protected internal override void Update()
         {
-            if (Mouse.current.rightButton.isPressed)
+            if (Context.player._playerAct.UniqueAction.IsPressed())
             {
                 Context.timer += Time.deltaTime;
                 if (Context.timer >= 2f)
@@ -91,6 +98,16 @@ public class CageBehaviour : BasicBehaviour
                     stateMachine.SendEvent((int)StateEvent.Watering);
                 }
             }
+        }
+        
+        private void UniqueAction(InputAction.CallbackContext context)
+        {
+            
+        }
+        
+        protected internal override void Exit()
+        {
+            Context.UniqueAction -= UniqueAction;
         }
     }
     
@@ -103,7 +120,7 @@ public class CageBehaviour : BasicBehaviour
         }
         protected internal override void Update()
         {
-            if (Mouse.current.rightButton.isPressed)
+            if (Context.player._playerAct.UniqueAction.IsPressed())
             {
                 Context.timer += Time.deltaTime;
                 if (Context.timer >= 4f)
@@ -111,6 +128,16 @@ public class CageBehaviour : BasicBehaviour
                     stateMachine.SendEvent((int)StateEvent.Watering);
                 }
             }
+        }
+        
+        private void UniqueAction(InputAction.CallbackContext context)
+        {
+            
+        }
+        
+        protected internal override void Exit()
+        {
+            Context.UniqueAction -= UniqueAction;
         }
     }
     
@@ -123,7 +150,7 @@ public class CageBehaviour : BasicBehaviour
         }
         protected internal override void Update()
         {
-            if (Mouse.current.rightButton.isPressed)
+            if (Context.player._playerAct.UniqueAction.IsPressed())
             {
                 Context.timer += Time.deltaTime;
                 if (Context.timer >= 7f)
@@ -132,25 +159,45 @@ public class CageBehaviour : BasicBehaviour
                 }
             }
         }
+        
+        private void UniqueAction(InputAction.CallbackContext context)
+        {
+            
+        }
+        
+        protected internal override void Exit()
+        {
+            Context.UniqueAction -= UniqueAction;
+        }
     }
     
     private class MatureState : ImtStateMachine<CageBehaviour>.State
     {
         protected internal override void Enter()
         {
+            Context.UniqueAction += UniqueAction;
             Context.isGrowing = false;
             Context.timer = 0f;
             Context.VegeAnimatior.Play("Mature");
         }
         protected internal override void Update()
         {
-            if (Context.Player.isButtonPress)
-            {
-                Context.AbilityUse();
-                stateMachine.SendEvent((int)StateEvent.MatureFinish);
-            }
+            
+        }
+        
+        private void UniqueAction(InputAction.CallbackContext context)
+        {
+            Context.AbilityUse();
+            stateMachine.SendEvent((int)StateEvent.MatureFinish);
+        }
+        
+        protected internal override void Exit()
+        {
+            Context.UniqueAction -= UniqueAction;
         }
     } 
+    
+    //人の睡眠時間削っておいて許されると思うなよ (11/17 月)
     
     #endregion
     

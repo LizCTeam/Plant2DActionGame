@@ -9,7 +9,7 @@ public class PlayerController : Character
     [SerializeField] private float _jumpSpeed = 10f;
 
     private PlayerAction _act;
-    private PlayerAction.PlayerActions _playerAct;
+    public PlayerAction.PlayerActions _playerAct;
     private Vector2 moveInput = Vector2.zero;
 
     private float _dir = 0f;

@@ -21326,9 +21326,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0
+    y: 0.000052273273
     width: 1
-    height: 1
+    height: 0.99989545
   near clip plane: 0
   far clip plane: 1000
   field of view: 60
@@ -21510,7 +21510,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1dba81a701ba9b48b4682f16aa08c92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CageBehaviour
-  Player: {fileID: 0}
+  Player: {fileID: 8758148488782289661}
   VegeAnimatior: {fileID: 7427453967296340983}
   CarrotAbilityObject: {fileID: 5108318043013734971}
   CornAbilityObject: {fileID: 8944301087064389664}
@@ -21638,6 +21638,7 @@ MonoBehaviour:
   _jumpSpeed: 6
   isButtonPress: 0
   VisualRoot: {fileID: 5215831438387029082}
+  cage: {fileID: 8548776156056024146}
 --- !u!114 &8758148488782289662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21733,13 +21734,13 @@ MonoBehaviour:
     m_ActionName: 'Player/UniqueAction[/Mouse/rightButton]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6117587818624952428}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 8548776156056024146}
+        m_TargetAssemblyTypeName: CageBehaviour, Assembly-CSharp
+        m_MethodName: SwitchSeed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
