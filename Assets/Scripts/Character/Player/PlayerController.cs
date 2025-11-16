@@ -1,6 +1,7 @@
 using NUnit.Framework.Internal.Filters;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class PlayerController : Character
 {
@@ -17,6 +18,7 @@ public class PlayerController : Character
     
     public bool isButtonPress;
     public GameObject VisualRoot;
+    [FormerlySerializedAs("Cage")] public CageBehaviour cage;
 
 
     protected override void OnAwake()
@@ -131,16 +133,16 @@ public class PlayerController : Character
 
     public void OnUniqueAction(InputAction.CallbackContext context)
     {
-        
+        cage.OnUniqueAction(context);
     }
 
     public void OnSwitching(InputAction.CallbackContext context)
     {
-        Debug.Log("OnSwitching");
+        cage.OnSwitchAction(context);
     }
 
     public void Move()
     {
-        _body.linearVelocity = new Vector2(_dir * _moveSpeed,_body.linearVelocity.y);
+        _body.linearVelocity = new Vector2(_dir * _moveSpeed, _body.linearVelocity.y);
     }
 }
