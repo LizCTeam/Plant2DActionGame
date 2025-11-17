@@ -29,7 +29,6 @@ public class JumpPlatform : BasicBehaviour
     {
         if(collision.gameObject.CompareTag("Player"))
         {
-            print("Enter");
             Rigidbody2D body = collision.gameObject.GetComponent<Rigidbody2D>();
             body.AddForce(transform.up * _jumpForce, ForceMode2D.Impulse);
         }

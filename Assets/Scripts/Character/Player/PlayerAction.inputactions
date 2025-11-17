@@ -308,7 +308,7 @@
                     "name": "",
                     "id": "30ad4a71-e749-49e4-9f45-2e30543fe6a0",
                     "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
+                    "interactions": "Hold(duration=0.1)",
                     "processors": "",
                     "groups": ";Gamepad",
                     "action": "UniqueAction",
