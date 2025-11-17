@@ -1,17 +1,24 @@
+using NUnit.Framework.Internal.Filters;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
-public class PlayerController : BasicBehaviour
+public class PlayerController : Character
 {
     [SerializeField] private float _moveSpeed = 10f;
     [SerializeField] private float _jumpSpeed = 10f;
 
     private PlayerAction _act;
     private PlayerAction.PlayerActions _playerAct;
+    private Vector2 moveInput = Vector2.zero;
 
     private float _dir = 0f;
 
-    private Rigidbody2D _rb = null;
+    private Rigidbody2D _body = null;
+    
+    public bool isButtonPress;
+    public GameObject VisualRoot;
+    [FormerlySerializedAs("Cage")] public CageBehaviour cage;
 
 
     protected override void OnAwake()
@@ -26,19 +33,30 @@ public class PlayerController : BasicBehaviour
     {
         base.OnStart();
 
-        _rb = GetComponent<Rigidbody2D>();
+        _body = GetComponent<Rigidbody2D>();
     }
 
     protected override void OnUpdate()
     {
         base.OnUpdate();
+        
+        var visualScale = VisualRoot.transform.localScale;
+        
+        if (_body.linearVelocity.x < 0f)
+        {
+            visualScale.x = -Mathf.Abs(visualScale.x);
+            VisualRoot.transform.localScale = visualScale;
+        }
+        else if (_body.linearVelocity.x > 0f)
+        {
+            visualScale.x = Mathf.Abs(visualScale.x);
+            VisualRoot.transform.localScale = visualScale;
+        }
     }
 
     protected override void OnFixedUpdate()
     {
         base.OnFixedUpdate();
-
-        Move();
     }
 
     private void OnEnable()
@@ -91,36 +109,40 @@ public class PlayerController : BasicBehaviour
         _act?.Disable();
     }
 
-    private void OnMove(InputAction.CallbackContext context)
+    public void OnMove(InputAction.CallbackContext context)
     {
         _dir = context.ReadValue<Vector2>().x;
+        Move();
     }
 
-    private void OnJump(InputAction.CallbackContext context)
+    public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && isGrounded())
         {
-            _rb.linearVelocityY += _jumpSpeed;
+            _body.linearVelocityY += _jumpSpeed;
         }
     }
 
-    private void OnFire(InputAction.CallbackContext context)
+    public void OnFire(InputAction.CallbackContext context)
     {
-        Debug.Log("OnFire");
+        if (context.started)
+        {
+            isButtonPress = !isButtonPress;
+        }
     }
 
-    private void OnUniqueAction(InputAction.CallbackContext context)
+    public void OnUniqueAction(InputAction.CallbackContext context)
     {
-        Debug.Log("OnUniqueAction");
+        cage.OnUniqueAction(context);
     }
 
-    private void OnSwitching(InputAction.CallbackContext context)
+    public void OnSwitching(InputAction.CallbackContext context)
     {
-        Debug.Log("OnSwitching");
+        cage.OnSwitchAction(context);
     }
 
-    private void Move()
+    public void Move()
     {
-        _rb.linearVelocity = new Vector2(_dir * _moveSpeed,_rb.linearVelocity.y);
+        _body.linearVelocity = new Vector2(_dir * _moveSpeed, _body.linearVelocity.y);
     }
 }

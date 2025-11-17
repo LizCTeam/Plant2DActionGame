@@ -11,7 +11,7 @@ using UnityEngine.UI;
 public class CageBehaviour : BasicBehaviour
 {
     [SerializeField]
-    public Player Player;
+    public PlayerController Player;
     [SerializeField]
     private Animator VegeAnimatior;
     
@@ -31,6 +31,9 @@ public class CageBehaviour : BasicBehaviour
     private ImtStateMachine<CageBehaviour> stateMachine;
     private Dictionary<VegetableType, IHasAbility> abilities = new Dictionary<VegetableType, IHasAbility>();
     
+    public event Action<InputAction.CallbackContext> UniqueAction;
+    public event Action<InputAction.CallbackContext> SwitchAction;
+    
     #region 状態遷移(ステート)
     public enum StateEvent
     {
@@ -46,24 +49,22 @@ public class CageBehaviour : BasicBehaviour
         // 状態へ突入時の処理はこのEnterで行う
         protected internal override void Enter()
         {
+            Context.UniqueAction += UniqueAction;
+            Context.SwitchAction += SwitchAction;
             Context.isGrowing = false;
             Context.timer = 0f;
             Context.VegeAnimatior.Play("Nothing");
         }
 
-        // 状態の更新はこのUpdateで行う
-        protected internal override void Update()
+        private void UniqueAction(InputAction.CallbackContext context)
         {
-            if (Mouse.current.rightButton.isPressed)
-            {
-                stateMachine.SendEvent((int)StateEvent.Seeding);
-            }
+            stateMachine.SendEvent((int)StateEvent.Seeding);
+        }
 
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                Context.SwitchSeed();
-                Context.SeedText.text = "seed : " + Context.currentVegetableType;
-            }
+        private void SwitchAction(InputAction.CallbackContext context)
+        {
+            Context.SwitchSeed();
+            Context.SeedText.text = "seed : " + Context.currentVegetableType;
         }
 
         // 状態から脱出する時の処理はこのExitで行う
@@ -85,7 +86,7 @@ public class CageBehaviour : BasicBehaviour
             if (Mouse.current.rightButton.isPressed)
             {
                 Context.timer += Time.deltaTime;
-                if (Context.timer >= 3f)
+                if (Context.timer >= 2f)
                 {
                     stateMachine.SendEvent((int)StateEvent.Watering);
                 }
@@ -105,7 +106,7 @@ public class CageBehaviour : BasicBehaviour
             if (Mouse.current.rightButton.isPressed)
             {
                 Context.timer += Time.deltaTime;
-                if (Context.timer >= 6f)
+                if (Context.timer >= 4f)
                 {
                     stateMachine.SendEvent((int)StateEvent.Watering);
                 }
@@ -125,7 +126,7 @@ public class CageBehaviour : BasicBehaviour
             if (Mouse.current.rightButton.isPressed)
             {
                 Context.timer += Time.deltaTime;
-                if (Context.timer >= 9f)
+                if (Context.timer >= 7f)
                 {
                     stateMachine.SendEvent((int)StateEvent.Watering);
                 }
@@ -149,10 +150,10 @@ public class CageBehaviour : BasicBehaviour
                 stateMachine.SendEvent((int)StateEvent.MatureFinish);
             }
         }
-    }
+    } 
     
     #endregion
-
+    
     protected override void OnAwake()
     {
         base.OnAwake();
@@ -205,5 +206,15 @@ public class CageBehaviour : BasicBehaviour
             type = (VegetableType)(((int)type + 1) % maxTypeCount);
         }
         currentVegetableType = type;
+    }
+
+    public virtual void OnSwitchAction(InputAction.CallbackContext obj)
+    {
+        SwitchAction?.Invoke(obj);
+    }
+
+    public virtual void OnUniqueAction(InputAction.CallbackContext obj)
+    {
+        UniqueAction?.Invoke(obj);
     }
 }

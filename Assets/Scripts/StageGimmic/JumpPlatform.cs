@@ -27,7 +27,6 @@ public class JumpPlatform : BasicBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        print("OnTriggerEnter");
         if(collision.gameObject.CompareTag("Player"))
         {
             print("Enter");

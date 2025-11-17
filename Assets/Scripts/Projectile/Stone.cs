@@ -1,19 +1,22 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class Player : Character
+public class Stone : ProjectileBehaviour
 {
-    public float speedMultiplier = 1.5f;
-    
     protected override void OnStart()
     {
         base.OnStart();
     }
-    
+
     protected override void OnUpdate()
     {
         base.OnUpdate();
     }
+
+    protected override void OnFixedUpdate()
+    {
+        base.OnFixedUpdate();
+    }
+    
+    
+
 }
