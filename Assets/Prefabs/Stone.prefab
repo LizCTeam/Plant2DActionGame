@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4915420120835885522}
   - component: {fileID: 8185280295973319441}
   - component: {fileID: 3013143821637494182}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 6475883613603158070}
   - component: {fileID: 383239986436122236}
   - component: {fileID: 4364665999420433826}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -230,7 +230,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2832666116962450609}
   - component: {fileID: 6565687595337609236}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Collision2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -299,7 +299,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4929774483256730484}
   - component: {fileID: 3117679267499308303}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

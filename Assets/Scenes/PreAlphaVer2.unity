@@ -228,11 +228,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9109799070022858441, guid: 324ce2f8393ab794bb7a5ca94f1841f1, type: 3}
       propertyPath: m_ExcludeLayers.m_Bits
-      value: 447
+      value: 1471
       objectReference: {fileID: 0}
     - target: {fileID: 9109799070022858441, guid: 324ce2f8393ab794bb7a5ca94f1841f1, type: 3}
       propertyPath: m_IncludeLayers.m_Bits
-      value: 512
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1436,6 +1436,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3879051645542436961, guid: 324ce2f8393ab794bb7a5ca94f1841f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9109799070022858441, guid: 324ce2f8393ab794bb7a5ca94f1841f1, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 1471
+      objectReference: {fileID: 0}
+    - target: {fileID: 9109799070022858441, guid: 324ce2f8393ab794bb7a5ca94f1841f1, type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
