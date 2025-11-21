@@ -8,9 +8,9 @@
             "actions": [
                 {
                     "name": "Move",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "ab033a89-5c14-4188-ba31-62bb35ba27a9",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -55,6 +55,15 @@
                     "name": "Switching",
                     "type": "Button",
                     "id": "81a8c571-6d78-46d7-864d-8fcfabf4de77",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ExitAction",
+                    "type": "Button",
+                    "id": "a5964557-aac5-4999-a71c-34a2268ff25a",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -356,6 +365,17 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "Switching",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2504d8e2-5dd9-427c-9035-9a666c7a477f",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "ExitAction",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -15,7 +15,7 @@ public class PlayerController : Character
     private float _dir = 0f;
 
     private Rigidbody2D _body = null;
-    
+
     public bool isButtonPress;
     public GameObject VisualRoot;
     [FormerlySerializedAs("Cage")] public CageBehaviour cage;
@@ -39,9 +39,9 @@ public class PlayerController : Character
     protected override void OnUpdate()
     {
         base.OnUpdate();
-        
+
         var visualScale = VisualRoot.transform.localScale;
-        
+
         if (_body.linearVelocity.x < 0f)
         {
             visualScale.x = -Mathf.Abs(visualScale.x);
@@ -82,6 +82,10 @@ public class PlayerController : Character
         _playerAct.Switching.started += OnSwitching;
         _playerAct.Switching.performed += OnSwitching;
         _playerAct.Switching.canceled += OnSwitching;
+
+        _playerAct.ExitAction.started += OnExitAction;
+        _playerAct.ExitAction.performed += OnExitAction;
+        _playerAct.ExitAction.canceled += OnExitAction;
     }
 
     private void OnDisable()
@@ -106,6 +110,10 @@ public class PlayerController : Character
         _playerAct.Switching.performed -= OnSwitching;
         _playerAct.Switching.canceled -= OnSwitching;
 
+        _playerAct.ExitAction.started -= OnExitAction;
+        _playerAct.ExitAction.performed -= OnExitAction;
+        _playerAct.ExitAction.canceled -= OnExitAction;
+
         _act?.Disable();
     }
 
@@ -127,7 +135,7 @@ public class PlayerController : Character
     {
         if (context.started)
         {
-            isButtonPress = !isButtonPress;
+            cage.OnFire(context);
         }
     }
 
@@ -144,5 +152,18 @@ public class PlayerController : Character
     public void Move()
     {
         _body.linearVelocity = new Vector2(_dir * _moveSpeed, _body.linearVelocity.y);
+    }
+
+    public void OnExitAction(InputAction.CallbackContext context)
+    {
+
+        if (context.started)
+        {
+            Application.Quit();
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#endif
+
+        }
     }
 }

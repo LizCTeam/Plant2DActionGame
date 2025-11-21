@@ -35,6 +35,7 @@ public class CageBehaviour : BasicBehaviour
     
     public event Action<InputAction.CallbackContext> UniqueAction;
     public event Action<InputAction.CallbackContext> SwitchAction;
+    public event Action<InputAction.CallbackContext> Fire;
     
     #region 状態遷移(ステート)
     public enum StateEvent
@@ -176,6 +177,7 @@ public class CageBehaviour : BasicBehaviour
     {
         protected internal override void Enter()
         {
+            Context.Fire += Fire;
             Context.UniqueAction += UniqueAction;
             Context.isGrowing = false;
             Context.timer = 0f;
@@ -188,13 +190,20 @@ public class CageBehaviour : BasicBehaviour
         
         private void UniqueAction(InputAction.CallbackContext context)
         {
+            //Context.AbilityUse();
+            //stateMachine.SendEvent((int)StateEvent.MatureFinish);
+        }
+
+        private void Fire(InputAction.CallbackContext context)
+        {
             Context.AbilityUse();
             stateMachine.SendEvent((int)StateEvent.MatureFinish);
         }
-        
+
         protected internal override void Exit()
         {
             Context.UniqueAction -= UniqueAction;
+            Context.Fire -= Fire;
         }
     } 
     
@@ -270,5 +279,10 @@ public class CageBehaviour : BasicBehaviour
     public virtual void OnUniqueAction(InputAction.CallbackContext obj)
     {
         UniqueAction?.Invoke(obj);
+    }
+
+    public virtual void OnFire(InputAction.CallbackContext obj)
+    {
+        Fire?.Invoke(obj);
     }
 }
