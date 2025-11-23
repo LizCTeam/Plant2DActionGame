@@ -29,9 +29,13 @@ public class CageBehaviour : BasicBehaviour
     public bool isGrowing = false;
     
     public VegetableType currentVegetableType = VegetableType.Carrot;
-    
+
+    private int currentGrowthStage = 0;
+
     private ImtStateMachine<CageBehaviour> stateMachine;
     private Dictionary<VegetableType, IHasAbility> abilities = new Dictionary<VegetableType, IHasAbility>();
+    // 野菜ごとの成長時間（秒）
+    private Dictionary<VegetableType, float[]> growthDurations = new Dictionary<VegetableType, float[]>();
     
     public event Action<InputAction.CallbackContext> UniqueAction;
     public event Action<InputAction.CallbackContext> SwitchAction;
@@ -94,8 +98,10 @@ public class CageBehaviour : BasicBehaviour
             if (Context.player._playerAct.UniqueAction.IsPressed())
             {
                 Context.timer += Time.deltaTime;
-                if (Context.timer >= 2f)
+                float requiredTime = Context.growthDurations[Context.currentVegetableType][0];
+                if (Context.timer >= requiredTime)
                 {
+                    Context.currentGrowthStage = 1;
                     stateMachine.SendEvent((int)StateEvent.Watering);
                 }
             }
@@ -118,14 +124,18 @@ public class CageBehaviour : BasicBehaviour
         {
             Context.isGrowing = true;
             Context.VegeAnimatior.Play("Sprout");
+            //育成中でも武器として使用可能にする。
+            Context.UniqueAction += UniqueAction;
         }
         protected internal override void Update()
         {
             if (Context.player._playerAct.UniqueAction.IsPressed())
             {
                 Context.timer += Time.deltaTime;
-                if (Context.timer >= 4f)
+                float requiredTime = Context.growthDurations[Context.currentVegetableType][1];
+                if (Context.timer >= requiredTime)
                 {
+                    Context.currentGrowthStage = 2;
                     stateMachine.SendEvent((int)StateEvent.Watering);
                 }
             }
@@ -133,7 +143,7 @@ public class CageBehaviour : BasicBehaviour
         
         private void UniqueAction(InputAction.CallbackContext context)
         {
-            
+            Context.AbilityUse();
         }
         
         protected internal override void Exit()
@@ -148,14 +158,17 @@ public class CageBehaviour : BasicBehaviour
         {
             Context.isGrowing = true;
             Context.VegeAnimatior.Play("Flora");
+            Context.UniqueAction += UniqueAction;
         }
         protected internal override void Update()
         {
             if (Context.player._playerAct.UniqueAction.IsPressed())
             {
                 Context.timer += Time.deltaTime;
-                if (Context.timer >= 7f)
+                float requiredTime = Context.growthDurations[Context.currentVegetableType][2];
+                if (Context.timer >= requiredTime)
                 {
+                    Context.currentGrowthStage = 3;
                     stateMachine.SendEvent((int)StateEvent.Watering);
                 }
             }
@@ -163,7 +176,7 @@ public class CageBehaviour : BasicBehaviour
         
         private void UniqueAction(InputAction.CallbackContext context)
         {
-            
+            Context.AbilityUse();
         }
         
         protected internal override void Exit()
@@ -180,6 +193,7 @@ public class CageBehaviour : BasicBehaviour
             Context.isGrowing = false;
             Context.timer = 0f;
             Context.VegeAnimatior.Play("Mature");
+            Context.currentGrowthStage = 0;
         }
         protected internal override void Update()
         {
@@ -219,6 +233,11 @@ public class CageBehaviour : BasicBehaviour
         
         abilities.Add(VegetableType.Carrot, CarrotAbilityObject.GetComponent<CarrotAbility>());
         abilities.Add(VegetableType.Corn, CornAbilityObject.GetComponent<CornAbility>());
+
+        //野菜ごとの各成長段階(Seed → Sprout → Flora → Mature)の時間
+        growthDurations.Add(VegetableType.Carrot, new float[] {2f, 4f, 7f});
+        growthDurations.Add(VegetableType.Corn, new float[] { 1f, 2f, 5f });
+        // 他の野菜も同様に追加
     }
 
     protected override void OnStart()
