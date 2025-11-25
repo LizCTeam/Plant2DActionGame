@@ -16,4 +16,9 @@ public class Player : Character
     {
         base.OnUpdate();
     }
+
+    public int GetHp()
+    {
+        return this._hp;
+    }
 }
