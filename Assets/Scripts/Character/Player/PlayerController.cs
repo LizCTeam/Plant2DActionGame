@@ -14,8 +14,6 @@ public class PlayerController : Character
 
     private float _dir = 0f;
 
-    private Rigidbody2D _body = null;
-
     public bool isButtonPress;
     public GameObject VisualRoot;
     [FormerlySerializedAs("Cage")] public CageBehaviour cage;
