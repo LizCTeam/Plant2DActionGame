@@ -17,7 +17,6 @@ public class Character : BasicBehaviour
         base.OnAwake();
         _body = GetComponent<Rigidbody2D>();
     }
-
     
     protected override void OnUpdate()
     {

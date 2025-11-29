@@ -1721,6 +1721,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 134731520974519304, guid: 4d656b51ff39e0747a348c3739b8baf5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 493
+      objectReference: {fileID: 0}
     - target: {fileID: 1455636818283768204, guid: 4d656b51ff39e0747a348c3739b8baf5, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -1739,8 +1743,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2356455659482398683, guid: 4d656b51ff39e0747a348c3739b8baf5, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3171049014506538750, guid: 4d656b51ff39e0747a348c3739b8baf5, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 2039290213}
+    - target: {fileID: 3171049014506538750, guid: 4d656b51ff39e0747a348c3739b8baf5, type: 3}
+      propertyPath: playerIcon
+      value: 
+      objectReference: {fileID: 6086557905861512603, guid: 5192d6a3fb27c904a924a09fecce3693, type: 3}
     - target: {fileID: 3368629874325710324, guid: 4d656b51ff39e0747a348c3739b8baf5, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -1756,6 +1768,26 @@ PrefabInstance:
     - target: {fileID: 3368629874325710324, guid: 4d656b51ff39e0747a348c3739b8baf5, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -60
+      objectReference: {fileID: 0}
+    - target: {fileID: 4252704063120844173, guid: 4d656b51ff39e0747a348c3739b8baf5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4252704063120844173, guid: 4d656b51ff39e0747a348c3739b8baf5, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4252704063120844173, guid: 4d656b51ff39e0747a348c3739b8baf5, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4252704063120844173, guid: 4d656b51ff39e0747a348c3739b8baf5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6290677150264478530, guid: 4d656b51ff39e0747a348c3739b8baf5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6711193424175596807, guid: 4d656b51ff39e0747a348c3739b8baf5, type: 3}
       propertyPath: m_Text
@@ -1786,6 +1818,10 @@ PrefabInstance:
     - target: {fileID: 8128037325552615210, guid: 4d656b51ff39e0747a348c3739b8baf5, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8617496763908545842, guid: 4d656b51ff39e0747a348c3739b8baf5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -469
       objectReference: {fileID: 0}
     - target: {fileID: 8667387218897862609, guid: 4d656b51ff39e0747a348c3739b8baf5, type: 3}
       propertyPath: m_Pivot.x
@@ -1868,7 +1904,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6864390926853126573, guid: 4d656b51ff39e0747a348c3739b8baf5, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d656b51ff39e0747a348c3739b8baf5, type: 3}
@@ -7391,6 +7428,17 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!114 &2039290213 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2246995923685720719, guid: 4e1e21456c8564943870e00139ae0c24, type: 3}
+  m_PrefabInstance: {fileID: 329916832}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2989146ec47050f468fff141064890eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Player
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

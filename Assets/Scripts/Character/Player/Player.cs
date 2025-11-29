@@ -118,4 +118,9 @@ public class Player : Character
         //これは形骸化した挙動
         //_body.linearVelocity = new Vector2(targetSpeed, _body.linearVelocityY);
     }
+
+    public int GetHp()
+    {
+        return this._hp;
+    }
 }
