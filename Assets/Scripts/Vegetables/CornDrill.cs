@@ -15,7 +15,7 @@ public class CornDrill : BasicBehaviour
         base.OnStart();
         GameObject _playerObject = GameObject.FindWithTag("Player");
         _player = _playerObject?.GetComponent<Player>();
-        _player.speedMultiplier = this._speedMultiplier;
+        //_player.speedMultiplier = this._speedMultiplier;
     }
 
     protected override void OnUpdate()
@@ -36,6 +36,6 @@ public class CornDrill : BasicBehaviour
 
     private void OnDestroy()
     {
-        _player.speedMultiplier = 1.0f;
+        //_player.speedMultiplier = 1.0f;
     }
 }

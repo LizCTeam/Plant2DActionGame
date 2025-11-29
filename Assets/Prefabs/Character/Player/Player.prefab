@@ -636,9 +636,9 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.00015619397
+    x: 0
     y: 0
-    width: 0.9996876
+    width: 1
     height: 1
   near clip plane: 0
   far clip plane: 1000
@@ -977,7 +977,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1dba81a701ba9b48b4682f16aa08c92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CageBehaviour
-  Player: {fileID: 370600968300845981}
+  player: {fileID: 370600968300845981}
   VegeAnimatior: {fileID: 7638217248100709186}
   CarrotAbilityObject: {fileID: 5479133101366014509}
   CornAbilityObject: {fileID: 2405106366544766057}
@@ -997,7 +997,6 @@ GameObject:
   - component: {fileID: 7499005524411237605}
   - component: {fileID: 5867730607254013472}
   - component: {fileID: 8460313167220604452}
-  - component: {fileID: 2241830784634630653}
   - component: {fileID: 3596770244035238973}
   - component: {fileID: 370600968300845981}
   - component: {fileID: 2246995923685720719}
@@ -1050,58 +1049,12 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 896
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_Interpolate: 1
+  m_SleepingMode: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &8460313167220604452
 BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7270741059625311622}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: 6047bcdaf24815d4eaaf549e63490bea, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0.3589772, y: -0.22862753}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 0.67276895, y: 2.2289343}
-  m_EdgeRadius: 0
---- !u!70 &2241830784634630653
-CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1134,9 +1087,18 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.38172588, y: -0.4392022}
-  m_Size: {x: 0.49566105, y: 1.8784035}
-  m_Direction: 0
+  m_Offset: {x: 0.4276009, y: -1.0587482}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.81001633, y: 0.6066778}
+  m_EdgeRadius: 0
 --- !u!114 &3596770244035238973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1286,6 +1248,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: e677016e-f722-490a-96d8-56d5495e8b7c
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a5964557-aac5-4999-a71c-34a2268ff25a
+    m_ActionName: 'Player/ExitAction[/Keyboard/escape]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
@@ -1303,17 +1269,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e6b4f327054ff64e99bf1d7d4ea284e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  _hp: 5
-  _maxHp: 5
-  _speed: 6
-  GroundLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  _moveSpeed: 6
-  _jumpSpeed: 6
+  inputDirection: {x: 0, y: 0}
   isButtonPress: 0
-  VisualRoot: {fileID: 1374080812624619252}
   cage: {fileID: 7516405525831616115}
+  _player: {fileID: 2246995923685720719}
 --- !u!114 &2246995923685720719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1331,5 +1290,10 @@ MonoBehaviour:
   _speed: 4
   GroundLayer:
     serializedVersion: 2
-    m_Bits: 0
-  speedMultiplier: 1
+    m_Bits: 64
+  acceleration: 7
+  deacceleration: 6
+  velPower: 0.9
+  jumpForce: 10
+  maxSpeed: 10
+  VisualRoot: {fileID: 1374080812624619252}

@@ -11,11 +11,13 @@ public class Character : BasicBehaviour
     
     public LayerMask GroundLayer;
     protected Rigidbody2D _body;
-    
-    protected override void OnStart()
+
+    protected override void OnAwake()
     {
+        base.OnAwake();
         _body = GetComponent<Rigidbody2D>();
     }
+
     
     protected override void OnUpdate()
     {

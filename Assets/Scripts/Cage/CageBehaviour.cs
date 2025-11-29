@@ -96,7 +96,7 @@ public class CageBehaviour : BasicBehaviour
         
         protected internal override void Update()
         {
-            if (Context.player._playerAct.UniqueAction.IsPressed())
+            if (Context.player.playerAct.UniqueAction.IsPressed())
             {
                 Context.timer += Time.deltaTime;
                 float requiredTime = Context.growthDurations[Context.currentVegetableType][0];
@@ -130,7 +130,7 @@ public class CageBehaviour : BasicBehaviour
         }
         protected internal override void Update()
         {
-            if (Context.player._playerAct.UniqueAction.IsPressed())
+            if (Context.player.playerAct.UniqueAction.IsPressed())
             {
                 Context.timer += Time.deltaTime;
                 float requiredTime = Context.growthDurations[Context.currentVegetableType][1];
@@ -176,7 +176,7 @@ public class CageBehaviour : BasicBehaviour
         }
         protected internal override void Update()
         {
-            if (Context.player._playerAct.UniqueAction.IsPressed())
+            if (Context.player.playerAct.UniqueAction.IsPressed())
             {
                 Context.timer += Time.deltaTime;
                 float requiredTime = Context.growthDurations[Context.currentVegetableType][2];
