@@ -123,10 +123,10 @@ public class CageBehaviour : BasicBehaviour
     {
         protected internal override void Enter()
         {
+            //育成中でも武器として使用可能にする。
+            Context.Fire += Fire;
             Context.isGrowing = true;
             Context.VegeAnimatior.Play("Sprout");
-            //育成中でも武器として使用可能にする。
-            Context.UniqueAction += UniqueAction;
         }
         protected internal override void Update()
         {
@@ -144,19 +144,32 @@ public class CageBehaviour : BasicBehaviour
         
         private void UniqueAction(InputAction.CallbackContext context)
         {
-            Context.AbilityUse();
+            //Context.AbilityUse();
         }
-        
+
+        private void Fire(InputAction.CallbackContext context)
+        {
+            Context.AbilityUse();
+            Context.isGrowing = false;
+            Context.timer = 0f;
+            Context.currentGrowthStage = 0;
+            stateMachine.SendEvent((int)StateEvent.Cancel);
+        }
+
         protected internal override void Exit()
         {
             Context.UniqueAction -= UniqueAction;
+            Context.Fire -= Fire;
         }
+
+        
     }
     
     private class FloraState : ImtStateMachine<CageBehaviour>.State
     {
         protected internal override void Enter()
         {
+            Context.Fire += Fire;
             Context.isGrowing = true;
             Context.VegeAnimatior.Play("Flora");
             Context.UniqueAction += UniqueAction;
@@ -177,13 +190,25 @@ public class CageBehaviour : BasicBehaviour
         
         private void UniqueAction(InputAction.CallbackContext context)
         {
-            Context.AbilityUse();
+            //Context.AbilityUse();
         }
-        
+
+        private void Fire(InputAction.CallbackContext context)
+        {
+            Context.AbilityUse();
+            Context.isGrowing = false;
+            Context.timer = 0f;
+            Context.currentGrowthStage = 0;
+            stateMachine.SendEvent((int)StateEvent.Cancel);
+        }
+
         protected internal override void Exit()
         {
             Context.UniqueAction -= UniqueAction;
+            Context.Fire -= Fire;
         }
+
+        
     }
     
     private class MatureState : ImtStateMachine<CageBehaviour>.State
