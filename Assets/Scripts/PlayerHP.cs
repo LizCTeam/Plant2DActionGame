@@ -58,7 +58,16 @@ public class PlayerHP : BasicBehaviour
 
 
 
-        if (currentHp < beforeHp)
+        if (currentHp > beforeHp)
+        {
+            int diff = currentHp - beforeHp;
+            for (int i = 0; i < diff; i++)
+            {
+                //HPが増えた場合、アイコンを追加生成
+                GameObject playerHpObj = Instantiate(playerIcon, transform);
+            }
+        }
+        else
         {
             //HPが減った場合
             //現在のHP以下のアイコンのみ表示、それ以外は非表示
@@ -66,18 +75,7 @@ public class PlayerHP : BasicBehaviour
             {
                 icon[i].gameObject.SetActive(i < currentHp);
             }
-
-            
         }
-        //else if (currentHp > beforeHp)
-        //{
-        //    int diff = currentHp - beforeHp;
-        //    for (int i = 0; i < diff; i++)
-        //    {
-        //        //HPが増えた場合、アイコンを追加生成
-        //        GameObject playerHpObj = Instantiate(playerIcon, transform);
-        //    }
-        //}
 
 
         //現在のHPを保存
