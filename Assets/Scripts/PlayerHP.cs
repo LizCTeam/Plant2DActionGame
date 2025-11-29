@@ -67,16 +67,13 @@ public class PlayerHP : BasicBehaviour
                 GameObject playerHpObj = Instantiate(playerIcon, transform);
             }
         }
-        else
-        {
-            //HPが減った場合
-            //現在のHP以下のアイコンのみ表示、それ以外は非表示
-            for (int i = 0; i < icon.Length; i++)
-            {
-                icon[i].gameObject.SetActive(i < currentHp);
-            }
-        }
 
+        //HPが減った場合
+        //現在のHP以下のアイコンのみ表示、それ以外は非表示
+        for (int i = 0; i < icon.Length; i++)
+        {
+            icon[i].gameObject.SetActive(i < currentHp);
+        }
 
         //現在のHPを保存
         beforeHp = currentHp;
