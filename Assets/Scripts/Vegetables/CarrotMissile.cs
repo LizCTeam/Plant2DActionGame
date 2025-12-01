@@ -26,7 +26,7 @@ public class CarrotMissile : ProjectileBehaviour
             //goal_position = parent.global_position.y - goal_position
             goalPosition = 5;
             goalPosition = this.Context.transform.position.y + goalPosition;
-            this.Context.transform.DOMoveY(goalPosition, 1.5f)
+            this.Context.transform.DOMoveY(goalPosition, 0.8f)
                 .SetEase(Ease.OutQuart)
                 .SetDelay(0.2f)
                 .OnComplete(() =>
@@ -66,7 +66,7 @@ public class CarrotMissile : ProjectileBehaviour
             GameObject nearestEnemy = null;
             List<GameObject> enemies = new List<GameObject>();
             enemies.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
-            print(enemies.Count + " Enemies Left");
+            //print(enemies.Count + " Enemies Left");
             foreach (var enemyObj in enemies)
             {
                 Component[] components = (Component[])enemyObj.GetComponents(typeof(Enemy));
@@ -135,7 +135,7 @@ public class CarrotMissile : ProjectileBehaviour
         //現在の位置を保存
         var currentPosition = transform.position;
         //移動
-        transform.position += direction * (this.speed * Time.deltaTime);
+        transform.position += direction * (speed * Time.deltaTime);
         //回転させる
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         sprite.transform.rotation = Quaternion.AngleAxis(angle + SpriteOffset, Vector3.forward);

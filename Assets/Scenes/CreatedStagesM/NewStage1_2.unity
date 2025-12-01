@@ -18822,6 +18822,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5336558338765013246, guid: 4e1e21456c8564943870e00139ae0c24, type: 3}
+      propertyPath: CarrotSpeed
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7270741059625311622, guid: 4e1e21456c8564943870e00139ae0c24, type: 3}
       propertyPath: m_Name
       value: Player
