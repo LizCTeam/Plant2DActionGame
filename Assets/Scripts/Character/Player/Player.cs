@@ -40,6 +40,8 @@ public class Player : Character
         UpdateSpriteDirection();
         UpdateCoyoteTime();
         
+        print(_body.linearVelocity);
+        
         if (playerActJump.WasPressedThisFrame())
         {
             _jumpBufferTimeCounter =  _jumpBufferTime;
@@ -72,13 +74,13 @@ public class Player : Character
     private void UpdateSpriteDirection()
     {
         var visualScale = VisualRoot.transform.localScale;
-
-        if (_body.linearVelocity.x < 0.1f)
+        
+        if (_body.linearVelocity.x < -0.5f)
         {
             visualScale.x = -Mathf.Abs(visualScale.x);
             VisualRoot.transform.localScale = visualScale;
         }
-        else if (_body.linearVelocity.x > 0.1f)
+        else if (_body.linearVelocity.x > 0.5f)
         {
             visualScale.x = Mathf.Abs(visualScale.x);
             VisualRoot.transform.localScale = visualScale;
