@@ -1285,15 +1285,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2989146ec47050f468fff141064890eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
-  _hp: 5
-  _maxHp: 5
+  _hp: 3
+  _maxHp: 3
   _speed: 4
   GroundLayer:
     serializedVersion: 2
     m_Bits: 64
-  acceleration: 7
-  deacceleration: 6
+  acceleration: 5
+  deacceleration: 8
   velPower: 0.9
-  jumpForce: 10
-  maxSpeed: 10
+  jumpForce: 17.5
+  maxSpeed: 8
+  frictionAmount: 0.9
   VisualRoot: {fileID: 1374080812624619252}
