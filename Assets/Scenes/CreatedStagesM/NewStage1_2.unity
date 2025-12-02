@@ -19761,7 +19761,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6864390926853126573, guid: 4d656b51ff39e0747a348c3739b8baf5, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d656b51ff39e0747a348c3739b8baf5, type: 3}
@@ -19777,6 +19778,14 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1884422515}
+    - target: {fileID: 1931093854520719415, guid: acb1335e00f7e294aab212cb372026f1, type: 3}
+      propertyPath: m_NormalizedViewPortRect.y
+      value: 0.049999982
+      objectReference: {fileID: 0}
+    - target: {fileID: 1931093854520719415, guid: acb1335e00f7e294aab212cb372026f1, type: 3}
+      propertyPath: m_NormalizedViewPortRect.height
+      value: 0.90000004
+      objectReference: {fileID: 0}
     - target: {fileID: 5444290805092727284, guid: acb1335e00f7e294aab212cb372026f1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.7030377
