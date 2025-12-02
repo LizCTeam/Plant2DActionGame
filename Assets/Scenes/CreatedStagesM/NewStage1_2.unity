@@ -1961,6 +1961,63 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1001 &405398720
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3882563065574824832, guid: 4cf96755db24ee94fa813d02cd5ceecc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 25.423382
+      objectReference: {fileID: 0}
+    - target: {fileID: 3882563065574824832, guid: 4cf96755db24ee94fa813d02cd5ceecc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.2605977
+      objectReference: {fileID: 0}
+    - target: {fileID: 3882563065574824832, guid: 4cf96755db24ee94fa813d02cd5ceecc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3882563065574824832, guid: 4cf96755db24ee94fa813d02cd5ceecc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3882563065574824832, guid: 4cf96755db24ee94fa813d02cd5ceecc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3882563065574824832, guid: 4cf96755db24ee94fa813d02cd5ceecc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3882563065574824832, guid: 4cf96755db24ee94fa813d02cd5ceecc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3882563065574824832, guid: 4cf96755db24ee94fa813d02cd5ceecc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3882563065574824832, guid: 4cf96755db24ee94fa813d02cd5ceecc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3882563065574824832, guid: 4cf96755db24ee94fa813d02cd5ceecc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7564204137304077188, guid: 4cf96755db24ee94fa813d02cd5ceecc, type: 3}
+      propertyPath: m_Name
+      value: Raccoondog
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4cf96755db24ee94fa813d02cd5ceecc, type: 3}
 --- !u!1 &876010763
 GameObject:
   m_ObjectHideFlags: 0
@@ -19852,8 +19909,16 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1931093854520719415, guid: acb1335e00f7e294aab212cb372026f1, type: 3}
+      propertyPath: m_NormalizedViewPortRect.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1931093854520719415, guid: acb1335e00f7e294aab212cb372026f1, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1931093854520719415, guid: acb1335e00f7e294aab212cb372026f1, type: 3}
+      propertyPath: m_NormalizedViewPortRect.width
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1931093854520719415, guid: acb1335e00f7e294aab212cb372026f1, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
@@ -19923,3 +19988,4 @@ SceneRoots:
   - {fileID: 942637226}
   - {fileID: 149713001}
   - {fileID: 1566789537}
+  - {fileID: 405398720}

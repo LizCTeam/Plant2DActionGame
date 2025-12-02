@@ -22,6 +22,7 @@ public class Enemy : Character, IDamageable
     {
         _hp = _maxHp;
         base.OnStart();
+        
     }
 
     protected override void OnUpdate()
