@@ -20457,7 +20457,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -6, y: -1.41, z: 0}
   m_LocalScale: {x: 1.85, y: 1.85, z: 1.85}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6400254418082444241}
   - {fileID: 5000222438224384499}
@@ -20494,6 +20494,7 @@ GameObject:
   - component: {fileID: 1897354086891551132}
   - component: {fileID: 127583216599268739}
   - component: {fileID: 1551553262968619720}
+  - component: {fileID: 6907041120094021375}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -20804,6 +20805,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3154200752808265180}
   - component: {fileID: 8432595499757081051}
+  - component: {fileID: 8432595499757081052}
   m_Layer: 0
   m_Name: PlayerSprite
   m_TagString: Untagged
@@ -21326,14 +21328,14 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0.000052273273
+    y: 0.047025234
     width: 1
-    height: 0.99989545
+    height: 0.90594953
   near clip plane: 0
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 6.7
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -21349,6 +21351,19 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &6907041120094021375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 933616348867619120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e36dc3c849d2b8747b4e7d77e89277bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FollowCamera
+  player: {fileID: 536589047173222469}
 --- !u!95 &7427453967296340983
 Animator:
   serializedVersion: 7
@@ -21426,6 +21441,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Hurtbox
   owner: {fileID: 6136935582548521893}
+  collider: {fileID: 0}
 --- !u!114 &8317972279755018882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21498,6 +21514,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &8432595499757081052
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3367818712874178862}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2307838980fa09e45b90e0a293ac3a0a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &8548776156056024146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21510,7 +21548,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1dba81a701ba9b48b4682f16aa08c92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CageBehaviour
-  Player: {fileID: 8758148488782289661}
+  player: {fileID: 8758148488782289661}
   VegeAnimatior: {fileID: 7427453967296340983}
   CarrotAbilityObject: {fileID: 5108318043013734971}
   CornAbilityObject: {fileID: 8944301087064389664}
@@ -21630,6 +21668,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e6b4f327054ff64e99bf1d7d4ea284e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  _hp: 5
+  _maxHp: 5
   _speed: 6
   GroundLayer:
     serializedVersion: 2

@@ -1,4 +1,4 @@
-using Unity.Mathematics.Geometry;
+﻿using Unity.Mathematics.Geometry;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,12 +13,18 @@ public class Character : BasicBehaviour
     protected override void OnAwake()
     {
         base.OnAwake();
+    }
+
+    protected override void OnStart()
+    {
+        base.OnAwake();
         _body = GetComponent<Rigidbody2D>();
     }
     
     protected override void OnUpdate()
     {
         base.OnUpdate();
+
     }
     
     protected bool isGrounded()

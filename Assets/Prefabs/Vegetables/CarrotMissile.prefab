@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 308344348320063176}
   m_Layer: 9
   m_Name: CarrotMissile
-  m_TagString: Untagged
+  m_TagString: Vegetables
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
