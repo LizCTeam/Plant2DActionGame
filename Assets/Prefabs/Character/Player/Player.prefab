@@ -773,6 +773,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarrotAbility
   Position: {fileID: 6519560306841782434}
   Projectile: {fileID: 1535273453308771460, guid: 05db59f588228a34d86c0c5c59f200ee, type: 3}
+  CarrotSpeed: 8
 --- !u!1 &5948026070581376487
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,6 +8,7 @@ public class Hurtbox : BasicBehaviour
     // IDamageableはインターフェース、このインターフェースを継承したclassは必ず
     // OnDamaged関数を実装しなくちゃいけない
     // これによってオブジェクト、ボス、敵同じHurtboxを使っても違う表現が出来る
+    [HideInInspector]
     public Collider2D collider;
     private IDamageable _damageable;
 
