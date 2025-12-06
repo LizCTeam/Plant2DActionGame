@@ -6,6 +6,7 @@ public class CameraFollow : BasicBehaviour
     [SerializeField] private float _minY = 0f;
     [SerializeField] private float _thresholdY = 10f;
     [SerializeField] private float _smoothSpeed = 5f;
+    [SerializeField] private float _addY = 2f;
 
     private Vector3 _initialCameraPos;
 
@@ -19,18 +20,23 @@ public class CameraFollow : BasicBehaviour
     private void LateUpdate()
     {
         Vector3 targetPos = transform.position;
+        float lerpTargetY = 0;
 
         // xŽ²‚Íí‚É’Ç]
         targetPos.x = player.position.x + 6f;
 
-        if(player.position.y > _thresholdY)
-        {
-            targetPos.y = Mathf.Lerp(transform.position.y,player.position.y, Time.deltaTime * _smoothSpeed);
-        }
-        else if(player.position.y > _minY && _thresholdY > player.position.y)
-        {
-            targetPos.y = Mathf.Lerp(transform.position.y,_initialCameraPos.y,Time.deltaTime * _smoothSpeed);
-        }
+        //if(player.position.y > _thresholdY)
+        //{
+        //    lerpTargetY = player.position.y + _addY;
+        //}
+        //else if(player.position.y > _minY && _thresholdY > player.position.y)
+        //{
+        //    targetPos.y = _initialCameraPos.y;
+        //}
+
+        lerpTargetY = player.position.y + _addY;
+
+        targetPos.y = Mathf.Lerp(transform.position.y,lerpTargetY, Time.deltaTime * _smoothSpeed);
 
         transform.position = targetPos;
     }
