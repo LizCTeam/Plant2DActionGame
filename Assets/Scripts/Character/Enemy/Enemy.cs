@@ -20,12 +20,17 @@ public class Enemy : Character, IDamageable
     
     protected override void OnStart()
     {
+        _hp = _maxHp;
         base.OnStart();
     }
 
     protected override void OnUpdate()
     {
         base.OnUpdate();
+        if (this._hp <= 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     protected override void OnFixedUpdate()
@@ -35,6 +40,6 @@ public class Enemy : Character, IDamageable
 
     public void OnDamaged(int damage)
     {
-        
+        _hp -= damage;
     }
 }

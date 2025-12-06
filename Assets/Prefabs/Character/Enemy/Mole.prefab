@@ -259,7 +259,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.0034089088, y: 0.17727536}
+  m_Offset: {x: -0.0034089088, y: -0.64447004}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -269,7 +269,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 2.861394, y: 1.8727406}
+  m_Size: {x: 2.861394, y: 0.22924984}
   m_EdgeRadius: 0
 --- !u!95 &987013463768992288
 Animator:
@@ -309,7 +309,7 @@ MonoBehaviour:
   GroundLayer:
     serializedVersion: 2
     m_Bits: 64
-  _maxHp: 5
+  _maxHp: 3
   hurtbox: {fileID: 94631783330939620}
   DetectorHide: {fileID: 4197683889219908697}
   DetectorChaseAway: {fileID: 7101474941673135724}
@@ -397,8 +397,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.3594495}
-  m_Radius: 0.7203077
+  m_Offset: {x: 0, y: 0.1540131}
+  m_Radius: 0.9257441
 --- !u!1 &5748276976716259195
 GameObject:
   m_ObjectHideFlags: 0
