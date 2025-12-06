@@ -40,7 +40,7 @@ public class Player : Character
         UpdateSpriteDirection();
         UpdateCoyoteTime();
         
-        print(_body.linearVelocity);
+        //print(_body.linearVelocity);
         
         if (playerActJump.WasPressedThisFrame())
         {
@@ -124,5 +124,10 @@ public class Player : Character
     public int GetHp()
     {
         return this._hp;
+    }
+
+    public bool IsMovingHorizontally()
+    {
+        return Mathf.Abs(_body.linearVelocity.x) > 0.1f;
     }
 }
