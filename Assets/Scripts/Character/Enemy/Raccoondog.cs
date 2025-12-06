@@ -165,29 +165,25 @@ public partial class Raccoondog : Enemy, IDamageable
                
             }
 
+            if (elapsedTime >= attackDuration)
+            {
+                Context.stateMachine.SendEvent((int)StateEvent.IdleEnter);
+            }
+
         }
 
     }
 
     private class parryState : ImtStateMachine<Raccoondog>.State
     {
+       
+
+
         protected internal override void Update()
         {
+
             base.Update();
-            Collider2D[] hits = Physics2D.OverlapCircleAll(Context.transform.position, 1.0f);
-            foreach (var hit in hits)
-            {
-               
-                if (hit.CompareTag("Vegetables"))
-                {
-                    
-                    GameObject vegetables = hit.gameObject;
-                    Object.Destroy(vegetables);
-                }
-            }
-            Debug.Log("hannn");
-            Context.stateMachine.SendEvent((int)StateEvent.MoveEnter);
-            
+             
         }
     }
 
@@ -236,6 +232,37 @@ public partial class Raccoondog : Enemy, IDamageable
     {
         this._hp -= damage;
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        GameObject vegetables = GameObject.FindWithTag("Vegetables");
+        if (vegetables != null)
+        {
+            
+            Rigidbody2D rb = other.attachedRigidbody;
+                if (rb != null)
+                {
+               
+                    Vector2 incoming = (other.transform.position - transform.position).normalized * 10f;
+
+
+                    Vector2 normal = Carrotreflect.transform.up;
+
+                    Vector2 reflected = Vector2.Reflect(incoming, normal);
+                    other.transform.position += (Vector3)(reflected.normalized * 0.5f);
+                    rb.linearVelocity = reflected.normalized * 10f;
+                    Debug.Log($"Projectile reflected! incoming={incoming}, reflected={reflected}");
+
+
+                }
+        }
+        
+    }
+
+
+
+
+
 
 
 
