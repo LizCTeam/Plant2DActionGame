@@ -87,7 +87,6 @@ public class Player : Character, IDamageable
         
         if (this._hp <= 0)
         {
-            print("HPはゼロ");
             //Deadアニメーションを再生
             //ゲームオーバー画面を表示
             //操作不可状態にする
@@ -150,7 +149,6 @@ public class Player : Character, IDamageable
 
     public void OnDamaged(int damage)
     {
-        print("OOO");
         _hp -= damage;
     }
 }
