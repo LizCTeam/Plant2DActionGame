@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - Enemy
+  - Vegetables
+  - Carrot
+  - ReflectedCarrot
   layers:
   - Default
   - TransparentFX

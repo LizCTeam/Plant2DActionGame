@@ -1,20 +1,24 @@
 using IceMilkTea.StateMachine;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.Rendering;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
 public partial class Raccoondog : Enemy, IDamageable
 {
+    [SerializeField] private Collider2D Carrotreflect;
+
+    public bool isreflect;
+    private GameObject Vegetable;
+
+
     public enum StateEvent
     {
        ParryEnter,
        AttackEnter,
        MoveEnter,
 
-
        IdleEnter
-
-
     }
 
     private Hurtbox _hurtbox;
@@ -29,6 +33,7 @@ public partial class Raccoondog : Enemy, IDamageable
         {
             
             GameObject player = GameObject.FindWithTag("Player");
+            GameObject vegetables = GameObject.FindWithTag("Vegetables");
            
             if(player != null)
             {
@@ -40,7 +45,16 @@ public partial class Raccoondog : Enemy, IDamageable
                 }
             }
 
-            
+            if (vegetables != null)
+            {
+                float Vegetabledist = Vector2.Distance(vegetables.transform.position, Context.transform.position);
+
+                if(Vegetabledist < 4.0f)
+                {
+                    Context.stateMachine.SendEvent((int)StateEvent.ParryEnter);
+                }
+                
+            }
 
         }
 
@@ -52,6 +66,8 @@ public partial class Raccoondog : Enemy, IDamageable
         {
 
             GameObject player = GameObject.FindWithTag("Player");
+            GameObject vegetables = GameObject.FindWithTag("Vegetables");
+
 
             if (player != null)
             {
@@ -61,6 +77,18 @@ public partial class Raccoondog : Enemy, IDamageable
                 {
                     Context.stateMachine.SendEvent((int)StateEvent.AttackEnter);
                 }
+            }
+
+            if (vegetables != null)
+            {
+                float Vegetabledist = Vector2.Distance(vegetables.transform.position, Context.transform.position);
+
+                if (Vegetabledist < 4.0f)
+                {
+                    Context.stateMachine.SendEvent((int)StateEvent.ParryEnter);
+                }
+
+                
             }
 
         }
@@ -82,7 +110,6 @@ public partial class Raccoondog : Enemy, IDamageable
         {
             elapsedTime += Time.deltaTime;
 
-            
             Collider2D[] hits = Physics2D.OverlapCircleAll(Context.transform.position, 3.0f);
             foreach (var hit in hits)
             {
@@ -107,23 +134,26 @@ public partial class Raccoondog : Enemy, IDamageable
                
             }
 
-            // ˆê’èŽžŠÔŒo‰ß‚µ‚½‚ç Idle ‚É–ß‚·
             if (elapsedTime >= attackDuration)
             {
                 Context.stateMachine.SendEvent((int)StateEvent.IdleEnter);
             }
 
-
         }
-
-
-
 
     }
 
     private class parryState : ImtStateMachine<Raccoondog>.State
     {
+       
 
+
+        protected internal override void Update()
+        {
+
+            base.Update();
+             
+        }
     }
 
 
@@ -172,7 +202,35 @@ public partial class Raccoondog : Enemy, IDamageable
         this._hp -= damage;
     }
 
-  
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        GameObject vegetables = GameObject.FindWithTag("Vegetables");
+        if (vegetables != null)
+        {
+            
+            Rigidbody2D rb = other.attachedRigidbody;
+                if (rb != null)
+                {
+               
+                    Vector2 incoming = (other.transform.position - transform.position).normalized * 10f;
+
+
+                    Vector2 normal = Carrotreflect.transform.up;
+
+                    Vector2 reflected = Vector2.Reflect(incoming, normal);
+                    other.transform.position += (Vector3)(reflected.normalized * 0.5f);
+                    rb.linearVelocity = reflected.normalized * 10f;
+                    Debug.Log($"Projectile reflected! incoming={incoming}, reflected={reflected}");
+
+
+                }
+        }
+        
+    }
+
+
+
+
 
 
 
