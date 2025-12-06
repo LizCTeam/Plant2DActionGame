@@ -93,7 +93,6 @@ public partial class Mole : Enemy, IDamageable
                 player = other.gameObject;
             }
         }
-        print("nope");
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -131,8 +130,6 @@ public partial class Mole : Enemy, IDamageable
             
             Rigidbody2D rid = ball.GetComponent<Rigidbody2D>();
             rid.AddForce(velocity * rid.mass, ForceMode2D.Impulse);
-            
-            print(velocity);
         }
         else
         {

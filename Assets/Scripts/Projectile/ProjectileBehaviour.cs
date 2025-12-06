@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ProjectileBehaviour : BasicBehaviour
+public class ProjectileBehaviour : BasicBehaviour, IDamageDealt
 {
     [SerializeField] 
     private GameObject _collisionObject;
@@ -35,4 +35,8 @@ public class ProjectileBehaviour : BasicBehaviour
 
     #endregion
     
+    public void OnDealtDamage(int damage, GameObject gameObject)
+    {
+        Destroy(this.gameObject);
+    }
 }

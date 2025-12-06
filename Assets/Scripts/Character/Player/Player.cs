@@ -2,8 +2,24 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-public class Player : Character
+public class Player : Character, IDamageable
 {
+    [SerializeField] protected int _maxHp = 3;
+
+    protected int _hp
+    {
+        set
+        {
+            _currentHp = Mathf.Clamp(value, 0, _maxHp);
+        }
+        get
+        {
+            return _currentHp;
+        }
+    }
+    
+    protected int _currentHp;
+    
     [SerializeField] private float acceleration = 7f;
     [SerializeField] private float deacceleration = 6f;
     [SerializeField] private float velPower = 0.9f;
@@ -30,6 +46,7 @@ public class Player : Character
     protected override void OnStart()
     {
         base.OnStart();
+        _hp = _maxHp;
     }
     
     protected override void OnUpdate()
@@ -39,8 +56,6 @@ public class Player : Character
         base.OnUpdate();
         UpdateSpriteDirection();
         UpdateCoyoteTime();
-        
-        print(_body.linearVelocity);
         
         if (playerActJump.WasPressedThisFrame())
         {
@@ -68,6 +83,14 @@ public class Player : Character
         if (isGrounded() && Mathf.Abs(_playerController.inputDirection.x) < 0.01f)
         {
             float amount = Mathf.Min(Mathf.Abs(_body.linearVelocity.x), Mathf.Abs(frictionAmount));
+        }
+        
+        if (this._hp <= 0)
+        {
+            print("HPはゼロ");
+            //Deadアニメーションを再生
+            //ゲームオーバー画面を表示
+            //操作不可状態にする
         }
     }
 
@@ -114,7 +137,6 @@ public class Player : Character
         var speedDif = targetSpeed - _body.linearVelocity.x;
         var accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? acceleration : deacceleration;
         var movement = Mathf.Pow(Mathf.Abs(speedDif) * accelRate, velPower) * Mathf.Sign(speedDif);
-        print("inputDirection : " + _playerController.inputDirection);
         _body.AddForce(movement * Vector2.right, ForceMode2D.Force);
         
         //これは形骸化した挙動
@@ -124,5 +146,11 @@ public class Player : Character
     public int GetHp()
     {
         return this._hp;
+    }
+
+    public void OnDamaged(int damage)
+    {
+        print("OOO");
+        _hp -= damage;
     }
 }

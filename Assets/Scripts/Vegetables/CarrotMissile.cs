@@ -42,7 +42,6 @@ public class CarrotMissile : ProjectileBehaviour
             // var parentPosition = this.Context.transform.position;
             // parentPosition.y += Context.speed * Time.deltaTime;
             // this.Context.transform.position = parentPosition;
-            // print(this.Context.transform.position + "   " + goalPosition);
             // if (this.Context.transform.position.y >= goalPosition)
             // {
             //     stateMachine.SendEvent((int)StateEvent.LaunchFinish);
@@ -66,7 +65,6 @@ public class CarrotMissile : ProjectileBehaviour
             GameObject nearestEnemy = null;
             List<GameObject> enemies = new List<GameObject>();
             enemies.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
-            //print(enemies.Count + " Enemies Left");
             foreach (var enemyObj in enemies)
             {
                 Component[] components = (Component[])enemyObj.GetComponents(typeof(Enemy));

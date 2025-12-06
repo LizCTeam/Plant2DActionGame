@@ -12,6 +12,16 @@ public class Hitbox : BasicBehaviour
     public bool isContinuousDamage;
     
     private readonly Dictionary<Collider2D, Coroutine> _hitEvents = new();
+
+    private IDamageDealt _damageDealt;
+
+    private void Awake()
+    {
+        if (owner)
+        {
+            _damageDealt = owner.GetComponent(nameof(IDamageDealt)) as IDamageDealt;
+        }
+    }
     
     // 注意OnTriggerEnterではなくOnTriggerEnter"2D" (1敗)
     // Unity上でIs TriggerをONにすることでGodotのArea2Dみたいな使い方が出来る
@@ -33,6 +43,7 @@ public class Hitbox : BasicBehaviour
     {
         var hurtbox = other.GetComponent<Hurtbox>();
         hurtbox?.Hurt(damage);
+        _damageDealt?.OnDealtDamage(damage, other.gameObject);
     }
 
     private void DoMultipleHit(Collider2D other)

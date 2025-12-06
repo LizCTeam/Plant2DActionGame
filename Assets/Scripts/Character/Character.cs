@@ -1,11 +1,9 @@
+using Unity.Mathematics.Geometry;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Character : BasicBehaviour
 {
-    [SerializeField] protected int _hp = 5;
-    [SerializeField] protected int _maxHp = 5;
-    
     [SerializeField]
     protected float _speed = 4f;
     
