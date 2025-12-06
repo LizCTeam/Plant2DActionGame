@@ -48,7 +48,7 @@ CapsuleCollider2D:
     m_Bits: 128
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 895
+    m_Bits: 1919
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -241,7 +241,7 @@ BoxCollider2D:
     m_Bits: 512
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 447
+    m_Bits: 1471
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -305,12 +305,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92aac0527c15dd54e848fef9f25bc522, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Mole
-  _hp: 5
-  _maxHp: 5
   _speed: 4
   GroundLayer:
     serializedVersion: 2
     m_Bits: 64
+  _maxHp: 5
   hurtbox: {fileID: 94631783330939620}
   DetectorHide: {fileID: 4197683889219908697}
   DetectorChaseAway: {fileID: 7101474941673135724}
@@ -380,7 +379,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 511
+    m_Bits: 1535
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -480,7 +479,7 @@ CapsuleCollider2D:
     m_Bits: 128
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 895
+    m_Bits: 1919
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2

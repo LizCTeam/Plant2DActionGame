@@ -16,7 +16,6 @@ public partial class Mole : Enemy, IDamageable
         
         protected internal override void Update()
         {
-            print(Context._throwCooldown);
             Context._throwCooldown -= Time.deltaTime;
             
             if (Context._throwCooldown <= 0.0f)
@@ -28,13 +27,11 @@ public partial class Mole : Enemy, IDamageable
             if (!Context.isDetectChaseAway && !Context.isHide)
             {
                 stateMachine.SendEvent((int)StateEvent.PlayerExit);
-                print("ChaseAway to Idle");
             }
             
             if (Context.isDetectChaseAway && Context.isHide)
             {
                 stateMachine.SendEvent((int)StateEvent.PlayerNear);
-                print("ChaseAway to Hide");
                 return;
             }
         }

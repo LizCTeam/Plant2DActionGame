@@ -16,12 +16,10 @@ public partial class Mole : Enemy, IDamageable
             if (!Context.isDetectChaseAway && !Context.isHide)
             {
                 stateMachine.SendEvent((int)StateEvent.PlayerExit);
-                print("Hide to Idle");
             }
             else if (Context.isDetectChaseAway && !Context.isHide)
             {
                 stateMachine.SendEvent((int)StateEvent.PlayerAround);
-                print("Hide to ChaseAway");
             }
         }
         

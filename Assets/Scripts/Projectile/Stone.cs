@@ -16,7 +16,4 @@ public class Stone : ProjectileBehaviour
     {
         base.OnFixedUpdate();
     }
-    
-    
-
 }
