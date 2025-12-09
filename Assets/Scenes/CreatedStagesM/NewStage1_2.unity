@@ -18907,7 +18907,8 @@ PrefabInstance:
       propertyPath: TimerText
       value: 
       objectReference: {fileID: 1379998351}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5857480226497493655, guid: 4e1e21456c8564943870e00139ae0c24, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

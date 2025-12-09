@@ -394,7 +394,7 @@ GameObject:
   - component: {fileID: 2134550077375113967}
   - component: {fileID: 375424176841803963}
   - component: {fileID: 4367791201347624199}
-  - component: {fileID: 5857480226497493655}
+  - component: {fileID: 5397003319672591881}
   m_Layer: 0
   m_Name: PlayerSprite (1)
   m_TagString: Untagged
@@ -497,7 +497,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5857480226497493655
+--- !u!114 &5397003319672591881
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -510,6 +510,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimatorController
   _animator: {fileID: 4367791201347624199}
+  _playerController: {fileID: 370600968300845981}
+  _player: {fileID: 2246995923685720719}
 --- !u!1 &1980961685044809017
 GameObject:
   m_ObjectHideFlags: 0
@@ -1513,7 +1515,7 @@ MonoBehaviour:
     m_Bits: 64
   acceleration: 5
   deacceleration: 8
-  velPower: 0.9
+  velPower: 0.92
   jumpForce: 17.5
   maxSpeed: 8
   frictionAmount: 0.9
