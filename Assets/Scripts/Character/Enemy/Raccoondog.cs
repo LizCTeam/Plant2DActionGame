@@ -69,7 +69,7 @@ public partial class Raccoondog : Enemy, IDamageable
             float dir = movingLeft ? 1 : -1;
             
             Context.GetComponent<Rigidbody2D>().linearVelocity = new Vector2(-dir * moveSpeed, Context.GetComponent<Rigidbody2D>().linearVelocity.y);
-            Transform groundCheck = Context.transform.Find("GroundCheck"); // 足元に空オブジェクトを置く
+            Transform groundCheck = Context.transform.Find("GroundCheck"); 
             if (groundCheck != null)
             {
                 if (!Physics2D.Raycast(groundCheck.position, Vector2.down, 0.1f, LayerMask.GetMask("Ground")))
@@ -115,9 +115,9 @@ public partial class Raccoondog : Enemy, IDamageable
         }
         private void Flip()
         {
-            movingLeft = !movingLeft;
+            movingLeft = false;
             Vector3 scale = Context.transform.localScale;
-            scale.x *= -1;
+            scale.x *= 1;
             Context.transform.localScale = scale;
         }
 
@@ -165,9 +165,9 @@ public partial class Raccoondog : Enemy, IDamageable
                
             }
 
-            if (elapsedTime >= attackDuration)
+            if (_elapsedTime >= _attackDuration)
             {
-                Context.stateMachine.SendEvent((int)StateEvent.IdleEnter);
+                Context.stateMachine.SendEvent((int)StateEvent.MoveEnter);
             }
 
         }
@@ -176,14 +176,22 @@ public partial class Raccoondog : Enemy, IDamageable
 
     private class parryState : ImtStateMachine<Raccoondog>.State
     {
-       
-
-
         protected internal override void Update()
         {
-
             base.Update();
-             
+            Collider2D[] hits = Physics2D.OverlapCircleAll(Context.transform.position, 2.0f);
+            foreach (var hit in hits)
+            {
+                GameObject vegetables = GameObject.FindWithTag("Vegetables");
+                if (vegetables != null)
+                {
+                    Object.Destroy(vegetables);
+                    Debug.Log("hannn");
+                }
+            }
+           
+            Context.stateMachine.SendEvent((int)StateEvent.MoveEnter);
+
         }
     }
 
@@ -233,31 +241,7 @@ public partial class Raccoondog : Enemy, IDamageable
         this._hp -= damage;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        GameObject vegetables = GameObject.FindWithTag("Vegetables");
-        if (vegetables != null)
-        {
-            
-            Rigidbody2D rb = other.attachedRigidbody;
-                if (rb != null)
-                {
-               
-                    Vector2 incoming = (other.transform.position - transform.position).normalized * 10f;
-
-
-                    Vector2 normal = Carrotreflect.transform.up;
-
-                    Vector2 reflected = Vector2.Reflect(incoming, normal);
-                    other.transform.position += (Vector3)(reflected.normalized * 0.5f);
-                    rb.linearVelocity = reflected.normalized * 10f;
-                    Debug.Log($"Projectile reflected! incoming={incoming}, reflected={reflected}");
-
-
-                }
-        }
-        
-    }
+   
 
 
 
