@@ -18847,6 +18847,10 @@ PrefabInstance:
       propertyPath: CarrotSpeed
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 5857480226497493655, guid: 4e1e21456c8564943870e00139ae0c24, type: 3}
+      propertyPath: _playerController
+      value: 
+      objectReference: {fileID: 1884422518}
     - target: {fileID: 7270741059625311622, guid: 4e1e21456c8564943870e00139ae0c24, type: 3}
       propertyPath: m_Name
       value: Player
@@ -19397,6 +19401,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2989146ec47050f468fff141064890eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
+--- !u!114 &1884422518 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 370600968300845981, guid: 4e1e21456c8564943870e00139ae0c24, type: 3}
+  m_PrefabInstance: {fileID: 1352907661}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1523018034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e6b4f327054ff64e99bf1d7d4ea284e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
 --- !u!1 &2058115879
 GameObject:
   m_ObjectHideFlags: 0
