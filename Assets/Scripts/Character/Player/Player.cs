@@ -126,8 +126,4 @@ public class Player : Character
         return this._hp;
     }
 
-    public bool IsMovingHorizontally()
-    {
-        return Mathf.Abs(_body.linearVelocity.x) > 0.1f;
-    }
 }
