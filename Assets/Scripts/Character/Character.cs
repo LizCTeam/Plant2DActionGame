@@ -23,7 +23,7 @@ public class Character : BasicBehaviour
         base.OnUpdate();
     }
     
-    protected bool isGrounded()
+    public bool isGrounded()
     {
         //BoxColliderにあるCastを使って地面の判定をboolで返します。
         Collider2D c = GetComponent<Collider2D>();
