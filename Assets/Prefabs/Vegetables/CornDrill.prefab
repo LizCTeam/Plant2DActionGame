@@ -219,8 +219,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f400d6fbc602ea84eab8b50133b5f363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CornDrill
-  _useTimer: 5
-  _speedMultiplier: 1.5
+  _useTimer: 3
+  _speedMultiplier: 5
+  _scaleMultiplier: 2
 --- !u!1 &8479472205188074223
 GameObject:
   m_ObjectHideFlags: 0
