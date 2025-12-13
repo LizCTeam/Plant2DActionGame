@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CornAbility : BasicBehaviour, IHasAbility
 {
@@ -13,6 +13,6 @@ public class CornAbility : BasicBehaviour, IHasAbility
         var scale = corn.transform.localScale;
         scale.x = Mathf.Sign(Parent.transform.localScale.x) * Mathf.Abs(Parent.transform.localScale.x);
         corn.transform.localScale = scale;
-        corn.transform.parent = Parent.transform;
+        //corn.transform.parent = Parent.transform;
     }
 }

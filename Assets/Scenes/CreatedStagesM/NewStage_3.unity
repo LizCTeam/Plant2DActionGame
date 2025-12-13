@@ -314,6 +314,18 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 2073898190}
+    - target: {fileID: 1221572798703206014, guid: acb1335e00f7e294aab212cb372026f1, type: 3}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 2073898185}
+    - target: {fileID: 1221572798703206014, guid: acb1335e00f7e294aab212cb372026f1, type: 3}
+      propertyPath: _smoothSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1221572798703206014, guid: acb1335e00f7e294aab212cb372026f1, type: 3}
+      propertyPath: _playerController
+      value: 
+      objectReference: {fileID: 2073898191}
     - target: {fileID: 5444290805092727284, guid: acb1335e00f7e294aab212cb372026f1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -13.92
@@ -712,6 +724,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7516405525831616115, guid: 4e1e21456c8564943870e00139ae0c24, type: 3}
+      propertyPath: SeedText
+      value: 
+      objectReference: {fileID: 3999803486089653849}
+    - target: {fileID: 7516405525831616115, guid: 4e1e21456c8564943870e00139ae0c24, type: 3}
+      propertyPath: TimerText
+      value: 
+      objectReference: {fileID: 2208345652179325230}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -28271,6 +28291,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7499005524411237605, guid: 4e1e21456c8564943870e00139ae0c24, type: 3}
   m_PrefabInstance: {fileID: 1097363996}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2073898191 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 370600968300845981, guid: 4e1e21456c8564943870e00139ae0c24, type: 3}
+  m_PrefabInstance: {fileID: 1097363996}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e6b4f327054ff64e99bf1d7d4ea284e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
 --- !u!224 &134731521242962689
 RectTransform:
   m_ObjectHideFlags: 0
