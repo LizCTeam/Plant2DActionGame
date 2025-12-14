@@ -1,11 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using DG.Tweening;
 using IceMilkTea.StateMachine;
-using UnityEngine.Animations;
-//using UnityEditor.Animations;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -245,8 +241,6 @@ public class CageBehaviour : BasicBehaviour
             Context.Fire -= Fire;
         }
     } 
-    
-    //人の睡眠時間削っておいて許されると思うなよ (11/17 月)
     
     #endregion
     

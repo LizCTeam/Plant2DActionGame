@@ -10,7 +10,7 @@ public class PlayerController : BasicBehaviour
     [FormerlySerializedAs("_inputDirection")] public Vector2 inputDirection = Vector2.zero;
 
     public bool isButtonPress;
-    [FormerlySerializedAs("Cage")] public CageBehaviour cage;
+    [FormerlySerializedAs("Cage")] public ReworkCageBehaviour cage;
 
     [SerializeField] private Player _player;
 
