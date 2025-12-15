@@ -19,6 +19,7 @@ public class CornDrill : BasicBehaviour
         GameObject _playerObject = GameObject.FindWithTag("Player");
         _player = _playerObject?.GetComponent<Player>();
         _playerController = _playerObject?.GetComponent<PlayerController>();
+        transform.localScale = new Vector3(_scaleMultiplier, _scaleMultiplier, _scaleMultiplier);
         //_player.speedMultiplier = this._speedMultiplier;
     }
 
@@ -60,12 +61,12 @@ public class CornDrill : BasicBehaviour
         //X軸方向に移動するアニメーションを追加
         Tween moveTween = transform.DOMoveX(transform.position.x + _speedMultiplier, _useTimer).SetEase(Ease.Linear);
 
-        //スケールを変化させるアニメーションを追加
-        Tween scaleTween=transform.DOScale(_scaleMultiplier,_useTimer).SetEase(Ease.Linear);
+        ////スケールを変化させるアニメーションを追加
+        //Tween scaleTween=transform.DOScale(_scaleMultiplier,_useTimer).SetEase(Ease.Linear);
 
         //シーケンスに2つのTweenを追加
         sequence.Join(moveTween);
-        sequence.Join(scaleTween);
+        //sequence.Join(scaleTween);
 
         //シーケンス完了時にコールバックを設定
         sequence.OnComplete(OnDestroy);
