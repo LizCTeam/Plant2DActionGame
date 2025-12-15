@@ -35,7 +35,7 @@ public class PlayerAnimatorController : BasicBehaviour
         }
         _animator.SetBool(_walk, walk);
         
-        if (_player.isGrounded()==false)
+        if (!_player.isGrounded())
         {
             jump = true;
         }
@@ -44,5 +44,6 @@ public class PlayerAnimatorController : BasicBehaviour
             jump = false;
         }
         _animator.SetBool(_jump, jump);
+        
     }
 }

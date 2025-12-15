@@ -16,9 +16,9 @@ public partial class ReworkCageBehaviour
         
         protected internal override void Update()
         {
-            if (Context.Player.playerAct.UniqueAction.IsPressed())
+            if (Context.Player.Controller.playerAct.UniqueAction.IsPressed())
             {
-                float maxTime = Context._plantAttributeData[Context.CurrentVegetableType].MaxGrowthDuration;
+                float maxTime = Context.PlantAttributeData[Context.CurrentVegetableType].MaxGrowthDuration;
                 if (Context.Timer < maxTime)
                 {
                     Context.Timer += Time.deltaTime;

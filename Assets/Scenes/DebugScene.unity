@@ -1572,6 +1572,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4586782407961326031, guid: f87143b8fa4ad4949ac41250003e8d6d, type: 3}
+      propertyPath: m_NormalizedViewPortRect.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4586782407961326031, guid: f87143b8fa4ad4949ac41250003e8d6d, type: 3}
+      propertyPath: m_NormalizedViewPortRect.width
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5349992120469301109, guid: f87143b8fa4ad4949ac41250003e8d6d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -64.86788

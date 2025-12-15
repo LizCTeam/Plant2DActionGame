@@ -11,4 +11,10 @@ public class PlantAttributeData : ScriptableObject
     public float SeedingPercentage;
     [TooltipAttribute("第二段階のパーセント : \n [MaxGrowthDuration]の[SproutPercentage]%が第二段階になる時間 \n 0.8fと入れると80%の時間で第二段階へ移行する")]
     public float SproutPercentage;
+    [TooltipAttribute("第一段階の野菜の攻撃力")] 
+    public int SeedingDamage;
+    [TooltipAttribute("第ニ段階の野菜の攻撃力")] 
+    public int SproutDamage;
+    [TooltipAttribute("第三段階の野菜の攻撃力")] 
+    public int MatureDamage;
 }
