@@ -1,6 +1,7 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class Player : Character, IDamageable
 {
@@ -26,14 +27,20 @@ public class Player : Character, IDamageable
     [SerializeField] public float jumpForce = 10f;
     [SerializeField] public float maxSpeed = 10f;
     [SerializeField] public float frictionAmount = 0.8f;
+
+    [SerializeField, Header("落下地点")] private float _deadPointY = -10f;
     
     private float _coyoteTime = 0.2f; //崖から離れた時の猶予時間
     private float _coyoteTimeCounter;
     
     private float _jumpBufferTime = 0.2f;
     private float _jumpBufferTimeCounter;
-    
+
+    private bool _isDead = false;
+
     private PlayerController _playerController;
+
+    private Vector3 _startPosition;
     
     public GameObject VisualRoot;
 
@@ -56,41 +63,59 @@ public class Player : Character, IDamageable
         base.OnUpdate();
         UpdateSpriteDirection();
         UpdateCoyoteTime();
-        
-        if (playerActJump.WasPressedThisFrame())
+
+        Vector3 _pos = transform.position;
+        transform.position = _pos;
+
+        if (_isDead == true)
         {
-            _jumpBufferTimeCounter =  _jumpBufferTime;
+            transform.position = _startPosition;
+            _isDead = false;
+            ResetStage();
         }
         else
         {
-            _jumpBufferTimeCounter -= Time.deltaTime;
+            if (playerActJump.WasPressedThisFrame())
+            {
+                _jumpBufferTimeCounter = _jumpBufferTime;
+            }
+            else
+            {
+                _jumpBufferTimeCounter -= Time.deltaTime;
+            }
+
+            if (_coyoteTimeCounter > 0f && _jumpBufferTimeCounter > 0f)
+            {
+                _body.linearVelocityY = jumpForce;
+
+                _jumpBufferTimeCounter = 0f;
+            }
+
+            if (playerActJump.WasReleasedThisFrame() && _body.linearVelocityY > 0f)
+            {
+                _body.linearVelocityY = _body.linearVelocityY * 0.5f;
+
+                _coyoteTimeCounter = 0f;
+            }
+
+            if (isGrounded() && Mathf.Abs(_playerController.inputDirection.x) < 0.01f)
+            {
+                float amount = Mathf.Min(Mathf.Abs(_body.linearVelocity.x), Mathf.Abs(frictionAmount));
+            }
+
+            if (this._hp <= 0 || transform.position.y < _deadPointY) 
+            {
+                //Deadアニメーションを再生
+                //ゲームオーバー画面を表示
+                //操作不可状態にする
+
+                Debug.Log("Player Dead");
+                Debug.Log(_hp);
+                _isDead = true;
+            }
         }
         
-        if (_coyoteTimeCounter > 0f && _jumpBufferTimeCounter > 0f)
-        {
-            _body.linearVelocityY = jumpForce;
-
-            _jumpBufferTimeCounter = 0f;
-        }
-
-        if (playerActJump.WasReleasedThisFrame() && _body.linearVelocityY > 0f)
-        {
-            _body.linearVelocityY = _body.linearVelocityY * 0.5f;
-            
-            _coyoteTimeCounter = 0f;
-        }
-
-        if (isGrounded() && Mathf.Abs(_playerController.inputDirection.x) < 0.01f)
-        {
-            float amount = Mathf.Min(Mathf.Abs(_body.linearVelocity.x), Mathf.Abs(frictionAmount));
-        }
-        
-        if (this._hp <= 0)
-        {
-            //Deadアニメーションを再生
-            //ゲームオーバー画面を表示
-            //操作不可状態にする
-        }
+       
     }
 
     private void UpdateSpriteDirection()
@@ -150,5 +175,12 @@ public class Player : Character, IDamageable
     public void OnDamaged(int damage)
     {
         _hp -= damage;
+    }
+
+    void ResetStage()
+    {
+        ContinuationChange.CurrentSceneName();
+
+        SceneManager.LoadScene("GameOver");
     }
 }
