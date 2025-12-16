@@ -87,12 +87,12 @@ public partial class Player : Character, IDamageable
     {
         var visualScale = VisualRoot.transform.localScale;
         
-        if (_body.linearVelocity.x < -0.5f)
+        if (Controller.inputDirection.x < -0.8f)
         {
             visualScale.x = -Mathf.Abs(visualScale.x);
             VisualRoot.transform.localScale = visualScale;
         }
-        else if (_body.linearVelocity.x > 0.5f)
+        else if (Controller.inputDirection.x > 0.8f)
         {
             visualScale.x = Mathf.Abs(visualScale.x);
             VisualRoot.transform.localScale = visualScale;
