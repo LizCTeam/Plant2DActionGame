@@ -303,7 +303,7 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""143bb1cd-cc10-4eca-a2f0-a3664166fe91"",
-                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Gamepad"",
@@ -347,7 +347,7 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""30ad4a71-e749-49e4-9f45-2e30543fe6a0"",
-                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": ""Hold(duration=0.1)"",
                     ""processors"": """",
                     ""groups"": "";Gamepad"",
@@ -369,18 +369,7 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""1efd61d3-1f7c-4344-9072-be86d317da36"",
-                    ""path"": ""<Gamepad>/dpad/down"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Gamepad"",
-                    ""action"": ""Switching"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""8bf84a93-6837-4d5e-b06d-e490b4f565cb"",
-                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Gamepad"",
@@ -406,6 +395,17 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""ExitAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""efcf1ae7-48ee-4e67-82e8-2af3df92c7f9"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
                     ""action"": ""ExitAction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false

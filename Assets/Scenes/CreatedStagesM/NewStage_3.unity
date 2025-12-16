@@ -28227,14 +28227,14 @@ RectTransform:
   m_GameObject: {fileID: 312227070379544217}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.96, y: 1.96, z: 1.96}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8667387217018951896}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -771, y: -521}
+  m_AnchoredPosition: {x: -602, y: -521}
   m_SizeDelta: {x: 349.94, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &312227070379544217
@@ -28682,7 +28682,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6290677148921998411}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
@@ -28697,20 +28697,18 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 49
+    m_FontSize: 37
     m_FontStyle: 1
     m_BestFit: 0
-    m_MinSize: 2
-    m_MaxSize: 67
+    m_MinSize: 0
+    m_MaxSize: 95
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "WASD : \u79FB\u52D5\n\u53F3\u30AF\u30EA\u30C3\u30AF : \u6C34\u3084\u308A\n\u5DE6\u30AF\u30EA\u30C3\u30AF
-    : (\u6E80\u958B\u6642)  \u653B\u6483\nR\uFF1A(\u4F55\u3082\u306A\u3044\u6642) 
-    \u7A2E\u30C1\u30A7\u30F3\u30B8"
+  m_Text: "\u5DE6\u30B9\u30C6\u30A3\u30C3\u30AF\uFF1A\u79FB\u52D5\nRB\uFF1A\u6210\u9577\nLB\uFF1A\u7A2E\u30C1\u30A7\u30F3\u30B8\nRT\uFF1A\u767A\u5C04(\u82BD\u304C\u751F\u3048\u308B\u72B6\u614B\u4EE5\u4E0A)\nA\uFF1A\u30B8\u30E3\u30F3\u30D7"
 --- !u!1 &7382368510906015531
 GameObject:
   m_ObjectHideFlags: 0
@@ -28841,8 +28839,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -599, y: 379}
-  m_SizeDelta: {x: 700, y: 300}
+  m_AnchoredPosition: {x: -503, y: 97}
+  m_SizeDelta: {x: 900, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &8667387217018951896
 RectTransform:
