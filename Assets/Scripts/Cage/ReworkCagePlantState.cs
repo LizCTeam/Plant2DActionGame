@@ -16,16 +16,13 @@ public partial class ReworkCageBehaviour
         
         protected internal override void Update()
         {
-            if (Context.Player.Controller.playerAct.UniqueAction.IsPressed())
+            float maxTime = Context.PlantAttributeData[Context.CurrentVegetableType].MaxGrowthDuration;
+            if (Context.Timer < maxTime)
             {
-                float maxTime = Context.PlantAttributeData[Context.CurrentVegetableType].MaxGrowthDuration;
-                if (Context.Timer < maxTime)
-                {
-                    Context.Timer += Time.deltaTime;
-                    Context.Timer = Mathf.Clamp(Context.Timer, 0, maxTime);
-                    Context._vegeAnimatior.SetInteger(Level, (int)Context.GrowthLevel);
-                    print("GrowthLevel : " + Context.GrowthLevel);
-                }
+                Context.Timer += Time.deltaTime;
+                Context.Timer = Mathf.Clamp(Context.Timer, 0, maxTime);
+                Context._vegeAnimatior.SetInteger(Level, (int)Context.GrowthLevel);
+                print("GrowthLevel : " + Context.GrowthLevel);
             }
         }
         
