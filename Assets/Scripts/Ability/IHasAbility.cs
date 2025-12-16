@@ -2,5 +2,5 @@ using UnityEngine;
 
 public interface IHasAbility
 {
-    public void UseAbility();
+    public void UseAbility(Player player);
 }

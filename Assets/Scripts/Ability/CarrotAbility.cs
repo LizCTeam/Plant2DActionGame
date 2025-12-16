@@ -6,7 +6,7 @@ public class CarrotAbility : BasicBehaviour, IHasAbility
     public GameObject Projectile;
     public float CarrotSpeed = 8f;
     
-    public void UseAbility()
+    public void UseAbility(Player player)
     {
         Debug.Log("Used Ability");
         GameObject Obj = Instantiate(Projectile, Position.transform.position, Quaternion.identity);

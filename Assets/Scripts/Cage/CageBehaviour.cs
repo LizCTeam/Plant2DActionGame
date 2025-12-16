@@ -1,11 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using DG.Tweening;
 using IceMilkTea.StateMachine;
-using UnityEngine.Animations;
-//using UnityEditor.Animations;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -13,7 +9,7 @@ using UnityEngine.UI;
 public class CageBehaviour : BasicBehaviour
 {
     [FormerlySerializedAs("Player")] [SerializeField]
-    public PlayerController player;
+    public Player player;
     [SerializeField]
     private Animator VegeAnimatior;
     
@@ -96,7 +92,7 @@ public class CageBehaviour : BasicBehaviour
         
         protected internal override void Update()
         {
-            if (Context.player.playerAct.UniqueAction.IsPressed())
+            if (Context.player.Controller.playerAct.UniqueAction.IsPressed())
             {
                 Context.timer += Time.deltaTime;
                 float requiredTime = Context.growthDurations[Context.currentVegetableType][0];
@@ -130,7 +126,7 @@ public class CageBehaviour : BasicBehaviour
         }
         protected internal override void Update()
         {
-            if (Context.player.playerAct.UniqueAction.IsPressed())
+            if (Context.player.Controller.playerAct.UniqueAction.IsPressed())
             {
                 Context.timer += Time.deltaTime;
                 float requiredTime = Context.growthDurations[Context.currentVegetableType][1];
@@ -176,7 +172,7 @@ public class CageBehaviour : BasicBehaviour
         }
         protected internal override void Update()
         {
-            if (Context.player.playerAct.UniqueAction.IsPressed())
+            if (Context.player.Controller.playerAct.UniqueAction.IsPressed())
             {
                 Context.timer += Time.deltaTime;
                 float requiredTime = Context.growthDurations[Context.currentVegetableType][2];
@@ -246,8 +242,6 @@ public class CageBehaviour : BasicBehaviour
         }
     } 
     
-    //人の睡眠時間削っておいて許されると思うなよ (11/17 月)
-    
     #endregion
     
     protected override void OnAwake()
@@ -301,7 +295,7 @@ public class CageBehaviour : BasicBehaviour
 
     public void AbilityUse()
     {
-        abilities[currentVegetableType]?.UseAbility();
+        abilities[currentVegetableType]?.UseAbility(player);
     }
 
     public void SwitchSeed()

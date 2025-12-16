@@ -2,6 +2,8 @@
 
 public class WaitForAnimation : CustomYieldInstruction
 {
+    //yield return new WaitForAnimation()
+    
     private Animator _animator;
     private int _stateHash = 0;
     private int _layerNo = 0;

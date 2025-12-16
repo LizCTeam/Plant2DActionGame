@@ -1,3 +1,4 @@
+using System;
 using NUnit.Framework.Internal.Filters;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,7 +11,7 @@ public class PlayerController : BasicBehaviour
     [FormerlySerializedAs("_inputDirection")] public Vector2 inputDirection = Vector2.zero;
 
     public bool isButtonPress;
-    [FormerlySerializedAs("Cage")] public CageBehaviour cage;
+    [FormerlySerializedAs("Cage")] public ReworkCageBehaviour cage;
 
     [SerializeField] private Player _player;
 
@@ -32,6 +33,7 @@ public class PlayerController : BasicBehaviour
     protected override void OnFixedUpdate()
     {
         base.OnFixedUpdate();
+        print(inputDirection.x);
     }
 
     private void OnEnable()
@@ -95,6 +97,23 @@ public class PlayerController : BasicBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         inputDirection = context.ReadValue<Vector2>();
+        
+        if (Math.Abs(inputDirection.x) >= 0.5f)
+        {
+            inputDirection.x = Math.Sign(inputDirection.x);
+        }
+        else
+        {
+            inputDirection.x *= 0.5f;
+        }
+        
+        inputDirection.x = Mathf.Clamp(inputDirection.x, -1f, 1f);
+        /*
+         * if inputDirection.x >= 0.5:
+                inputDirection.x=1
+           else
+                inputDirection.x/=0.5 
+         */
     }
 
     public void OnJump(InputAction.CallbackContext context)

@@ -1,11 +1,32 @@
+using IceMilkTea.StateMachine;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
-public class Player : Character, IDamageable
+public partial class Player : Character, IDamageable
 {
     [SerializeField] protected int _maxHp = 3;
+    [SerializeField] private Animator _playerAnimator;
+    [SerializeField] private float acceleration = 7f;
+    [SerializeField] private float deacceleration = 6f;
+    [SerializeField] private float velPower = 0.9f;
+    [SerializeField] public float jumpForce = 10f;
+    [SerializeField] public float maxSpeed = 10f;
+    [SerializeField] public float frictionAmount = 0.8f;
+    [SerializeField] public ReworkCageBehaviour reworkCage;
+    
+    private float _coyoteTime = 0.2f; //崖から離れた時の猶予時間
+    private float _coyoteTimeCounter;
+    public bool IsAttacking { private set; get; }
 
+    public int AvailableWeaponHit = 0;
+    
+    private ImtStateMachine<Player> _stateMachine;
+
+    private float _jumpBufferTime = 0.2f;
+    private float _jumpBufferTimeCounter;
+    
     protected int _hp
     {
         set
@@ -19,77 +40,71 @@ public class Player : Character, IDamageable
     }
     
     protected int _currentHp;
+
+    [HideInInspector]
+    public PlayerController Controller{ private set; get; }
     
-    [SerializeField] private float acceleration = 7f;
-    [SerializeField] private float deacceleration = 6f;
-    [SerializeField] private float velPower = 0.9f;
-    [SerializeField] public float jumpForce = 10f;
-    [SerializeField] public float maxSpeed = 10f;
-    [SerializeField] public float frictionAmount = 0.8f;
+    private enum StateEvent
+    {
+        AttackStart,
+        AttackFinish
+    }
+
+    private enum StatePlayer
+    {
+        Normal,
+        DaikonAttack
+    }
     
-    private float _coyoteTime = 0.2f; //崖から離れた時の猶予時間
-    private float _coyoteTimeCounter;
-    
-    private float _jumpBufferTime = 0.2f;
-    private float _jumpBufferTimeCounter;
-    
-    private PlayerController _playerController;
+	[SerializeField, Header("落下地点")] private float _deadPointY = -10f;
+	private bool _isDead = false;
+	private Vector3 _startPosition;
     
     public GameObject VisualRoot;
-
+    
     protected override void OnAwake()
     {
         base.OnAwake();
-        _playerController = GetComponent<PlayerController>();
+        _stateMachine = new ImtStateMachine<Player>(this);
+        Controller = GetComponent<PlayerController>();
+        
+        _stateMachine.AddTransition<PlayerNormal, PlayerDaikonAttack>((int)StateEvent.AttackStart);
+        _stateMachine.AddTransition<PlayerDaikonAttack, PlayerNormal>((int)StateEvent.AttackFinish);
+        
+        _stateMachine.SetStartState<PlayerNormal>();
     }
     
     protected override void OnStart()
     {
         base.OnStart();
         _hp = _maxHp;
+        _stateMachine.Update();
     }
     
     protected override void OnUpdate()
     {
-        var playerActJump = _playerController.playerAct.Jump;
-        
         base.OnUpdate();
-        UpdateSpriteDirection();
-        UpdateCoyoteTime();
-        
-        if (playerActJump.WasPressedThisFrame())
-        {
-            _jumpBufferTimeCounter =  _jumpBufferTime;
-        }
-        else
-        {
-            _jumpBufferTimeCounter -= Time.deltaTime;
-        }
-        
-        if (_coyoteTimeCounter > 0f && _jumpBufferTimeCounter > 0f)
-        {
-            _body.linearVelocityY = jumpForce;
+        _stateMachine.Update();
+	
+		Vector3 _pos = transform.position;
+        transform.position = _pos;
 
-            _jumpBufferTimeCounter = 0f;
-        }
-
-        if (playerActJump.WasReleasedThisFrame() && _body.linearVelocityY > 0f)
+        if (_isDead == true)
         {
-            _body.linearVelocityY = _body.linearVelocityY * 0.5f;
-            
-            _coyoteTimeCounter = 0f;
+            transform.position = _startPosition;
+            _isDead = false;
+            ResetStage();
         }
-
-        if (isGrounded() && Mathf.Abs(_playerController.inputDirection.x) < 0.01f)
-        {
-            float amount = Mathf.Min(Mathf.Abs(_body.linearVelocity.x), Mathf.Abs(frictionAmount));
-        }
-        
-        if (this._hp <= 0)
+		
+		if (this._hp <= 0 || transform.position.y < _deadPointY) 
         {
             //Deadアニメーションを再生
             //ゲームオーバー画面を表示
             //操作不可状態にする
+
+            Debug.Log("Player Dead");
+            Debug.Log(_hp);
+            _isDead = true;
         }
     }
 
@@ -97,12 +112,12 @@ public class Player : Character, IDamageable
     {
         var visualScale = VisualRoot.transform.localScale;
         
-        if (_body.linearVelocity.x < -0.5f)
+        if (Controller.inputDirection.x < -0.8f)
         {
             visualScale.x = -Mathf.Abs(visualScale.x);
             VisualRoot.transform.localScale = visualScale;
         }
-        else if (_body.linearVelocity.x > 0.5f)
+        else if (Controller.inputDirection.x > 0.8f)
         {
             visualScale.x = Mathf.Abs(visualScale.x);
             VisualRoot.transform.localScale = visualScale;
@@ -124,7 +139,6 @@ public class Player : Character, IDamageable
     protected override void OnFixedUpdate()
     {
         base.OnFixedUpdate();
-        Move();
     }
     
     public void Move()
@@ -132,7 +146,7 @@ public class Player : Character, IDamageable
         //新挙動
         //accelRateはtargetSpeedがある一定値(0.01)より大きいならばaccelに切り替わる
         //それをmovementで入力した値によって変えている
-        var targetSpeed = _playerController.inputDirection.x * maxSpeed;
+        var targetSpeed = Controller.inputDirection.x * maxSpeed;
         var speedDif = targetSpeed - _body.linearVelocity.x;
         var accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? acceleration : deacceleration;
         var movement = Mathf.Pow(Mathf.Abs(speedDif) * accelRate, velPower) * Mathf.Sign(speedDif);
@@ -150,5 +164,12 @@ public class Player : Character, IDamageable
     public void OnDamaged(int damage)
     {
         _hp -= damage;
+    }
+
+    void ResetStage()
+    {
+        ContinuationChange.CurrentSceneName();
+
+        SceneManager.LoadScene("GameOver");
     }
 }
