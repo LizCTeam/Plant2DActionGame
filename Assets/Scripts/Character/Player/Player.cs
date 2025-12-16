@@ -56,6 +56,10 @@ public partial class Player : Character, IDamageable
         DaikonAttack
     }
     
+	[SerializeField, Header("落下地点")] private float _deadPointY = -10f;
+	private bool _isDead = false;
+	private Vector3 _startPosition;
+    
     public GameObject VisualRoot;
     
     protected override void OnAwake()
@@ -81,6 +85,27 @@ public partial class Player : Character, IDamageable
     {
         base.OnUpdate();
         _stateMachine.Update();
+	
+		Vector3 _pos = transform.position;
+        transform.position = _pos;
+
+        if (_isDead == true)
+        {
+            transform.position = _startPosition;
+            _isDead = false;
+            ResetStage();
+        }
+		
+		if (this._hp <= 0 || transform.position.y < _deadPointY) 
+        {
+            //Deadアニメーションを再生
+            //ゲームオーバー画面を表示
+            //操作不可状態にする
+
+            Debug.Log("Player Dead");
+            Debug.Log(_hp);
+            _isDead = true;
+        }
     }
 
     private void UpdateSpriteDirection()
@@ -139,5 +164,12 @@ public partial class Player : Character, IDamageable
     public void OnDamaged(int damage)
     {
         _hp -= damage;
+    }
+
+    void ResetStage()
+    {
+        ContinuationChange.CurrentSceneName();
+
+        SceneManager.LoadScene("GameOver");
     }
 }
