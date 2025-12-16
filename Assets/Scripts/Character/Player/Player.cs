@@ -1,4 +1,4 @@
-using IceMilkTea.StateMachine;
+﻿using IceMilkTea.StateMachine;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -26,7 +26,15 @@ public partial class Player : Character, IDamageable
 
     private float _jumpBufferTime = 0.2f;
     private float _jumpBufferTimeCounter;
+
+    private bool _isNowJump = false;
+    private bool _isInJumpArea = false;
+
+    public bool IsNowJump => _isNowJump;
+    public bool IsInJumpArea => _isInJumpArea;
+
     
+
     protected int _hp
     {
         set
@@ -139,5 +147,20 @@ public partial class Player : Character, IDamageable
     public void OnDamaged(int damage)
     {
         _hp -= damage;
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("JumpArea"))
+        {
+            _isInJumpArea = true;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("JumpArea"))
+        {
+            _isInJumpArea = false;
+        }
     }
 }
