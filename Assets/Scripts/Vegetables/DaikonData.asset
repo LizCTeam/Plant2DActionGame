@@ -16,6 +16,6 @@ MonoBehaviour:
   VegetableType: 2
   SeedingPercentage: 0.2
   SproutPercentage: 0.7
-  SeedingDamage: 1
-  SproutDamage: 1
-  MatureDamage: 2
+  SeedingDamage: 4
+  SproutDamage: 5
+  MatureDamage: 10

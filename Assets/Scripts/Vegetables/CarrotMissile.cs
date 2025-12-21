@@ -7,6 +7,22 @@ public class CarrotMissile : ProjectileBehaviour
 {
     public SpriteRenderer sprite;
     
+    [HideInInspector]
+    public Hitbox OwnerHitbox;
+
+    [HideInInspector]
+    public int Damage
+    {
+        set
+        {
+            if (OwnerHitbox != null)
+            {
+                OwnerHitbox.damage = value;
+            }
+        }
+        get => OwnerHitbox?.damage ?? 0;
+    }
+    
     private ImtStateMachine<CarrotMissile> stateMachine;
     
     #region 状態遷移(ステート)
@@ -104,6 +120,7 @@ public class CarrotMissile : ProjectileBehaviour
     protected override void OnAwake()
     {
         base.OnAwake();
+        OwnerHitbox = GetComponentInChildren<Hitbox>();
         stateMachine = new ImtStateMachine<CarrotMissile>(this);
         stateMachine.AddTransition<LaunchState, LockOnState>((int)StateEvent.LaunchFinish);
         

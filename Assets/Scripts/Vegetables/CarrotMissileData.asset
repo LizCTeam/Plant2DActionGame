@@ -15,7 +15,7 @@ MonoBehaviour:
   MaxGrowthDuration: 8
   VegetableType: 0
   SeedingPercentage: 0.4
-  SproutPercentage: 0.8
-  SeedingDamage: 3
-  SproutDamage: 3
+  SproutPercentage: 0.75
+  SeedingDamage: 1
+  SproutDamage: 2
   MatureDamage: 3
