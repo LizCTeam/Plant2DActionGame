@@ -1,7 +1,8 @@
-using IceMilkTea.StateMachine;
+﻿using IceMilkTea.StateMachine;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 public partial class Player : Character, IDamageable
