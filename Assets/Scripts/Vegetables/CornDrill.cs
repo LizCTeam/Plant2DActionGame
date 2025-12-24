@@ -6,12 +6,34 @@ public class CornDrill : BasicBehaviour
     [SerializeField]
     private float _useTimer;
     [SerializeField]
-    private float _speedMultiplier=10f;
-    [SerializeField]
-    private float _scaleMultiplier = 2f;
+    private float _speedMultiplier = 10f;
+    [HideInInspector]
+    public float _scaleMultiplier = 1f;
+    
+    [HideInInspector]
+    public Hitbox OwnerHitbox;
 
+    [HideInInspector]
+    public int Damage
+    {
+        set
+        {
+            if (OwnerHitbox != null)
+            {
+                OwnerHitbox.damage = value;
+            }
+        }
+        get => OwnerHitbox?.damage ?? 0;
+    }
+    
     private Player _player;
     private PlayerController _playerController;
+
+    protected override void OnAwake()
+    {
+        base.OnAwake();
+        OwnerHitbox = GetComponentInChildren<Hitbox>();
+    }
 
     protected override void OnStart()
     {

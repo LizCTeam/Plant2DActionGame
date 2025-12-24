@@ -12,10 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f98669c3133d40448833b09692ac744e, type: 3}
   m_Name: CarrotMissileData
   m_EditorClassIdentifier: Assembly-CSharp::PlantAttributeData
-  MaxGrowthDuration: 8
+  MaxGrowthDuration: 9
   VegetableType: 0
   SeedingPercentage: 0.4
   SproutPercentage: 0.75
   SeedingDamage: 1
   SproutDamage: 2
   MatureDamage: 3
+  SeedingScale: 1
+  SproutScale: 1
+  MatureScale: 1
+  SeedingSwingCount: 0
+  SproutSwingCount: 0
+  MatureSwingCount: 0
