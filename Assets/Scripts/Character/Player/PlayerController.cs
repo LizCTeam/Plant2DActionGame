@@ -33,7 +33,6 @@ public class PlayerController : BasicBehaviour
     protected override void OnFixedUpdate()
     {
         base.OnFixedUpdate();
-        print(inputDirection.x);
     }
 
     private void OnEnable()
