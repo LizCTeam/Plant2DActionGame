@@ -63,24 +63,27 @@ public partial class Raccoondog : Enemy, IDamageable
 
         protected internal override void Update()
         {
-            float dir = movingLeft ? 1 : -1;
-            
-            Context.GetComponent<Rigidbody2D>().linearVelocity = new Vector2(-dir * moveSpeed, Context.GetComponent<Rigidbody2D>().linearVelocity.y);
-            Transform groundCheck = Context.transform.Find("GroundCheck"); 
+            Rigidbody2D rb = Context.GetComponent<Rigidbody2D>();
+
+            float dir = movingLeft ? -1 : 1;
+            rb.linearVelocity = new Vector2(dir * moveSpeed, rb.linearVelocity.y);
+
+           
+            Transform groundCheck = Context.transform.Find("Ground"); 
             if (groundCheck != null)
             {
-                if (!Physics2D.Raycast(groundCheck.position, Vector2.down, 0.1f, LayerMask.GetMask("Ground")))
+                if (!Physics2D.Raycast(groundCheck.position, Vector2.down, 2f, LayerMask.GetMask("Ground")))
                 {
                     Flip();
                 }
             }
 
-
-
-            RaycastHit2D wallHit = Physics2D.Raycast(Context.transform.position, Vector2.right * (movingLeft ? 1 : -1), 0.2f, LayerMask.GetMask("Ground"));
+            Vector2 wallDir = movingLeft ? Vector2.left : Vector2.right;
+            RaycastHit2D wallHit = Physics2D.Raycast(Context.transform.position, wallDir, 2f, LayerMask.GetMask("Ground"));
             if (wallHit.collider != null)
             {
                 Flip();
+               
             }
 
             GameObject player = GameObject.FindWithTag("Player");
@@ -112,12 +115,13 @@ public partial class Raccoondog : Enemy, IDamageable
         }
         private void Flip()
         {
-            movingLeft = false;
-            Vector3 scale = Context.transform.localScale;
-            scale.x *= 1;
+            movingLeft = !movingLeft;
+            Vector2 scale = Context.transform.localScale;
+            scale.x *= -1f;
             Context.transform.localScale = scale;
         }
 
+        
 
 
     }
@@ -138,7 +142,7 @@ public partial class Raccoondog : Enemy, IDamageable
         {
             _elapsedTime += Time.deltaTime;
 
-            Collider2D[] hits = Physics2D.OverlapCircleAll(Context.transform.position, 3.0f);
+            Collider2D[] hits = Physics2D.OverlapCircleAll(Context.transform.position, 2.5f);
             foreach (var hit in hits)
             {
                 if (hit.CompareTag("Player"))
@@ -148,18 +152,14 @@ public partial class Raccoondog : Enemy, IDamageable
                     if (rb != null)
                     {
                         Vector2 knockbackDir = (hit.transform.position - Context.transform.position).normalized;
-                        float knockbackForce = 2f;
+                        float knockbackForce = 0.5f;
 
                         rb.AddForce(knockbackDir * knockbackForce, ForceMode2D.Impulse);
+                        Debug.Log(knockbackDir);
                     }
 
                 }
 
-            }
-
-            if (_elapsedTime >= _attackDuration)
-            {
-               
             }
 
             if (_elapsedTime >= _attackDuration)
