@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Vegetables
   - JumpArea
+  - JumpPad
   layers:
   - Default
   - TransparentFX

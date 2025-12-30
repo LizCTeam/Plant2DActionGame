@@ -4,6 +4,7 @@ using UnityEngine;
 public class CameraFollow : BasicBehaviour
 {
     [SerializeField] private Transform _player;
+    [SerializeField]private Rigidbody2D _playerRb2D;
     [SerializeField] private float _minY = 0f;
     [SerializeField] private float _thresholdY = 10f;
     [SerializeField] private float _smoothSpeed = 5f;
@@ -11,8 +12,8 @@ public class CameraFollow : BasicBehaviour
 
     private bool _isFollowing = true;
 
-    private bool hoge1;
-    private bool hoge2;
+    private bool _JumpFlag;
+    private bool _isJumping;
 
     private Vector3 _initialCameraPos;
     private Vector3 _playerPos;
@@ -26,9 +27,7 @@ public class CameraFollow : BasicBehaviour
 
         _initialCameraPos = transform.position;
 
-        hoge1 = _playermove.IsNowJump;
-        hoge2 = _playermove.IsInJumpArea;
-
+        _JumpFlag = _playermove.IsNowJump;
     }
 
     private void LateUpdate()
@@ -50,29 +49,60 @@ public class CameraFollow : BasicBehaviour
         //    targetPos.y = _initialCameraPos.y;
         //}
 
+        bool _isGrounded = _playerCharacter.isGrounded();
 
-
-        if (_playerCharacter.isGrounded() && !hoge1)
+        if (_playerCharacter.isGrounded())
         {
-            hoge1 = true;
-            
-        }
+            _JumpFlag = true;
+            _isJumping = true;
+            _playerPos.y = _player.position.y;
 
-        if (!_playermove.IsInJumpArea)
-        { 
-            if (playerAct.Jump.WasPressedThisFrame()) // ジャンプボタンが押された瞬間
+        }
+        else
+        {
+            if (_playerRb2D.linearVelocity.y < 0)
             {
-                hoge1 = false;
-                hoge1 = true;
-                _playerPos.y = _player.position.y;
-                StartCoroutine(FollowCameraOff());// <- ジャンプボタンが押された瞬間だからギリギリ動作するぜ
-                
+                _isJumping = false;
             }
         }
 
-        
+        if(_isGrounded)
+        {
+            if (!_playermove.IsInJumpArea && _isJumping == true)
+            {
+                if (playerAct.Jump.WasPressedThisFrame()) // ジャンプボタンが押された瞬間
+                {
+                    _JumpFlag = false;
+                    _playerPos.y = _player.position.y;
+                    StartCoroutine(FollowCameraOff());// <- ジャンプボタンが押された瞬間だからギリギリ動作するぜ
+                }
+            }
+            else if (_playermove.IsInJumpArea)
+            {
+                if (playerAct.Jump.WasPressedThisFrame()) // ジャンプボタンが押された瞬間
+                {
+                    _JumpFlag = true;
+                    _playerPos.y = _player.position.y;
+                }
+            }
+        }
+       
 
-        if (hoge1)
+        //if(playerAct.Jump.WasReleasedThisFrame())
+        //{
+        //    if (_playermove.IsInJumpArea|| _playerRb2D.linearVelocity.y > 0)
+        //    {
+        //        _JumpFlag = true;
+        //    }
+        //    else
+        //    {
+        //        _JumpFlag = false;
+        //    }
+        //    _playerPos.y = _player.position.y;
+        //    StartCoroutine(FollowCameraOff());// <- ジャンプボタンが押された瞬間だからギリギリ動作するぜ
+        //}
+
+        if (_JumpFlag)
         {
             lerpTargetY = _player.position.y + _addY;
 
@@ -97,18 +127,18 @@ public class CameraFollow : BasicBehaviour
     private IEnumerator FollowCameraOff()
     {
         yield return new WaitForSeconds(0.1f);
-        if(_player.position.y > _playerPos.y)
+        if (_player.position.y > _playerPos.y)
         {
-            hoge1 = true;
+            _JumpFlag = true;
         }
-        hoge1 = false;
+        _JumpFlag = false;
     }
 
-    
+
 
     private void OnGUI()
     {
-        GUI.Label(new Rect(10, 10, 1000, 500), $"{_isFollowing}");
+        GUI.Label(new Rect(10, 10, 1000, 500), $"{_JumpFlag}");
         GUI.Label(new Rect(10, 50, 1000, 500), $"{_playermove.IsInJumpArea}");
     }
 }

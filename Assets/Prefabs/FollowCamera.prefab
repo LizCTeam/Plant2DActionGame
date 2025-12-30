@@ -256,7 +256,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa40e1b2b85e789408ec7b6a85930887, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
-  player: {fileID: 0}
+  _player: {fileID: 7852163679182784935, guid: f87143b8fa4ad4949ac41250003e8d6d, type: 3}
+  _playerRb2D: {fileID: 4825426959071850748, guid: f87143b8fa4ad4949ac41250003e8d6d, type: 3}
   _minY: 0
   _thresholdY: 6.5
   _smoothSpeed: 1
+  _addY: 2
+  _playerController: {fileID: 7439363938561666688, guid: f87143b8fa4ad4949ac41250003e8d6d, type: 3}
+  _playerCharacter: {fileID: 8485780947914333263, guid: f87143b8fa4ad4949ac41250003e8d6d, type: 3}
+  _playermove: {fileID: 8485780947914333263, guid: f87143b8fa4ad4949ac41250003e8d6d, type: 3}

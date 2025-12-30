@@ -154,6 +154,7 @@ public partial class Player : Character, IDamageable
         if (collision.CompareTag("JumpArea"))
         {
             _isInJumpArea = true;
+            _isNowJump = true;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -161,6 +162,16 @@ public partial class Player : Character, IDamageable
         if (collision.CompareTag("JumpArea"))
         {
             _isInJumpArea = false;
+            _isNowJump = false;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("JumpPad"))
+        {
+            _isNowJump = true;
+            _isInJumpArea = true;
         }
     }
 }
