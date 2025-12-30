@@ -327,7 +327,7 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
-    m_FontStyle: 3
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 40
@@ -337,7 +337,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u30B3\u30F3\u30C6\u30CB\u30E5\u30A6"
+  m_Text: "\u3053\u3093\u3066\u3043\u306B\u3085\uFF5E"
 --- !u!222 &436571783
 CanvasRenderer:
   m_ObjectHideFlags: 0

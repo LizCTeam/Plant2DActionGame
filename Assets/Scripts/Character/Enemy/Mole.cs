@@ -146,7 +146,7 @@ public partial class Mole : Enemy, IDamageable
         
         float y = pointA.y - pointB.y;
         
-        float speed = Mathf.Sqrt(-Physics.gravity.y * Mathf.Pow(x, 2) / (2 * Mathf.Pow(Mathf.Cos(rad), 2) * (x * Mathf.Tan(rad) + y)));
+        float speed = Mathf.Sqrt(-Physics2D.gravity.y * Mathf.Pow(x, 2) / (2 * Mathf.Pow(Mathf.Cos(rad), 2) * (x * Mathf.Tan(rad) + y)));
 
         if (float.IsNaN(speed))
         {
