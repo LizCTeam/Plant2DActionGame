@@ -71,6 +71,7 @@ public partial class Mole : Enemy, IDamageable
     
     public void OnDamaged(int damage)
     {
+        EffectManager.Instance.PlayEffect(transform.position);
         this._hp -= damage;
     }
     

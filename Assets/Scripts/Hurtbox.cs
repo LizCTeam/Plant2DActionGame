@@ -22,7 +22,7 @@ public class Hurtbox : BasicBehaviour
             _damageable = owner.GetComponents(typeof(IDamageable)).FirstOrDefault() as IDamageable;
         }
     }
-
+    
     public void Hurt(int damage)
     {
         // ownerがIDamageableであればダメージを与える

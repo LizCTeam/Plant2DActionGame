@@ -41,6 +41,7 @@ public class Hitbox : BasicBehaviour
 
     private void DoBasicHit(Collider2D other)
     {
+        print(other);
         var hurtbox = other.GetComponent<Hurtbox>();
         hurtbox?.Hurt(damage);
         _damageDealt?.OnDealtDamage(damage, other.gameObject);

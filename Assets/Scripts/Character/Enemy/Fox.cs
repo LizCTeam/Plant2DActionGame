@@ -2,7 +2,7 @@ using IceMilkTea.StateMachine;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class Fox : Enemy
+public class Fox : Enemy, IDamageable
 {
     [SerializeField]
     private Player _player;
@@ -79,5 +79,11 @@ public class Fox : Enemy
         //distanceはよくわかんないけどデフォで1f
 
         return hit;
+    }
+    
+    public void OnDamaged(int damage)
+    {
+        EffectManager.Instance.PlayEffect(transform.position);
+        _hp -= damage;
     }
 }

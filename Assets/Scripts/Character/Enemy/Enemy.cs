@@ -47,6 +47,7 @@ public class Enemy : Character, IDamageable
 
     public void OnDamaged(int damage)
     {
+        EffectManager.Instance.PlayEffect(transform.position);
         _hp -= damage;
     }
 }
