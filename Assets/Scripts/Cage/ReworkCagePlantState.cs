@@ -9,7 +9,7 @@ public partial class ReworkCageBehaviour
     {
         protected internal override void Enter()
         {
-            Context.UniqueAction += UniqueAction;
+            Context.SwitchAction += SwitchAction;
             Context.Fire += Fire;
             Context.IsGrowing = true;
         }
@@ -30,21 +30,29 @@ public partial class ReworkCageBehaviour
         {
             if(Context.GrowthLevel == GrowthStage.Nothing) return;
             Context.AbilityUse();
-            Context.IsGrowing = false;
-            Context.Timer = 0f;
-            stateMachine.SendEvent((int)StateEvent.Cancel);
+            InitPlantState();
             Context._vegeAnimatior.SetInteger(Level, (int)Context.GrowthLevel);
-        }
-        
-        private void UniqueAction(InputAction.CallbackContext context)
-        {
-            
         }
         
         protected internal override void Exit()
         {
-            Context.UniqueAction -= UniqueAction;
+            Context.SwitchAction -= SwitchAction;
             Context.Fire -= Fire;
+            Context.IsGrowing = false;
+        }
+        
+        private void SwitchAction(InputAction.CallbackContext context)
+        {
+            if (context.phase == InputActionPhase.Started)
+            {
+                Context.SwitchSeed();
+                Context.SeedText.text = "seed : " + Context.CurrentVegetableType;
+            }
+        }
+
+        private void InitPlantState()
+        {
+            Context.Timer = 0f;
         }
     }
 }

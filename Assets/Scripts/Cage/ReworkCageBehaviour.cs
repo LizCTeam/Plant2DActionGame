@@ -80,10 +80,8 @@ public partial class ReworkCageBehaviour : BasicBehaviour
     {
         base.OnAwake();
         stateMachine = new ImtStateMachine<ReworkCageBehaviour>(this);
-        stateMachine.AddTransition<NothingState, PlantState>((int)StateEvent.Seeding);
-        stateMachine.AddTransition<PlantState, NothingState>((int)StateEvent.Cancel);
         
-        stateMachine.SetStartState<NothingState>();
+        stateMachine.SetStartState<PlantState>();
         
         _abilities.Add(VegetableType.Carrot, _carrotAbilityObject.GetComponent<CarrotAbility>());
         _abilities.Add(VegetableType.Corn, _cornAbilityObject.GetComponent<CornAbility>());
