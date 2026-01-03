@@ -8,7 +8,7 @@ public class Character : BasicBehaviour
     protected float _speed = 4f;
     
     public LayerMask GroundLayer;
-    protected Rigidbody2D _body;
+    public Rigidbody2D _body; //改名したいけど使っている場所が多いから変更しないよ
 
     protected override void OnAwake()
     {

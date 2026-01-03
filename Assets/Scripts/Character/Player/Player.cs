@@ -28,6 +28,12 @@ public partial class Player : Character, IDamageable
     private float _jumpBufferTime = 0.2f;
     private float _jumpBufferTimeCounter;
     
+    [SerializeField, Header("落下地点")] private float _deadPointY = -10f;
+    private bool _isDead = false;
+    private Vector3 _startPosition;
+    
+    public GameObject VisualRoot;
+    
     protected int _hp
     {
         set
@@ -56,12 +62,6 @@ public partial class Player : Character, IDamageable
         Normal,
         DaikonAttack
     }
-    
-	[SerializeField, Header("落下地点")] private float _deadPointY = -10f;
-	private bool _isDead = false;
-	private Vector3 _startPosition;
-    
-    public GameObject VisualRoot;
     
     protected override void OnAwake()
     {

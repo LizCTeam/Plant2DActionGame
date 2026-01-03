@@ -1,4 +1,6 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CornDrill : BasicBehaviour
@@ -6,7 +8,7 @@ public class CornDrill : BasicBehaviour
     [SerializeField]
     private float _useTimer;
     [SerializeField]
-    private float _speedMultiplier = 10f;
+    private float _distance = 10f;
     [HideInInspector]
     public float _scaleMultiplier = 1f;
     
@@ -42,28 +44,12 @@ public class CornDrill : BasicBehaviour
         _player = _playerObject?.GetComponent<Player>();
         _playerController = _playerObject?.GetComponent<PlayerController>();
         transform.localScale = new Vector3(_scaleMultiplier, _scaleMultiplier, _scaleMultiplier);
-        //_player.speedMultiplier = this._speedMultiplier;
-    }
-
-    protected override void OnUpdate()
-    {
-        base.OnUpdate();
         var playerFireAct = _playerController.playerAct.Fire;
         if (playerFireAct != null)
         {
             Shoot();
         }
-        //_useTimer -= Time.deltaTime;
-        //if (_useTimer <= 0f)
-        //{
-        //    _useTimer = 0f;
-        //    Destroy(this.gameObject);
-        //}
-    }
-
-    protected override void OnFixedUpdate()
-    {
-        base.OnFixedUpdate();
+        //_player.speedMultiplier = this._speedMultiplier;
     }
 
     private void Shoot()
@@ -77,12 +63,18 @@ public class CornDrill : BasicBehaviour
 
         //Sequenceのインスタンスを作成
         var sequence = DOTween.Sequence();
+        var dir = Math.Sign(_player.VisualRoot.transform.localScale.x);
 
         _useTimer -= Time.deltaTime;
 
         //X軸方向に移動するアニメーションを追加
-        Tween moveTween = transform.DOMoveX(transform.position.x + _speedMultiplier, _useTimer).SetEase(Ease.Linear);
+        Tween moveTween = transform.DOMoveX(transform.position.x + _distance * dir, _useTimer)
+            .SetEase(Ease.OutQuad);
 
+        var scale = transform.localScale;
+        scale.x *= dir;
+        transform.localScale = scale;
+        
         ////スケールを変化させるアニメーションを追加
         //Tween scaleTween=transform.DOScale(_scaleMultiplier,_useTimer).SetEase(Ease.Linear);
 
