@@ -13,7 +13,6 @@ public class CameraFollow : BasicBehaviour
     private bool _isFollowing = true;
 
     private bool _JumpFlag;
-    private bool _isJumping;
 
     private Vector3 _initialCameraPos;
     private Vector3 _playerPos;
@@ -51,41 +50,38 @@ public class CameraFollow : BasicBehaviour
 
         bool _isGrounded = _playerCharacter.isGrounded();
 
-        if (_playerCharacter.isGrounded())
+        if (_isGrounded)
         {
             _JumpFlag = true;
-            _isJumping = true;
             _playerPos.y = _player.position.y;
 
         }
         else
         {
-            if (_playerRb2D.linearVelocity.y < 0)
+            if (_player.position.y < _playerPos.y)
             {
-                _isJumping = false;
+                _JumpFlag = true;
             }
         }
 
-        if(_isGrounded)
+        if (!_playermove.IsInJumpArea)
         {
-            if (!_playermove.IsInJumpArea && _isJumping == true)
+            if (playerAct.Jump.WasPressedThisFrame()) // ジャンプボタンが押された瞬間
             {
-                if (playerAct.Jump.WasPressedThisFrame()) // ジャンプボタンが押された瞬間
-                {
-                    _JumpFlag = false;
-                    _playerPos.y = _player.position.y;
-                    StartCoroutine(FollowCameraOff());// <- ジャンプボタンが押された瞬間だからギリギリ動作するぜ
-                }
-            }
-            else if (_playermove.IsInJumpArea)
-            {
-                if (playerAct.Jump.WasPressedThisFrame()) // ジャンプボタンが押された瞬間
-                {
-                    _JumpFlag = true;
-                    _playerPos.y = _player.position.y;
-                }
+                _JumpFlag = false;
+                StartCoroutine(FollowCameraOff());// <- ジャンプボタンが押された瞬間だからギリギリ動作するぜ
             }
         }
+        else if (_playermove.IsInJumpArea)
+        {
+            if (playerAct.Jump.WasPressedThisFrame()) // ジャンプボタンが押された瞬間
+            {
+                _JumpFlag = true;
+                _JumpFlag = true;
+            }
+        }
+
+        
        
 
         //if(playerAct.Jump.WasReleasedThisFrame())
