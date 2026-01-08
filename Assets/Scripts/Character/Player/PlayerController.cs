@@ -30,6 +30,25 @@ public class PlayerController : BasicBehaviour
         
     }
 
+    protected override void OnUpdate()
+    {
+        base.OnUpdate();
+        print("INPUT VALUE : " + playerAct.Move.ReadValue<Vector2>());
+        
+        inputDirection = playerAct.Move.ReadValue<Vector2>();
+        
+        if (Math.Abs(inputDirection.x) >= 0.5f)
+        {
+            inputDirection.x = Math.Sign(inputDirection.x);
+        }
+        else
+        {
+            inputDirection.x *= 0.5f;
+        }
+        
+        inputDirection.x = Mathf.Clamp(inputDirection.x, -1f, 1f);
+    }
+
     protected override void OnFixedUpdate()
     {
         base.OnFixedUpdate();
@@ -95,18 +114,7 @@ public class PlayerController : BasicBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        inputDirection = context.ReadValue<Vector2>();
         
-        if (Math.Abs(inputDirection.x) >= 0.5f)
-        {
-            inputDirection.x = Math.Sign(inputDirection.x);
-        }
-        else
-        {
-            inputDirection.x *= 0.5f;
-        }
-        
-        inputDirection.x = Mathf.Clamp(inputDirection.x, -1f, 1f);
         /*
          * if inputDirection.x >= 0.5:
                 inputDirection.x=1
