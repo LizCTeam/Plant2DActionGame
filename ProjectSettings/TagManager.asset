@@ -16,14 +16,14 @@ TagManager:
   - Ground
   - Player
   - Enemy
-  - Projectile
+  - PlayerProjectile
   - EnemyProjectile
   - Destroyable
-  - 
-  - 
-  - 
-  - 
-  - 
+  - PlayerHitbox
+  - EnemyHitbox
+  - PlayerHurtbox
+  - EnemyHurtbox
+  - PlayerDetector
   - 
   - 
   - 

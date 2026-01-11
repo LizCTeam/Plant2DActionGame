@@ -9,7 +9,7 @@ public class Mouse : Enemy
     
     private Vector2 _raycastOffset = new Vector2(0.0f, 0.0f);
     private int _direction = -1; // -1: 左, +1: 右
-    private float _wallCheckDistance = 0.15f;
+    private float _wallCheckDistance = 1.0f;
     
     void Awake()
     {
@@ -17,7 +17,7 @@ public class Mouse : Enemy
         {
             _renderer = GetComponentInChildren<SpriteRenderer>();
         }
-        _direction = startFacingRight ? +1 : -1;
+        _direction = startFacingRight ? 1 : -1;
     }
     
     protected override void OnStart()
@@ -54,11 +54,11 @@ public class Mouse : Enemy
     private void FlipDirection()
     {
         _direction *= -1;
+        _renderer.flipX = !_renderer.flipX;
     }
     
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // groundLayerに含まれるか確認（含まれない場合はタグなどで絞る）
         if (((1 << collision.gameObject.layer) & GroundLayer) != 0)
         {
             foreach (var contact in collision.contacts)
