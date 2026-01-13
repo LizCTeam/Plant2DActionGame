@@ -4,8 +4,8 @@ using UnityEngine;
 
 public partial class Mole : Enemy, IDamageable
 {
-    private float _throwCooldown = 1.5f;
-    private float _maxCooldown = 3.2f;
+    private float _throwCooldown = 0.5f;
+    private float _maxCooldown = 1.0f;
     
     private class MoleChaseAway : ImtStateMachine<Mole>.State
     {

@@ -115,6 +115,7 @@ public partial class ReworkCageBehaviour : BasicBehaviour
     
     public void SwitchSeed()
     {
+        Timer = 0f;
         var maxTypeCount = PlantAttributeData.Count;
         var plantKeys = PlantAttributeData.Keys;
         var plantTypes = new VegetableType[maxTypeCount];
