@@ -22,6 +22,6 @@ MonoBehaviour:
   SeedingScale: 1
   SproutScale: 1
   MatureScale: 1
-  SeedingSwingCount: 3
+  SeedingSwingCount: 2
   SproutSwingCount: 2
   MatureSwingCount: 1
