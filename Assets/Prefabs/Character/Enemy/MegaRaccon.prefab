@@ -100,9 +100,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   _body: {fileID: 1275156372689012961}
-  _maxHp: 8
+  _maxHp: 12
   startFacingRight: 0
   _renderer: {fileID: 3727240320812580436}
+  _wallCheckDistance: 1
 --- !u!50 &1275156372689012961
 Rigidbody2D:
   serializedVersion: 5
