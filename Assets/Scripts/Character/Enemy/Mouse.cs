@@ -9,7 +9,7 @@ public class Mouse : Enemy
     
     private Vector2 _raycastOffset = new Vector2(0.0f, 0.0f);
     private int _direction = -1; // -1: 左, +1: 右
-    private float _wallCheckDistance = 1.0f;
+    public float _wallCheckDistance = 1.0f;
     
     void Awake()
     {

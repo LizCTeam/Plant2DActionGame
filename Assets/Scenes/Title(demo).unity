@@ -353,8 +353,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16987b1fb60c4454e89a7e7c4d9643e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonScript
-  sceneName: NewStage_3
-  _sceneAsset: {fileID: 102900000, guid: f2597e3f8fd00f247b62884b679e3509, type: 3}
+  sceneName: StageBetaM
+  _sceneAsset: {fileID: 102900000, guid: cc44ee2bd1e8e4d40ad68e8a92078044, type: 3}
 --- !u!114 &931816956
 MonoBehaviour:
   m_ObjectHideFlags: 0
