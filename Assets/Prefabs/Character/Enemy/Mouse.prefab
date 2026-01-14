@@ -98,11 +98,12 @@ MonoBehaviour:
   _speed: 4
   GroundLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 2112
   _body: {fileID: 1364199187420433268}
   _maxHp: 1
   startFacingRight: 0
   _renderer: {fileID: 1856350208946303390}
+  _wallCheckDistance: 1
 --- !u!50 &1364199187420433268
 Rigidbody2D:
   serializedVersion: 5

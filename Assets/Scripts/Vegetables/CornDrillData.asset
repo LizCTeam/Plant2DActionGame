@@ -18,7 +18,7 @@ MonoBehaviour:
   SproutPercentage: 0.6
   SeedingDamage: 1
   SproutDamage: 2
-  MatureDamage: 4
+  MatureDamage: 3
   SeedingScale: 0.8
   SproutScale: 1
   MatureScale: 1.5
