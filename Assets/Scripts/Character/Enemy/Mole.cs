@@ -92,6 +92,7 @@ public partial class Mole : Enemy, IDamageable
             {
                 isHide = true;
                 player = other.gameObject;
+                hurtbox.enabled = false;
             }
         }
     }
@@ -112,6 +113,7 @@ public partial class Mole : Enemy, IDamageable
             if (other.CompareTag("Player"))
             {
                 isHide = false;
+                hurtbox.enabled = true;
             }
         }
     }
