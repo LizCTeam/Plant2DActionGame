@@ -55,7 +55,7 @@ public partial class Player
             //     float amount = Mathf.Min(Mathf.Abs(Context._body.linearVelocity.x), Mathf.Abs(Context.frictionAmount));
             // }
         
-            if (Context._hp <= 0)
+            if (Context.Hp <= 0)
             {
                 //Deadアニメーションを再生
                 //ゲームオーバー画面を表示
