@@ -34,7 +34,8 @@ public partial class Player : Character, IDamageable
     
     public GameObject VisualRoot;
     
-    protected int _hp
+    [HideInInspector]
+    public int Hp
     {
         set
         {
@@ -78,7 +79,7 @@ public partial class Player : Character, IDamageable
     protected override void OnStart()
     {
         base.OnStart();
-        _hp = _maxHp;
+        Hp = _maxHp;
         _stateMachine.Update();
     }
     
@@ -99,14 +100,14 @@ public partial class Player : Character, IDamageable
             ResetStage();
         }
 		
-		if (this._hp <= 0 || transform.position.y < _deadPointY) 
+		if (this.Hp <= 0 || transform.position.y < _deadPointY) 
         {
             //Deadアニメーションを再生
             //ゲームオーバー画面を表示
             //操作不可状態にする
 
             Debug.Log("Player Dead");
-            Debug.Log(_hp);
+            Debug.Log(Hp);
             _isDead = true;
         }
     }
@@ -161,13 +162,13 @@ public partial class Player : Character, IDamageable
 
     public int GetHp()
     {
-        return this._hp;
+        return this.Hp;
     }
 
     public void OnDamaged(int damage)
     {
         EffectManager.Instance.PlayEffect(transform.position);
-        _hp -= damage;
+        Hp -= damage;
     }
 
     void ResetStage()
