@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class Goal : BasicBehaviour
 {
     public Transform player;
+    [SerializeField]
+    protected Scene scene;
    
     private bool isGoal = false;
 
