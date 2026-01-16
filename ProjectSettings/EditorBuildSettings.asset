@@ -14,24 +14,24 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/CreatedStages/M/GameScene1124M.unity
     guid: 59dfb16d09599754fa70167d5d2b45c0
-  - enabled: 0
-    path: Assets/Scenes/CreatedStagesM/NewStage1_2.unity
-    guid: efe28a2f30bee0444a4e6d7053b29e65
   - enabled: 1
     path: Assets/Scenes/Title(demo).unity
     guid: 8f103c8bce994204b80dfe0917b0a9eb
+  - enabled: 1
+    path: Assets/Scenes/CreatedStagesM/Tutorial.unity
+    guid: efe28a2f30bee0444a4e6d7053b29e65
   - enabled: 1
     path: Assets/Scenes/CreatedStages/M/StageBetaM.unity
     guid: cc44ee2bd1e8e4d40ad68e8a92078044
   - enabled: 1
     path: Assets/Scenes/GameOver.unity
     guid: e0b9c1cc70c58ed4ca755219f73dd886
-  - enabled: 0
-    path: Assets/Scenes/CreatedStagesM/NewStage_3.unity
-    guid: f2597e3f8fd00f247b62884b679e3509
   - enabled: 1
     path: Assets/Scenes/GoalScene.unity
     guid: 0de00302396790942baaeb50badb48f9
+  - enabled: 0
+    path: Assets/Scenes/CreatedStagesM/NewStage_3.unity
+    guid: f2597e3f8fd00f247b62884b679e3509
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
