@@ -33,6 +33,10 @@ public partial class Player : Character, IDamageable
     private Vector3 _startPosition;
     
     public GameObject VisualRoot;
+    public Hurtbox Hurtbox;
+    
+    [HideInInspector]
+    public ReworkCageBehaviour.GrowthStage CurrentStage = ReworkCageBehaviour.GrowthStage.Nothing;
     
     [HideInInspector]
     public int Hp
@@ -87,8 +91,6 @@ public partial class Player : Character, IDamageable
     {
         base.OnUpdate();
         _stateMachine.Update();
-	
-        
         
 		Vector3 _pos = transform.position;
         transform.position = _pos;

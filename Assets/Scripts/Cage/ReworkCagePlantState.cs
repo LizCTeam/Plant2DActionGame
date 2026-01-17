@@ -22,7 +22,6 @@ public partial class ReworkCageBehaviour
                 Context.Timer += Time.deltaTime;
                 Context.Timer = Mathf.Clamp(Context.Timer, 0, maxTime);
                 Context._vegeAnimatior.SetInteger(Level, (int)Context.GrowthLevel);
-                print("GrowthLevel : " + Context.GrowthLevel);
             }
         }
         
@@ -46,7 +45,6 @@ public partial class ReworkCageBehaviour
             if (context.phase == InputActionPhase.Started)
             {
                 Context.SwitchSeed();
-                Context.SeedText.text = "seed : " + Context.CurrentVegetableType;
             }
         }
 

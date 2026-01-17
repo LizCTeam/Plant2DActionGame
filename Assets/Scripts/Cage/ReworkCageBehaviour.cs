@@ -22,8 +22,6 @@ public partial class ReworkCageBehaviour : BasicBehaviour
     [SerializeField] 
     public List<PlantAttributeData> _plantAttributes;
     
-    public Text TimerText;
-    public Text SeedText;
     public float Timer = 0f;
     public bool IsGrowing = false;
     public VegetableType CurrentVegetableType = VegetableType.Carrot;
@@ -97,20 +95,12 @@ public partial class ReworkCageBehaviour : BasicBehaviour
     {
         base.OnStart();
         stateMachine.Update();
-        if (SeedText != null)
-        {
-            SeedText.text = "seed : " + CurrentVegetableType;
-        }
     }
     
     protected override void OnUpdate()
     {
         base.OnUpdate();
         stateMachine.Update();
-        if (TimerText != null)
-        {
-            TimerText.text = "Timer : " + Timer;
-        }
     }
     
     public void SwitchSeed()

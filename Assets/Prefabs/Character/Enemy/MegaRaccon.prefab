@@ -100,7 +100,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2112
   _body: {fileID: 1275156372689012961}
-  _maxHp: 13
+  _maxHp: 15
   startFacingRight: 0
   _renderer: {fileID: 3727240320812580436}
   _wallCheckDistance: 3.8

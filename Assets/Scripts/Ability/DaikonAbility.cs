@@ -12,6 +12,7 @@ namespace Ability
             if (growthState == ReworkCageBehaviour.GrowthStage.Nothing) return;
             var data = player.reworkCage.PlantAttributeData[VegetableType.Daikon];
             player.AvailableWeaponHit = data.SeedingSwingCount;
+            player.CurrentStage = growthState;
             _hitbox.damage = growthState switch
             {
                 ReworkCageBehaviour.GrowthStage.Seeding => data.SeedingDamage,

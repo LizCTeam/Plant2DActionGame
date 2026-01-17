@@ -33,7 +33,6 @@ public class PlayerController : BasicBehaviour
     protected override void OnUpdate()
     {
         base.OnUpdate();
-        print("INPUT VALUE : " + playerAct.Move.ReadValue<Vector2>());
         
         inputDirection = playerAct.Move.ReadValue<Vector2>();
         
