@@ -401,7 +401,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1931093854520719415, guid: acb1335e00f7e294aab212cb372026f1, type: 3}
       propertyPath: m_NormalizedViewPortRect.x
-      value: 0.00011947751
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1931093854520719415, guid: acb1335e00f7e294aab212cb372026f1, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
@@ -409,7 +409,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1931093854520719415, guid: acb1335e00f7e294aab212cb372026f1, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
-      value: 0.99976104
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1931093854520719415, guid: acb1335e00f7e294aab212cb372026f1, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
@@ -28835,6 +28835,16 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7288334981412968288, guid: f87143b8fa4ad4949ac41250003e8d6d, type: 3}
   m_PrefabInstance: {fileID: 6720699587622439634}
   m_PrefabAsset: {fileID: 0}
+--- !u!50 &6109931813339101498 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 6692807296204327971, guid: f87143b8fa4ad4949ac41250003e8d6d, type: 3}
+  m_PrefabInstance: {fileID: 6720699587622439634}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &6109931813339101500 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 922372281697989264, guid: f87143b8fa4ad4949ac41250003e8d6d, type: 3}
+  m_PrefabInstance: {fileID: 6720699587622439634}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6290677148921998411
 GameObject:
   m_ObjectHideFlags: 0
@@ -28903,6 +28913,22 @@ PrefabInstance:
       propertyPath: TimerText
       value: 
       objectReference: {fileID: 2208345652179325230}
+    - target: {fileID: 922372281697989264, guid: f87143b8fa4ad4949ac41250003e8d6d, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2857369851230561370, guid: f87143b8fa4ad4949ac41250003e8d6d, type: 3}
+      propertyPath: _body
+      value: 
+      objectReference: {fileID: 6109931813339101498}
+    - target: {fileID: 2857369851230561370, guid: f87143b8fa4ad4949ac41250003e8d6d, type: 3}
+      propertyPath: _playerAnimator
+      value: 
+      objectReference: {fileID: 6109931813339101500}
+    - target: {fileID: 5019171283412924950, guid: f87143b8fa4ad4949ac41250003e8d6d, type: 3}
+      propertyPath: isButtonPress
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6466265105785693429, guid: f87143b8fa4ad4949ac41250003e8d6d, type: 3}
       propertyPath: m_Name
       value: ReworkPlayer
@@ -28945,6 +28971,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7288334981412968288, guid: f87143b8fa4ad4949ac41250003e8d6d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7573687298698093884, guid: f87143b8fa4ad4949ac41250003e8d6d, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
