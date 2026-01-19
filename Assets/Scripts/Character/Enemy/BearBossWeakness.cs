@@ -1,14 +1,17 @@
 ﻿using System.Collections;
 using IceMilkTea.StateMachine;
+using UnityEngine;
 
 public partial class BearBoss : Enemy, IDamageable
 {
+    private static readonly int DoWeakness = Animator.StringToHash("doWeakness");
+
     private class BearBossWeakness : ImtStateMachine<BearBoss>.State
     {
         private IEnumerator WeaknessCoroutine()
         {
-            Context._bearAnimator.Play("BearBossWeakness");
-            yield return new WaitForAnimation(Context._bearAnimator, 0, "BearBossWeakness");
+            Context._bearAnimator.SetTrigger(DoWeakness);
+            yield return new WaitWhile(() => Context._bearAnimator.GetCurrentAnimatorStateInfo(0).IsName("BearBossWeakness"));
             stateMachine.SendEvent((int)StateEvent.IdleEnter);
         }
         
@@ -16,6 +19,8 @@ public partial class BearBoss : Enemy, IDamageable
         protected internal override void Enter()
         {
             Context.StartCoroutine(WeaknessCoroutine());
+            Context.FaceTarget();
+            Context._hurtbox.gameObject.SetActive(true);
         }
 
         // 状態の更新はこのUpdateで行う
@@ -26,6 +31,7 @@ public partial class BearBoss : Enemy, IDamageable
         // 状態から脱出する時の処理はこのExitで行う
         protected internal override void Exit()
         {
+            Context._hurtbox.gameObject.SetActive(false);
         }
     }
 }
