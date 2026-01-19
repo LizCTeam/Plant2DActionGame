@@ -78,6 +78,8 @@ public partial class Player : Character, IDamageable
         _stateMachine.AddTransition<PlayerDaikonAttack, PlayerNormal>((int)StateEvent.AttackFinish);
         
         _stateMachine.SetStartState<PlayerNormal>();
+        
+        ScoreManager.Instance.ResetScore();
     }
     
     protected override void OnStart()

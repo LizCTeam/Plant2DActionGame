@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Enemy : Character, IDamageable
 {
@@ -18,12 +19,16 @@ public class Enemy : Character, IDamageable
     }
 
     protected int _currentHp;
-    
+
+    private void OnEnable()
+    {
+        ScoreManager.Instance.scoreData.MaxEnemyCount++;
+    }
+
     protected override void OnStart()
     {
         _hp = _maxHp;
         base.OnStart();
-        
     }
 
     protected override void OnUpdate()
@@ -32,6 +37,7 @@ public class Enemy : Character, IDamageable
 
         if (this._hp <= 0)
         {
+            ScoreManager.Instance.scoreData.EnemyKillCount++;
             Destroy(this.gameObject);
         }
        

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d450fa68f764a549a3033b7b19f64ad, type: 3}
+  m_Name: ScoreLineStage1
+  m_EditorClassIdentifier: Assembly-CSharp::TotalRankRule
+  rankLines:
+  - rank: 0
+    minScore: 0
+  - rank: 1
+    minScore: 5000
+  - rank: 2
+    minScore: 10000
+  - rank: 3
+    minScore: 20000
+  - rank: 4
+    minScore: 40000
