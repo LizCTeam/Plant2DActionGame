@@ -21210,7 +21210,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: a5fb982ca5a6f7145874234d3e414fda, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -23191,19 +23191,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1931093854520719415, guid: acb1335e00f7e294aab212cb372026f1, type: 3}
       propertyPath: m_NormalizedViewPortRect.x
-      value: 0.00018960238
-      objectReference: {fileID: 0}
-    - target: {fileID: 1931093854520719415, guid: acb1335e00f7e294aab212cb372026f1, type: 3}
-      propertyPath: m_NormalizedViewPortRect.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1931093854520719415, guid: acb1335e00f7e294aab212cb372026f1, type: 3}
+      propertyPath: m_NormalizedViewPortRect.y
+      value: 0.000092715025
+      objectReference: {fileID: 0}
+    - target: {fileID: 1931093854520719415, guid: acb1335e00f7e294aab212cb372026f1, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
-      value: 0.9996208
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1931093854520719415, guid: acb1335e00f7e294aab212cb372026f1, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
-      value: 1
+      value: 0.99981457
       objectReference: {fileID: 0}
     - target: {fileID: 5444290805092727284, guid: acb1335e00f7e294aab212cb372026f1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -23380,6 +23380,7 @@ SpriteRenderer:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1140728670}
   - {fileID: 1268492911}
   - {fileID: 1871532595}
   - {fileID: 788981322}
@@ -23395,4 +23396,3 @@ SceneRoots:
   - {fileID: 1901328044}
   - {fileID: 1082554572}
   - {fileID: 624926585}
-  - {fileID: 1140728670}
