@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Enemy : Character, IDamageable
 {
-
     [SerializeField] protected int _maxHp = 5;
+    [SerializeField] protected AudioSource hurtSound;
 
     protected int _hp
     {
@@ -47,6 +48,7 @@ public class Enemy : Character, IDamageable
 
     public void OnDamaged(int damage)
     {
+        hurtSound.Play();
         EffectManager.Instance.PlayEffect(transform.position);
         _hp -= damage;
     }

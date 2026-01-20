@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -6,6 +8,10 @@ public class ItemGyunyu : BasicBehaviour
 {
     [SerializeField]
     private int healAmount = 1;
+    [SerializeField]
+    private AudioSource _healSound;
+    [SerializeField]
+    private SpriteRenderer _spriteRenderer;
 
     private Collider2D _collider2D;
 
@@ -31,12 +37,22 @@ public class ItemGyunyu : BasicBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
-    {
+    {   
         if (collision.gameObject.CompareTag("Player"))
         {
             var player = collision.gameObject.GetComponent<Player>();
             player.Hp += healAmount;
+            StartCoroutine(DestroyAfterPlaySE());
         }
-        Destroy(this.gameObject);
+        
+    }
+
+    private IEnumerator DestroyAfterPlaySE()
+    {
+        var color = _spriteRenderer.color.a;
+        _healSound.PlayOneShot(_healSound.clip);
+        yield return new WaitWhile(() => _healSound.isPlaying);
+        gameObject.SetActive(false);
+        color = 0;
     }
 }

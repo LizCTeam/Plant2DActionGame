@@ -16,6 +16,7 @@ public partial class Player : Character, IDamageable
     [SerializeField] public float maxSpeed = 10f;
     [SerializeField] public float frictionAmount = 0.8f;
     [SerializeField] public ReworkCageBehaviour reworkCage;
+    [SerializeField] private AudioSource daikonSound;
     
     private float _coyoteTime = 0.2f; //崖から離れた時の猶予時間
     private float _coyoteTimeCounter;
@@ -178,5 +179,10 @@ public partial class Player : Character, IDamageable
         ContinuationChange.CurrentSceneName();
 
         SceneManager.LoadScene("GameOver");
+    }
+
+    private void PlayDaikonSound()
+    {
+        daikonSound.Play();
     }
 }

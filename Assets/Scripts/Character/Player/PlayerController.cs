@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using NUnit.Framework.Internal.Filters;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -15,6 +16,10 @@ public class PlayerController : BasicBehaviour
 
     [SerializeField] private Player _player;
 
+    [Header("サウンド")]
+    [SerializeField] private AudioSource soundJump;
+    [SerializeField] private AudioSource soundSeedChange;
+    
     protected override void OnAwake()
     {
         base.OnAwake();
@@ -124,7 +129,10 @@ public class PlayerController : BasicBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        
+        if (context.started)
+        {
+            soundJump.Play();
+        }
     }
 
     public void OnFire(InputAction.CallbackContext context)
@@ -143,6 +151,10 @@ public class PlayerController : BasicBehaviour
     public void OnSwitching(InputAction.CallbackContext context)
     {
         cage.OnSwitchAction(context);
+        if (context.started)
+        {
+            soundSeedChange.Play();
+        }
     }
 
     public void OnExitAction(InputAction.CallbackContext context)
