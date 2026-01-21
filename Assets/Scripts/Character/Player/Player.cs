@@ -86,6 +86,9 @@ public partial class Player : Character, IDamageable
         base.OnStart();
         Hp = _maxHp;
         _stateMachine.Update();
+        
+        GameResultSingleton.Instance?.InitResult();
+        GameResultSingleton.Instance?.StartTimer();
     }
     
     protected override void OnUpdate()
@@ -100,6 +103,7 @@ public partial class Player : Character, IDamageable
         {
             transform.position = _startPosition;
             _isDead = false;
+            GameResultSingleton.Instance?.StopTimer();
             ResetStage();
         }
 		

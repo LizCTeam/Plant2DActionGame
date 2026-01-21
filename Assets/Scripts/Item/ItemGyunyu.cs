@@ -54,5 +54,6 @@ public class ItemGyunyu : BasicBehaviour
         yield return new WaitWhile(() => _healSound.isPlaying);
         gameObject.SetActive(false);
         color = 0;
+        GameResultSingleton.Instance?.IncrementMilkCount();
     }
 }

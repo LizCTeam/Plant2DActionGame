@@ -16,6 +16,7 @@ public class Goal : BasicBehaviour
         {
             isGoal = true;
             Debug.Log("Goal");
+            GameResultSingleton.Instance?.StopTimer();
             SceneManager.LoadScene("GoalScene");
         }
     }

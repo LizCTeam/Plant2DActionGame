@@ -33,6 +33,7 @@ public class Enemy : Character, IDamageable
 
         if (this._hp <= 0)
         {
+            GameResultSingleton.Instance?.IncrementKillCount();
             Destroy(this.gameObject);
         }
        
