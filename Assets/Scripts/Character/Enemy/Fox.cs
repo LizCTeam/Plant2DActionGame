@@ -4,8 +4,16 @@ using UnityEngine.Serialization;
 
 public class Fox : Enemy, IDamageable
 {
+    private static readonly int IsDetected = Animator.StringToHash("isDetected");
+
     [SerializeField]
     private Player _player;
+    
+    [SerializeField]
+    private Animator _foxAnimator;
+    
+    [SerializeField]
+    private GameObject VisualRoot;
     
     [SerializeField]
     private float _acceleration;
@@ -36,8 +44,13 @@ public class Fox : Enemy, IDamageable
         var playerDistance = (_player.transform.position - transform.position).magnitude;
         if (playerDistance < _detectionRadius)
         {
+            _foxAnimator.SetBool(IsDetected, true);
             Move();
             TryJump();
+        }
+        else
+        {
+            _foxAnimator.SetBool(IsDetected, false);
         }
     }
 
@@ -61,6 +74,20 @@ public class Fox : Enemy, IDamageable
         var accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? _acceleration : _deceleration;
         var movement = Mathf.Pow(Mathf.Abs(speedDif) * accelRate, _velPower) * Mathf.Sign(speedDif);
         _body.AddForce(movement * Vector2.right, ForceMode2D.Force);
+
+        SpriteFlip();
+    }
+    
+    private void SpriteFlip()
+    {
+        if (_body.linearVelocityX < -0.1f)
+        {
+            VisualRoot.transform.localScale = new Vector3(1f, 1f, 1f);
+        }
+        else if (_body.linearVelocityX > 0.1f)
+        {
+            VisualRoot.transform.localScale = new Vector3(-1f, 1f, 1f);
+        }
     }
 
     public void TryJump()
@@ -75,7 +102,7 @@ public class Fox : Enemy, IDamageable
     public bool CanJump()
     {
         var horizontalVelocity = new Vector2(_body.linearVelocity.x, 0f);
-        RaycastHit2D hit =  Physics2D.Raycast(transform.position, horizontalVelocity, 3f, GroundLayer);
+        RaycastHit2D hit =  Physics2D.Raycast(transform.position, horizontalVelocity, 4f, GroundLayer);
         //distanceはよくわかんないけどデフォで1f
 
         return hit;

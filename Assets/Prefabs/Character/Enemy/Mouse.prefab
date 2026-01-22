@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1060886827086843162}
   - component: {fileID: 8772183947861203230}
   - component: {fileID: 1364199187420433268}
+  - component: {fileID: 7302642522334863979}
   m_Layer: 8
   m_Name: Mouse
   m_TagString: Enemy
@@ -72,7 +73,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.14713573, y: -0.15097547}
+  m_Offset: {x: -0.044541955, y: -0.27364135}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -82,7 +83,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.5822825, y: 1.0987592}
+  m_Size: {x: 1.7874701, y: 1.3440909}
   m_EdgeRadius: 0
 --- !u!114 &8772183947861203230
 MonoBehaviour:
@@ -133,6 +134,28 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!95 &7302642522334863979
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1208912056931213614}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6888ce170d4166d47b26752c707586a4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1724058413882168349
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,7 +320,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: -357421434760999972, guid: f7a998dac0daa7a4d9d0972bc0cdc806, type: 3}
+  m_Sprite: {fileID: -9186234714488378111, guid: 855e8a35de672c84b95286915bb2ac39, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -350,7 +373,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5018202040188980864}
   - component: {fileID: 7912562422095970940}
-  - component: {fileID: 6053881571981365241}
+  - component: {fileID: 2669476445915812856}
   m_Layer: 15
   m_Name: Hurtbox
   m_TagString: Untagged
@@ -387,8 +410,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Hurtbox
   owner: {fileID: 1208912056931213614}
   collider: {fileID: 0}
---- !u!58 &6053881571981365241
-CircleCollider2D:
+--- !u!61 &2669476445915812856
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -400,10 +423,10 @@ CircleCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 640
+    m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 1344
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -421,8 +444,18 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.026067972, y: 0}
-  m_Radius: 1.1412742
+  m_Offset: {x: -0.053833842, y: 0.20380199}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 3.8916905, y: 3.2995112}
+  m_EdgeRadius: 0
 --- !u!1001 &3424000108182670880
 PrefabInstance:
   m_ObjectHideFlags: 0
