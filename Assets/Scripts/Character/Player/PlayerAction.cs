@@ -313,6 +313,17 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""82260144-4e89-45cd-9dee-518825016e4f"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""05f6913d-c316-48b2-a6bb-e225f14c7960"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
@@ -373,6 +384,17 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Gamepad"",
+                    ""action"": ""Switching"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b1b4d519-9b60-46cb-a8ec-56f30b30142e"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
                     ""action"": ""Switching"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false

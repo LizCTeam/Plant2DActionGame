@@ -198,5 +198,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 857befe7967cd7a4bb948ea65ee5bcf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FallingPlatform
-  fallWait: 2
+  fallWait: 0.1
   destoryWait: 1
