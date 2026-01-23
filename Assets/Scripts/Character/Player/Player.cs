@@ -95,44 +95,51 @@ public partial class Player : Character, IDamageable
     {
         base.OnUpdate();
         _stateMachine.Update();
-        
-		Vector3 _pos = transform.position;
-        transform.position = _pos;
 
-        if (_isDead == true)
+        if (!Controller.isPaused)
         {
-            transform.position = _startPosition;
-            _isDead = false;
-            GameResultSingleton.Instance?.StopTimer();
-            ResetStage();
-        }
+            Vector3 _pos = transform.position;
+            transform.position = _pos;
+
+            if (_isDead == true)
+            {
+                transform.position = _startPosition;
+                _isDead = false;
+                GameResultSingleton.Instance?.StopTimer();
+                ResetStage();
+            }
 		
-		if (this.Hp <= 0 || transform.position.y < _deadPointY) 
-        {
-            //Deadアニメーションを再生
-            //ゲームオーバー画面を表示
-            //操作不可状態にする
+            if (this.Hp <= 0 || transform.position.y < _deadPointY) 
+            {
+                //Deadアニメーションを再生
+                //ゲームオーバー画面を表示
+                //操作不可状態にする
 
-            Debug.Log("Player Dead");
-            Debug.Log(Hp);
-            _isDead = true;
+                Debug.Log("Player Dead");
+                Debug.Log(Hp);
+                _isDead = true;
+            }
         }
     }
 
     private void UpdateSpriteDirection()
     {
         var visualScale = VisualRoot.transform.localScale;
-        
-        if (Controller.inputDirection.x < -0.8f)
+
+        if (!Controller.isPaused)
         {
-            visualScale.x = -Mathf.Abs(visualScale.x);
-            VisualRoot.transform.localScale = visualScale;
+            if (Controller.inputDirection.x < -0.8f)
+            {
+                visualScale.x = -Mathf.Abs(visualScale.x);
+                VisualRoot.transform.localScale = visualScale;
+            }
+            else if (Controller.inputDirection.x > 0.8f)
+            {
+                visualScale.x = Mathf.Abs(visualScale.x);
+                VisualRoot.transform.localScale = visualScale;
+            }
         }
-        else if (Controller.inputDirection.x > 0.8f)
-        {
-            visualScale.x = Mathf.Abs(visualScale.x);
-            VisualRoot.transform.localScale = visualScale;
-        }
+
     }
 
     private void UpdateCoyoteTime()
@@ -154,6 +161,8 @@ public partial class Player : Character, IDamageable
     
     public void Move()
     {
+        if (Controller.isPaused) return;
+        
         //新挙動
         //accelRateはtargetSpeedがある一定値(0.01)より大きいならばaccelに切り替わる
         //それをmovementで入力した値によって変えている
@@ -181,7 +190,7 @@ public partial class Player : Character, IDamageable
     void ResetStage()
     {
         ContinuationChange.CurrentSceneName();
-
+        Time.timeScale = 1;
         SceneManager.LoadScene("GameOver");
     }
 

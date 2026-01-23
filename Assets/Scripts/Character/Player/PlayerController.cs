@@ -20,6 +20,8 @@ public class PlayerController : BasicBehaviour
     [SerializeField] private AudioSource soundJump;
     [SerializeField] private AudioSource soundSeedChange;
     
+    public bool isPaused = false;
+    
     protected override void OnAwake()
     {
         base.OnAwake();
@@ -162,11 +164,7 @@ public class PlayerController : BasicBehaviour
 
         if (context.started)
         {
-            Application.Quit();
-#if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-#endif
-
+            isPaused = !isPaused;
         }
     }
 }

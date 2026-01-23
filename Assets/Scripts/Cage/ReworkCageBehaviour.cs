@@ -120,16 +120,16 @@ public partial class ReworkCageBehaviour : BasicBehaviour
     
     public virtual void OnSwitchAction(InputAction.CallbackContext obj)
     {
-        SwitchAction?.Invoke(obj);
+        if(!Player.Controller.isPaused) SwitchAction?.Invoke(obj);
     }
     
     public virtual void OnUniqueAction(InputAction.CallbackContext obj)
     {
-        UniqueAction?.Invoke(obj);
+        if(!Player.Controller.isPaused) UniqueAction?.Invoke(obj);
     }
     
     public virtual void OnFire(InputAction.CallbackContext obj)
     {
-        Fire?.Invoke(obj);
+        if(!Player.Controller.isPaused) Fire?.Invoke(obj);
     }
 }

@@ -23,6 +23,9 @@ public class ButtonScript : BasicBehaviour
     {
         if (!string.IsNullOrEmpty(sceneName))
         {
+            if (Time.timeScale == 0) Time.timeScale = 1f;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Confined;
             SceneManager.LoadScene(sceneName);
         }
         else
