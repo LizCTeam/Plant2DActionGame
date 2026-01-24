@@ -96,29 +96,27 @@ public partial class Player : Character, IDamageable
         base.OnUpdate();
         _stateMachine.Update();
 
-        if (!Controller.isPaused)
+        if (Controller.isPaused) return;
+        Vector3 _pos = transform.position;
+        transform.position = _pos;
+
+        if (_isDead == true)
         {
-            Vector3 _pos = transform.position;
-            transform.position = _pos;
+            transform.position = _startPosition;
+            _isDead = false;
+            GameResultSingleton.Instance?.StopTimer();
+            ResetStage();
+        }
+	
+        if (this.Hp <= 0 || transform.position.y < _deadPointY) 
+        {
+            //Deadアニメーションを再生
+            //ゲームオーバー画面を表示
+            //操作不可状態にする
 
-            if (_isDead == true)
-            {
-                transform.position = _startPosition;
-                _isDead = false;
-                GameResultSingleton.Instance?.StopTimer();
-                ResetStage();
-            }
-		
-            if (this.Hp <= 0 || transform.position.y < _deadPointY) 
-            {
-                //Deadアニメーションを再生
-                //ゲームオーバー画面を表示
-                //操作不可状態にする
-
-                Debug.Log("Player Dead");
-                Debug.Log(Hp);
-                _isDead = true;
-            }
+            Debug.Log("Player Dead");
+            Debug.Log(Hp);
+            _isDead = true;
         }
     }
 
@@ -126,18 +124,16 @@ public partial class Player : Character, IDamageable
     {
         var visualScale = VisualRoot.transform.localScale;
 
-        if (!Controller.isPaused)
+        if (Controller.isPaused) return;
+        if (Controller.inputDirection.x < -0.8f)
         {
-            if (Controller.inputDirection.x < -0.8f)
-            {
-                visualScale.x = -Mathf.Abs(visualScale.x);
-                VisualRoot.transform.localScale = visualScale;
-            }
-            else if (Controller.inputDirection.x > 0.8f)
-            {
-                visualScale.x = Mathf.Abs(visualScale.x);
-                VisualRoot.transform.localScale = visualScale;
-            }
+            visualScale.x = -Mathf.Abs(visualScale.x);
+            VisualRoot.transform.localScale = visualScale;
+        }
+        else if (Controller.inputDirection.x > 0.8f)
+        {
+            visualScale.x = Mathf.Abs(visualScale.x);
+            VisualRoot.transform.localScale = visualScale;
         }
 
     }

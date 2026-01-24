@@ -131,7 +131,7 @@ public class PlayerController : BasicBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (!isPaused && context.started)
         {
             soundJump.Play();
         }
@@ -139,7 +139,7 @@ public class PlayerController : BasicBehaviour
 
     public void OnFire(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (!isPaused && context.started)
         {
             cage.OnFire(context);
         }
@@ -153,7 +153,7 @@ public class PlayerController : BasicBehaviour
     public void OnSwitching(InputAction.CallbackContext context)
     {
         cage.OnSwitchAction(context);
-        if (context.started)
+        if (isPaused && context.started)
         {
             soundSeedChange.Play();
         }
@@ -161,7 +161,6 @@ public class PlayerController : BasicBehaviour
 
     public void OnExitAction(InputAction.CallbackContext context)
     {
-
         if (context.started)
         {
             isPaused = !isPaused;
