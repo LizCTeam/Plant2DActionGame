@@ -15,7 +15,7 @@ public class UIResult : BasicBehaviour
         InitUi();
     }
 
-    private void InitUi()
+    public void InitUi()
     {
         if (GameResultSingleton.Instance)
         {
@@ -49,7 +49,7 @@ public class UIResult : BasicBehaviour
     private void SetKillCountText(int killCount)
         => KillCount.text = $"たおしたてき: \n{killCount}たい";
     private void SetMilkCountText(int milkCount)
-        => MilkCount.text = $"ぬすんだミルク：\n{milkCount}こ";
+        => MilkCount.text = $"ぬすんだミルク: \n{milkCount}こ";
     private void SetSecretCountText(int secretCount)
-        => SecretCount.text = $"シークレット：\n{secretCount}こ";
+        => SecretCount.text = $"シークレット: \n{secretCount}こ";
 }

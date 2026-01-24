@@ -58,7 +58,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: ff1d283919431c64bb24884af0a5d79d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1297,6 +1297,22 @@ MonoBehaviour:
   VisualRoot: {fileID: 1893019257116695834}
   Hurtbox: {fileID: 6673923243785336070}
   CurrentStage: 0
+  OnDeadEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2857369851230561370}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: OnDead
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  Input: {fileID: 0}
   _dashForce: 30
 --- !u!114 &5019171283412924950
 MonoBehaviour:
@@ -1316,6 +1332,7 @@ MonoBehaviour:
   _player: {fileID: 2857369851230561370}
   soundJump: {fileID: 3605448220448293344}
   soundSeedChange: {fileID: 704597932331035144}
+  isPaused: 0
 --- !u!114 &6358636535963142929
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -56,6 +56,11 @@ public class ButtonScript : BasicBehaviour
         ContinuationChange.BackToBeforeScene();
     }
 
+    public void OnRetryButtonClick()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
     public void QuitGame()
     {
 #if UNITY_EDITOR

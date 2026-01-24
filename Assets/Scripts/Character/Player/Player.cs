@@ -1,5 +1,7 @@
+using System;
 using IceMilkTea.StateMachine;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -25,12 +27,12 @@ public partial class Player : Character, IDamageable
     public int AvailableWeaponHit = 0;
     
     private ImtStateMachine<Player> _stateMachine;
-
+    
     private float _jumpBufferTime = 0.2f;
     private float _jumpBufferTimeCounter;
     
     [SerializeField, Header("落下地点")] private float _deadPointY = -10f;
-    private bool _isDead = false;
+    
     private Vector3 _startPosition;
     
     public GameObject VisualRoot;
@@ -38,6 +40,20 @@ public partial class Player : Character, IDamageable
     
     [HideInInspector]
     public ReworkCageBehaviour.GrowthStage CurrentStage = ReworkCageBehaviour.GrowthStage.Nothing;
+    
+    public UnityEvent OnGameFinishEvent;
+    
+    [HideInInspector]
+    public PlayerInput Input;
+
+    [HideInInspector]
+    public bool IsClear
+    {
+        get
+        {
+            return GameResultSingleton.Instance?.IsGameClear ?? false;
+        }
+    }
     
     [HideInInspector]
     public int Hp
@@ -51,6 +67,8 @@ public partial class Player : Character, IDamageable
             return _currentHp;
         }
     }
+
+    public bool IsDead => _currentHp <= 0;
     
     protected int _currentHp;
 
@@ -72,6 +90,7 @@ public partial class Player : Character, IDamageable
     protected override void OnAwake()
     {
         base.OnAwake();
+        Input = GetComponent<PlayerInput>();
         _stateMachine = new ImtStateMachine<Player>(this);
         Controller = GetComponent<PlayerController>();
         
@@ -95,36 +114,23 @@ public partial class Player : Character, IDamageable
     {
         base.OnUpdate();
         _stateMachine.Update();
-
+        
+        if(IsClear) return;
+        if(IsDead) return;
         if (Controller.isPaused) return;
+        
         Vector3 _pos = transform.position;
         transform.position = _pos;
-
-        if (_isDead == true)
-        {
-            transform.position = _startPosition;
-            _isDead = false;
-            GameResultSingleton.Instance?.StopTimer();
-            ResetStage();
-        }
-	
-        if (this.Hp <= 0 || transform.position.y < _deadPointY) 
-        {
-            //Deadアニメーションを再生
-            //ゲームオーバー画面を表示
-            //操作不可状態にする
-
-            Debug.Log("Player Dead");
-            Debug.Log(Hp);
-            _isDead = true;
-        }
     }
 
     private void UpdateSpriteDirection()
     {
-        var visualScale = VisualRoot.transform.localScale;
-
+        if(IsClear) return;
+        if(IsDead) return;
         if (Controller.isPaused) return;
+        
+        var visualScale = VisualRoot.transform.localScale;
+        
         if (Controller.inputDirection.x < -0.8f)
         {
             visualScale.x = -Mathf.Abs(visualScale.x);
@@ -140,6 +146,9 @@ public partial class Player : Character, IDamageable
 
     private void UpdateCoyoteTime()
     {
+        if(IsClear) return;
+        if(IsDead) return;
+        
         if (isGrounded())
         {
             _coyoteTimeCounter = _coyoteTime;
@@ -157,6 +166,8 @@ public partial class Player : Character, IDamageable
     
     public void Move()
     {
+        if(IsClear) return;
+        if(IsDead) return;
         if (Controller.isPaused) return;
         
         //新挙動
@@ -181,17 +192,44 @@ public partial class Player : Character, IDamageable
     {
         EffectManager.Instance.PlayEffect(transform.position);
         Hp -= damage;
+        if (Hp <= 0 || transform.position.y < _deadPointY)
+        {
+            Input.SwitchCurrentActionMap("UI");
+            OnGameFinishEvent.Invoke();
+        }
+        // if (this.Hp <= 0 || transform.position.y < _deadPointY) 
+        // {
+        //     //Deadアニメーションを再生
+        //     //ゲームオーバー画面を表示
+        //     //操作不可状態にする
+        //
+        //     Debug.Log("Player Dead");
+        //     Debug.Log(Hp);
+        //     IsDead = true;
+        // }
     }
 
-    void ResetStage()
+    public void OnFinish()
     {
-        ContinuationChange.CurrentSceneName();
+        GameResultSingleton.Instance?.StopTimer();
         Time.timeScale = 1;
-        SceneManager.LoadScene("GameOver");
+        if (!IsDead)
+        {
+            var instance = GameResultSingleton.Instance;
+            if (instance != null) instance.IsGameClear = true;
+        }
     }
-
+    
     private void PlayDaikonSound()
     {
         daikonSound.Play();
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Goal"))
+        {
+            OnGameFinishEvent.Invoke();
+        }
     }
 }

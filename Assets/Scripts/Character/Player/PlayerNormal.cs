@@ -13,6 +13,8 @@ public partial class Player
         
         protected internal override void Update()
         {
+            if(Context.IsDead) return;
+            
             var playerAct = Context.Controller.playerAct;
             
             Context.UpdateSpriteDirection();

@@ -11,6 +11,9 @@ public class GameResultSingleton : BasicBehaviour
     
     private bool _isTimerRunning; 
     
+    [HideInInspector]
+    public bool IsGameClear = false;
+    
     protected override void OnAwake()
     {
         if (!Instance)
@@ -40,6 +43,7 @@ public class GameResultSingleton : BasicBehaviour
         MilkCount = 0;
         SecretCount = 0;
         ResultTime = 0;
+        IsGameClear = false;
     }
 
     public void StartTimer()

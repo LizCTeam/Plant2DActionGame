@@ -2,13 +2,11 @@ using UnityEngine;
 
 public class GameManager : BasicBehaviour
 {
-    [SerializeField]
-    private Camera cam;
-    
     protected override void OnStart()
     {
         base.OnStart();
         Application.targetFrameRate = 60;
+        QualitySettings.vSyncCount = 0;
     }
 
     protected override void OnUpdate()

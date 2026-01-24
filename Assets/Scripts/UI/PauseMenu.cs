@@ -11,7 +11,6 @@ public class PauseMenu : BasicBehaviour
     public Player player;
     
     private PlayerController _playerController;
-    private PlayerInput _playerInput;
     private bool _lastPaused;
 
     protected override void OnAwake()
@@ -19,7 +18,6 @@ public class PauseMenu : BasicBehaviour
         if (player != null)
         {
             _playerController = player.GetComponent<PlayerController>();
-            _playerInput = player.GetComponent<PlayerInput>();
         }
     }
     protected override void OnStart()
@@ -31,7 +29,7 @@ public class PauseMenu : BasicBehaviour
     protected override void OnUpdate()
     {
         base.OnUpdate();
-        if (_playerController == null || _playerInput == null) return;
+        if (_playerController == null || player.Input == null) return;
 
         bool paused = _playerController.isPaused;
         if (paused != _lastPaused)
@@ -67,7 +65,7 @@ public class PauseMenu : BasicBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
 
-        _playerInput.SwitchCurrentActionMap("UI");
+        player.Input.SwitchCurrentActionMap("UI");
         
         var first = pauseContainer.GetComponentInChildren<Selectable>();
         if (first != null)
@@ -84,7 +82,7 @@ public class PauseMenu : BasicBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
-        _playerInput.SwitchCurrentActionMap("Player");
+        player.Input.SwitchCurrentActionMap("Player");
         EventSystem.current.SetSelectedGameObject(null);
     }
 

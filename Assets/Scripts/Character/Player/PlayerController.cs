@@ -7,7 +7,7 @@ using UnityEngine.Serialization;
 
 public class PlayerController : BasicBehaviour
 {
-    private PlayerAction _act;
+    public PlayerAction _act;
     public PlayerAction.PlayerActions playerAct;
     [FormerlySerializedAs("_inputDirection")] public Vector2 inputDirection = Vector2.zero;
 
@@ -40,6 +40,8 @@ public class PlayerController : BasicBehaviour
     protected override void OnUpdate()
     {
         base.OnUpdate();
+        if (_player.IsClear) return;
+        if (_player.IsDead) return;
         
         inputDirection = playerAct.Move.ReadValue<Vector2>();
         
@@ -131,7 +133,8 @@ public class PlayerController : BasicBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (!isPaused && context.started)
+        if (_player.IsClear) return;
+        if (!isPaused && !_player.IsDead && context.started)
         {
             soundJump.Play();
         }
@@ -139,7 +142,8 @@ public class PlayerController : BasicBehaviour
 
     public void OnFire(InputAction.CallbackContext context)
     {
-        if (!isPaused && context.started)
+        if (_player.IsClear) return;
+        if (!isPaused && !_player.IsDead && context.started)
         {
             cage.OnFire(context);
         }
@@ -147,21 +151,24 @@ public class PlayerController : BasicBehaviour
 
     public void OnUniqueAction(InputAction.CallbackContext context)
     {
+        if (_player.IsClear) return;
         cage.OnUniqueAction(context);
     }
 
     public void OnSwitching(InputAction.CallbackContext context)
     {
-        cage.OnSwitchAction(context);
-        if (isPaused && context.started)
+        if (_player.IsClear) return;
+        if (!isPaused && !_player.IsDead && context.started)
         {
+            cage.OnSwitchAction(context);
             soundSeedChange.Play();
         }
     }
 
     public void OnExitAction(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (_player.IsClear) return;
+        if (!_player.IsDead && context.started)
         {
             isPaused = !isPaused;
         }
