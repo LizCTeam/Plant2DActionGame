@@ -19,10 +19,12 @@ public partial class BearBoss : Enemy, IDamageable
     [Header("必須設定項目")] [SerializeField] protected GameObject _fallingRocks;
     [SerializeField] protected GameObject _stone;
     [SerializeField] protected GameObject VisualRoot;
-    [SerializeField] protected GameObject _hipDropPos;
+    [SerializeField] protected GameObject _headPos;
     
     [SerializeField, Header("デバッグ用")] private AttackPattern _attackPatternOverride;
     [SerializeField] private bool _useAttackPatternOverride = false;
+
+    [HideInInspector] public bool IsJumpReady;
 
     protected float _wallCheckDistance = 20f;
     private Vector2 _raycastOffset = new Vector2(0.0f, 0.0f);
@@ -56,6 +58,16 @@ public partial class BearBoss : Enemy, IDamageable
         Slam,
         HipDrop,
         Weakness,
+    }
+
+    private enum BearAnimationState
+    {
+        Idle = 0,
+        Jump = 1,
+        Slam = 2,
+        BodyBlow = 3,
+        Weakness = 4,
+        HipDrop = 5
     }
     
     private Queue<ActionType> _actionQueue = new Queue<ActionType>();
@@ -96,12 +108,13 @@ public partial class BearBoss : Enemy, IDamageable
     {
         base.OnUpdate();
         stateMachine.Update();
-        print(stateMachine.CurrentStateName);
     }
 
     protected override void OnFixedUpdate()
     {
         base.OnFixedUpdate();
+        Move();
+        print(IsJumpReady);
     }
 
     public void OnDamaged(int damage)
@@ -120,14 +133,15 @@ public partial class BearBoss : Enemy, IDamageable
 
     public void HipDropStone()
     {
-        var randomAmount = Random.Range(minStoneAmount, maxStoneAmount);
+        var randomAmount = Random.Range(minStoneAmount, maxStoneAmount + 1);
         for (int i = 0; i < randomAmount; i++)
         {
-            var stone = Instantiate(_stone, _hipDropPos.transform.position, Quaternion.identity);
-            var stonebody = stone.GetComponent<Rigidbody2D>();
-            var randonAngle = Common.Rotate(Vector2.up, Mathf.Deg2Rad * Random.Range(-45, 45));
+            var initPosition = new Vector3(transform.position.x, transform.position.y - 1.5f, transform.position.z);
+            var stone = Instantiate(_stone, initPosition, Quaternion.identity);
+            var stoneBody = stone.GetComponent<Rigidbody2D>();
+            var randomAngle = Common.Rotate(Vector2.up, Mathf.Deg2Rad * Random.Range(-45f, 45f));
             
-            stonebody.AddForce(randonAngle * 10f, ForceMode2D.Impulse);
+            stoneBody?.AddForce(randomAngle * 10f, ForceMode2D.Impulse);
         }
     }
 
@@ -147,8 +161,8 @@ public partial class BearBoss : Enemy, IDamageable
 
     private void FaceTarget()
     {
-        var playerDirction = (_player.transform.position - transform.position).normalized;
-        VisualRoot.transform.localScale = new Vector3(-Math.Sign(playerDirction.x), 1f, 1f);
+        var playerDirection = (_player.transform.position - transform.position).normalized;
+        VisualRoot.transform.localScale = new Vector3(-Math.Sign(playerDirection.x), 1f, 1f);
     }
     
     private void SpriteFlip()
@@ -180,7 +194,7 @@ public partial class BearBoss : Enemy, IDamageable
         }
     }
 
-private bool IsWallAhead()
+    private bool IsWallAhead()
     {
         Vector2 origin = (Vector2)transform.position + _raycastOffset;
         Vector2 dir = new Vector2(_body.linearVelocityX, 0f);

@@ -4,26 +4,22 @@ using UnityEngine;
 
 public partial class BearBoss : Enemy, IDamageable
 {
-    private static readonly int DoSlam = Animator.StringToHash("doSlam");
-
     private class BearBossSlam : ImtStateMachine<BearBoss>.State
     {
         private IEnumerator SlamCoroutine()
         {
-            Context._bearAnimator.Play("BearBossSlam");
+            Context.FaceTarget();
+            Context._bearAnimator.SetInteger(ParameterState, (int)BearAnimationState.Slam);
+            yield return new WaitWhile(() => Context._bearAnimator.GetCurrentAnimatorStateInfo(0).IsName("BearBossSlam"));
             yield return new WaitForAnimation(Context._bearAnimator, 0, "BearBossSlam");
-            stateMachine.SendEvent((int)StateEvent.WeaknessEnter);
+            var actionType = Context.EvaluateEvent(Context._actionQueue.Dequeue());
+            stateMachine.SendEvent((int)actionType);
         }
         
         // 状態へ突入時の処理はこのEnterで行う
         protected internal override void Enter()
         {
             Context.StartCoroutine(SlamCoroutine());
-            Context.FaceTarget();
-            Context._bearAnimator.SetTrigger(DoSlam);
-            
-            var actionType = Context.EvaluateEvent(Context._actionQueue.Dequeue());
-            stateMachine.SendEvent((int)actionType);
         }
 
         // 状態の更新はこのUpdateで行う

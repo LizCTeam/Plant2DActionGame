@@ -1,41 +1,63 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
 using IceMilkTea.StateMachine;
 using UnityEngine;
 using Vector2 = UnityEngine.Vector2;
 
-public partial class BearBoss : Enemy, IDamageable
+public partial class BearBoss
 {
-    private static readonly int IsBodyBlow = Animator.StringToHash("isBodyBlow");
-
     private class BearBossBodyblow : ImtStateMachine<BearBoss>.State
     {
-        Vector2 previousPlayerToDirection = Vector2.zero;
+        private Vector2 _previousPlayerToDirection = Vector2.zero;
+        private bool _hasPassPlayer = false;
+        private float _passPlayerTimer = 0.0f;
         
         // 状態へ突入時の処理はこのEnterで行う
         protected internal override void Enter()
         {
-            this.Context._bearAnimator.SetBool(IsBodyBlow, true);
-            previousPlayerToDirection = (Context._player.transform.position - Context.transform.position).normalized;
-        }
-
-        // 状態の更新はこのUpdateで行う
-        protected internal override void Update()
-        {
-            Context.SpriteFlip();
-            var playerToDirection = (Context._player.transform.position - Context.transform.position).normalized;
-            Context._targetDirection =  playerToDirection;
-            Context.Move();
-            if (previousPlayerToDirection.x * playerToDirection.x < 0f)
+            Context._bearAnimator.SetInteger(ParameterState, (int)BearAnimationState.BodyBlow);
+            _previousPlayerToDirection = (Context._player.transform.position - Context._headPos.transform.position).normalized;
+            _hasPassPlayer = false;
+            _passPlayerTimer = 0.0f;
+            if (Math.Abs(Context._player.transform.position.x - Context._headPos.transform.position.x) < 2.0f)
             {
                 var actionType = Context.EvaluateEvent(Context._actionQueue.Dequeue());
                 stateMachine.SendEvent((int)actionType);
             }
         }
 
+        // 状態の更新はこのUpdateで行う
+        protected internal override void Update()
+        {
+            if (_hasPassPlayer)
+            {
+                _passPlayerTimer += Time.deltaTime;
+            }
+
+            var playerToDirection = (Context._player.transform.position - Context._headPos.transform.position).normalized;
+            Context._targetDirection =  playerToDirection;
+
+            Context.SpriteFlip();
+
+            switch (_hasPassPlayer)
+            {
+                case false when _previousPlayerToDirection.x * playerToDirection.x < 0f:
+                    Context._targetDirection = Vector2.zero;
+                    _hasPassPlayer = true;
+                    break;
+                case true when _passPlayerTimer > 1.5f || Math.Abs(Context._body.linearVelocityX) < 1.0f:
+                {
+                    var actionType = Context.EvaluateEvent(Context._actionQueue.Dequeue());
+                    stateMachine.SendEvent((int)actionType);
+                    break;
+                }
+            }
+        }
+
         // 状態から脱出する時の処理はこのExitで行う
         protected internal override void Exit()
         {
-            this.Context._bearAnimator.SetBool(IsBodyBlow, false);
+            Context._targetDirection = Vector2.zero;
         }
     }
 }

@@ -6,18 +6,19 @@ using UnityEngine.Assertions;
 using Assert = NUnit.Framework.Assert;
 using Random = UnityEngine.Random;
 
-public partial class BearBoss : Enemy, IDamageable
+public partial class BearBoss
 {
-    private static readonly int IsIdle = Animator.StringToHash("isIdle");
+    private static readonly int ParameterState = Animator.StringToHash("state");
 
     private class BearBossIdle : ImtStateMachine<BearBoss>.State
     {
         private IEnumerator IdleCoroutine()
         {
+            Context.FaceTarget();
+            
             int maxCount = Enum.GetNames(typeof(AttackPattern)).Length;
             var randomValue = (AttackPattern)Random.Range(0, maxCount);
-            Context._bearAnimator.SetBool(IsIdle, true);
-            yield return new WaitForAnimation(Context._bearAnimator, 0, "BearBossIdle");
+            Context._bearAnimator.SetInteger(ParameterState, (int)BearAnimationState.Idle);
             if (Context._useAttackPatternOverride)
             {
                 randomValue = Context._attackPatternOverride;
@@ -47,30 +48,12 @@ public partial class BearBoss : Enemy, IDamageable
             var actionType = Context.EvaluateEvent(Context._actionQueue.Dequeue());
             stateMachine.SendEvent((int)actionType);
             
-            // switch (randomValue)
-            // {
-            //     case AttackPattern.BodyBlowToSlam:
-            //         stateMachine.SendEvent((int)StateEvent.BodyBlowEnter);
-            //         break;
-            //     case AttackPattern.SlamToHipDrop:
-            //         stateMachine.SendEvent((int)StateEvent.SlamEnter);
-            //         break;
-            //     case AttackPattern.HipDropToBodyBlow:
-            //         stateMachine.SendEvent((int)StateEvent.HipDropEnter);
-            //         break;
-            //     default:
-            //         Assert.IsTrue(false, "Unknown state " + randomValue + "    error!");
-            //         break;
-            // }
-            
-            Context._bearAnimator.SetBool(IsIdle, false);
-            
+            yield return new WaitForSeconds(1.5f);
         }
         
         // 状態へ突入時の処理はこのEnterで行う
         protected internal override void Enter()
         {
-            Context.FaceTarget();
             Context.StartCoroutine(IdleCoroutine());
         }
 

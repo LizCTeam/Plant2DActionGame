@@ -6,9 +6,6 @@ using UnityEngine.Serialization;
 
 public partial class BearBoss : Enemy, IDamageable
 {
-    private static readonly int DoJump = Animator.StringToHash("doJump");
-    private static readonly int DoHipDrop = Animator.StringToHash("doHipDrop");
-
     [Header("熊ちゃんのジャンプ力")]
     [SerializeField] public float JumpHeight = 10f;
     
@@ -18,29 +15,31 @@ public partial class BearBoss : Enemy, IDamageable
     
     private class BearBossHipDrop : ImtStateMachine<BearBoss>.State
     {
-        private bool isJumping = true;
-
         private IEnumerator HipDropCoroutine()
         {
+            Context._bearAnimator.SetInteger(ParameterState, (int)BearAnimationState.Jump);
+            yield return new WaitWhile(() => Context._bearAnimator.GetCurrentAnimatorStateInfo(0).IsName("BearBossJump"));
+            yield return new WaitUntil(() => Context.IsJumpReady);
+
             var playerPos = Context._player.transform.position;
             var targetPos = new Vector3(playerPos.x, Context.transform.position.y + Context.JumpHeight, Context.transform.position.z);
-            isJumping = true;
+
+            var isJumpFinish = false;
             Context.transform.DOMove(targetPos, 1f)
                 .SetEase(Ease.OutQuart)
-                .OnComplete(() => 
-                {
-                    isJumping = false;
-                });
-            Context._bearAnimator.SetTrigger(DoJump);
-            yield return new WaitWhile(() => Context._bearAnimator.GetCurrentAnimatorStateInfo(0).IsName("BearBossJump"));
-            Context._bearAnimator.SetTrigger(DoHipDrop);
+                .OnComplete(() => isJumpFinish = true);
+            yield return new WaitUntil(() => isJumpFinish);
+
+            Context._bearAnimator.SetInteger(ParameterState, (int)BearAnimationState.HipDrop);
             yield return new WaitWhile(() => Context._bearAnimator.GetCurrentAnimatorStateInfo(0).IsName("BearBossHipDrop"));
-            if (!isJumping && Context.isGrounded())
-            {
-                Context.HipDropStone();
-                var actionType = Context.EvaluateEvent(Context._actionQueue.Dequeue());
-                stateMachine.SendEvent((int)actionType);
-            }
+            yield return new WaitForAnimation(Context._bearAnimator, 0, "BearBossHipDrop");
+
+            yield return new WaitUntil(() => Context.isGrounded());
+
+            Context.HipDropStone();
+
+            var actionType = Context.EvaluateEvent(Context._actionQueue.Dequeue());
+            stateMachine.SendEvent((int)actionType);
         }
         
         // 状態へ突入時の処理はこのEnterで行う
