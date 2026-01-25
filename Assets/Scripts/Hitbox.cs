@@ -15,12 +15,15 @@ public class Hitbox : BasicBehaviour
 
     private IDamageDealt _damageDealt;
 
+    private Collider2D _collider;
+
     private void Awake()
     {
         if (owner)
         {
             _damageDealt = owner.GetComponent(nameof(IDamageDealt)) as IDamageDealt;
         }
+        _collider = GetComponent<Collider2D>();
     }
     
     // 注意OnTriggerEnterではなくOnTriggerEnter"2D" (1敗)
@@ -76,5 +79,25 @@ public class Hitbox : BasicBehaviour
             StopCoroutine(_hitEvents[other]);
             _hitEvents.Remove(other);
         }
+    }
+
+    private void OnEnable()
+    {
+        var filter = new ContactFilter2D();
+        var results = new List<Collider2D>();
+        _collider.Overlap(filter, results);
+        foreach (var other in results)
+        {
+            OnTriggerEnter2D(other);
+        }
+    }
+    
+    private void OnDisable()
+    {
+        foreach (var hitEvent in _hitEvents)
+        {
+            StopCoroutine(hitEvent.Value);
+        }
+        _hitEvents.Clear(); 
     }
 }
