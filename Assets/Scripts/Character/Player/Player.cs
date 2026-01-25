@@ -192,6 +192,7 @@ public partial class Player : Character, IDamageable
     {
         EffectManager.Instance.PlayEffect(transform.position);
         Hp -= damage;
+        SoundManagerSingleton.Instance.PlaySound("PlayerHurt");
         if (Hp <= 0 || transform.position.y < _deadPointY)
         {
             Input.SwitchCurrentActionMap("UI");

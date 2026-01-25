@@ -9,8 +9,6 @@ public class ItemGyunyu : BasicBehaviour
     [SerializeField]
     private int healAmount = 1;
     [SerializeField]
-    private AudioSource _healSound;
-    [SerializeField]
     private SpriteRenderer _spriteRenderer;
 
     private Collider2D _collider2D;
@@ -42,18 +40,9 @@ public class ItemGyunyu : BasicBehaviour
         {
             var player = collision.gameObject.GetComponent<Player>();
             player.Hp += healAmount;
-            StartCoroutine(DestroyAfterPlaySE());
+            SoundManagerSingleton.Instance.PlaySound("Heal");
+            Destroy(this.gameObject);
         }
         
-    }
-
-    private IEnumerator DestroyAfterPlaySE()
-    {
-        var color = _spriteRenderer.color.a;
-        _healSound.PlayOneShot(_healSound.clip);
-        yield return new WaitWhile(() => _healSound.isPlaying);
-        gameObject.SetActive(false);
-        color = 0;
-        GameResultSingleton.Instance?.IncrementMilkCount();
     }
 }

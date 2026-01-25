@@ -4,7 +4,6 @@ using UnityEngine.Serialization;
 public class Enemy : Character, IDamageable
 {
     [SerializeField] protected int _maxHp = 5;
-    [SerializeField] protected AudioSource hurtSound;
 
     protected int _hp
     {
@@ -34,6 +33,7 @@ public class Enemy : Character, IDamageable
         if (this._hp <= 0)
         {
             GameResultSingleton.Instance?.IncrementKillCount();
+            SoundManagerSingleton.Instance.PlaySound("Hurt");
             Destroy(this.gameObject);
         }
        
@@ -49,7 +49,7 @@ public class Enemy : Character, IDamageable
 
     public void OnDamaged(int damage)
     {
-        hurtSound.Play();
+        SoundManagerSingleton.Instance.PlaySound("Hurt");
         EffectManager.Instance.PlayEffect(transform.position);
         _hp -= damage;
     }

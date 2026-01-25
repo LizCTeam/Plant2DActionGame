@@ -73,6 +73,7 @@ public partial class Mole : Enemy, IDamageable
     {
         EffectManager.Instance.PlayEffect(transform.position);
         this._hp -= damage;
+        SoundManagerSingleton.Instance.PlaySound("Hurt");
     }
     
     private void OnTriggerEnter2D(Collider2D other)
