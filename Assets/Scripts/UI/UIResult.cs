@@ -23,14 +23,14 @@ public class UIResult : BasicBehaviour
             SetClearTimeText(result.ResultTime);
             SetKillCountText(result.KillCount);
             SetMilkCountText(result.MilkCount);
-            SetSecretCountText(result.SecretCount);
+            SetSecretCountText(result.SecretCount, result.MaxSecretCount);
         }
         else
         {
             SetClearTimeText(0);
             SetKillCountText(0);
             SetMilkCountText(0);
-            SetSecretCountText(0);   
+            SetSecretCountText(0, 0);   
         }
     }
     
@@ -50,6 +50,6 @@ public class UIResult : BasicBehaviour
         => KillCount.text = $"たおしたてき: \n{killCount}たい";
     private void SetMilkCountText(int milkCount)
         => MilkCount.text = $"ぬすんだミルク: \n{milkCount}こ";
-    private void SetSecretCountText(int secretCount)
-        => SecretCount.text = $"シークレット: \n{secretCount}こ";
+    private void SetSecretCountText(int secretCount, int maxSecretCount)
+        => SecretCount.text = $"シークレット: \n{secretCount} / {maxSecretCount} こ";
 }

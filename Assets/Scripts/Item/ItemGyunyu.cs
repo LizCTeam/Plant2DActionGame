@@ -40,6 +40,7 @@ public class ItemGyunyu : BasicBehaviour
         {
             var player = collision.gameObject.GetComponent<Player>();
             player.Hp += healAmount;
+            GameResultSingleton.Instance.IncrementMilkCount();
             SoundManagerSingleton.Instance.PlaySound("Heal");
             Destroy(this.gameObject);
         }
