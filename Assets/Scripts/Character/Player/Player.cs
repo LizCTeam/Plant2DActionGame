@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using IceMilkTea.StateMachine;
 using UnityEngine;
 using UnityEngine.Events;
@@ -38,7 +39,6 @@ public partial class Player : Character, IDamageable
     public GameObject VisualRoot;
     public Hurtbox Hurtbox;
     
-    [HideInInspector]
     public ReworkCageBehaviour.GrowthStage CurrentStage = ReworkCageBehaviour.GrowthStage.Nothing;
     
     public UnityEvent OnGameFinishEvent;
@@ -68,7 +68,18 @@ public partial class Player : Character, IDamageable
         }
     }
 
-    public bool IsDead => _currentHp <= 0;
+    private enum PlayerAnimationState
+    {
+        Idle = 0,
+        Hurt = 1,
+        DaikonAttack = 2,
+        Walk = 3,
+        Jump = 4,
+        Dead = 5
+    }
+
+    public bool IsDead => Hp <= 0;
+    private bool _isAnimationHurt = false;
     
     protected int _currentHp;
 
@@ -162,6 +173,12 @@ public partial class Player : Character, IDamageable
     protected override void OnFixedUpdate()
     {
         base.OnFixedUpdate();
+        UpdateAnimation();
+        if (transform.position.y < _deadPointY && !IsDead)
+        {
+            Hp = 0;
+            OnGameFinishEvent.Invoke();
+        }
     }
     
     public void Move()
@@ -193,10 +210,13 @@ public partial class Player : Character, IDamageable
         EffectManager.Instance.PlayEffect(transform.position);
         Hp -= damage;
         SoundManagerSingleton.Instance.PlaySound("PlayerHurt");
-        if (Hp <= 0 || transform.position.y < _deadPointY)
+        if (Hp <= 0)
         {
-            Input.SwitchCurrentActionMap("UI");
             OnGameFinishEvent.Invoke();
+        }
+        else if(!_isAnimationHurt)
+        {
+            StartCoroutine(PlayHurtAnimation());
         }
         // if (this.Hp <= 0 || transform.position.y < _deadPointY) 
         // {
@@ -204,16 +224,24 @@ public partial class Player : Character, IDamageable
         //     //ゲームオーバー画面を表示
         //     //操作不可状態にする
         //
-        //     Debug.Log("Player Dead");
-        //     Debug.Log(Hp);
         //     IsDead = true;
         // }
     }
 
+    private IEnumerator PlayHurtAnimation()
+    {
+        _isAnimationHurt = true;
+        yield return new WaitUntil(() => _playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Hurt"));
+        yield return new WaitForAnimation(_playerAnimator, 0, "Hurt");
+        _isAnimationHurt = false;
+    }
+
     public void OnFinish()
     {
+        Input.SwitchCurrentActionMap("UI");
         GameResultSingleton.Instance?.StopTimer();
         Time.timeScale = 1;
+        _body.linearVelocity = Vector2.zero;
         if (!IsDead)
         {
             var instance = GameResultSingleton.Instance;
@@ -231,6 +259,48 @@ public partial class Player : Character, IDamageable
         if (other.gameObject.layer == LayerMask.NameToLayer("Goal"))
         {
             OnGameFinishEvent.Invoke();
+        }
+    }
+    
+    public void Dash()
+    {
+        if (CurrentStage != ReworkCageBehaviour.GrowthStage.Mature) return;
+        var visualScale = VisualRoot.transform.localScale;
+        var dash = new Vector2(visualScale.x * _dashForce, 0);
+        _body.AddForce(dash, ForceMode2D.Impulse);
+    }
+
+    private void UpdateAnimation()
+    {
+        if (IsDead)
+        {
+            _playerAnimator.SetInteger(State, (int)PlayerAnimationState.Dead);
+            return;
+        }
+        
+        if (IsAttacking)
+        {
+            _playerAnimator.SetInteger(State, (int)PlayerAnimationState.DaikonAttack);
+            return;
+        }
+        
+        if (_isAnimationHurt)
+        {
+            _playerAnimator.SetInteger(State, (int)PlayerAnimationState.Hurt);
+            return;
+        }
+        
+        if (!isGrounded())
+        {
+            _playerAnimator.SetInteger(State, (int)PlayerAnimationState.Jump);
+        }
+        else if (Controller.inputDirection.x != 0)
+        {
+            _playerAnimator.SetInteger(State, (int)PlayerAnimationState.Walk);
+        }
+        else
+        {
+            _playerAnimator.SetInteger(State, (int)PlayerAnimationState.Idle);
         }
     }
 }

@@ -155,7 +155,6 @@ public partial class Raccoondog : Enemy, IDamageable
                         float knockbackForce = 0.5f;
 
                         rb.AddForce(knockbackDir * knockbackForce, ForceMode2D.Impulse);
-                        Debug.Log(knockbackDir);
                     }
 
                 }
@@ -183,7 +182,6 @@ public partial class Raccoondog : Enemy, IDamageable
                 if (vegetables != null)
                 {
                     Object.Destroy(vegetables);
-                    Debug.Log("hannn");
                 }
             }
            

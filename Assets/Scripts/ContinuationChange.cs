@@ -9,7 +9,6 @@ public static class ContinuationChange
     public static void CurrentSceneName()
     {
         _sceneName = SceneManager.GetActiveScene().name;
-        Debug.Log(_sceneName);
     }
 
     //上記のメソッドで取得されたシーンに戻す。
