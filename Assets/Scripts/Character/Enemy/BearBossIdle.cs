@@ -3,7 +3,6 @@ using System.Collections;
 using IceMilkTea.StateMachine;
 using UnityEngine;
 using UnityEngine.Assertions;
-using Assert = NUnit.Framework.Assert;
 using Random = UnityEngine.Random;
 
 public partial class BearBoss
