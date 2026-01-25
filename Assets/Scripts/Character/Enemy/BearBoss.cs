@@ -114,7 +114,6 @@ public partial class BearBoss : Enemy, IDamageable
     {
         base.OnFixedUpdate();
         Move();
-        print(IsJumpReady);
     }
 
     public void OnDamaged(int damage)
