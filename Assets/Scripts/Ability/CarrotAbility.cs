@@ -10,7 +10,6 @@ public class CarrotAbility : BasicBehaviour, IHasAbility
     {
         var cage = player.reworkCage;
         
-        Debug.Log("Used Ability");
         GameObject Obj = Instantiate(Projectile, Position.transform.position, Quaternion.identity);
         CarrotMissile carrot = Obj.GetComponent<CarrotMissile>();
         carrot.speed = CarrotSpeed;

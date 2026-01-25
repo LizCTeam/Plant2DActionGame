@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 170637625942177176}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.01, y: 0.051800255, z: 0}
+  m_LocalPosition: {x: -0.01, y: 0.05180025, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.45, y: 1.48}
+  m_Size: {x: 6, y: 6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1095,7 +1095,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.36132643, y: -0.21735698}
+  m_Offset: {x: 0.36132643, y: -0.26985335}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1105,7 +1105,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.6244468, y: 2.2894607}
+  m_Size: {x: 0.6244468, y: 2.3944535}
   m_EdgeRadius: 0
 --- !u!114 &4565687256543477826
 MonoBehaviour:
@@ -1297,21 +1297,9 @@ MonoBehaviour:
   VisualRoot: {fileID: 1893019257116695834}
   Hurtbox: {fileID: 6673923243785336070}
   CurrentStage: 0
-  OnDeadEvent:
+  OnGameFinishEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2857369851230561370}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: OnDead
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   Input: {fileID: 0}
   _dashForce: 30
 --- !u!114 &5019171283412924950
@@ -1858,7 +1846,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -5618774878439156520, guid: 36ff5798b00d38b468951de708f813ad, type: 3}
   m_Color: {r: 0.745283, g: 0.745283, b: 0.745283, a: 1}
   m_FlipX: 1

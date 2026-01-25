@@ -5,10 +5,13 @@ using UnityEngine;
 
 public partial class Player
 {
+    private static readonly int State = Animator.StringToHash("State");
+
     public class PlayerNormal : ImtStateMachine<Player>.State
     {
         protected internal override void Enter()
         {
+            Context._playerAnimator.SetInteger(State, (int)PlayerAnimationState.Idle);
         }
         
         protected internal override void Update()
@@ -42,7 +45,7 @@ public partial class Player
                 Context._coyoteTimeCounter = 0f;
             }
 
-            if (playerAct.Fire.WasPressedThisFrame() && Context.AvailableWeaponHit > 0)
+            if (playerAct.Fire.WasPressedThisFrame() && Context.AvailableWeaponHit > 0 && !Context._isAnimationHurt)
             {
                 stateMachine.SendEvent((int)StateEvent.AttackStart);
                 Context.AvailableWeaponHit -= 1;
@@ -51,7 +54,8 @@ public partial class Player
                     Context.AvailableWeaponHit = 0;
                 }
             }
-
+            
+            
             // if (Context.isGrounded() && Mathf.Abs(Context._playerController.inputDirection.x) < 0.01f)
             // {
             //     float amount = Mathf.Min(Mathf.Abs(Context._body.linearVelocity.x), Mathf.Abs(Context.frictionAmount));

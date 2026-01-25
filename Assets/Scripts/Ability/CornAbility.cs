@@ -10,7 +10,6 @@ public class CornAbility : BasicBehaviour, IHasAbility
     {
         var cage = player.reworkCage;
         
-        Debug.Log("Used Ability 2");
         var Obj = Instantiate(CornObject, Position.transform.position, Quaternion.identity);
         var scale = Obj.transform.localScale;
         scale.x = Mathf.Sign(Parent.transform.localScale.x) * Mathf.Abs(Parent.transform.localScale.x);
