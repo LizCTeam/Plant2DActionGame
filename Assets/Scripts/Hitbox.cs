@@ -81,23 +81,23 @@ public class Hitbox : BasicBehaviour
         }
     }
 
-    private void OnEnable()
-    {
-        var filter = new ContactFilter2D();
-        var results = new List<Collider2D>();
-        _collider.Overlap(filter, results);
-        foreach (var other in results)
-        {
-            OnTriggerEnter2D(other);
-        }
-    }
-    
-    private void OnDisable()
-    {
-        foreach (var hitEvent in _hitEvents)
-        {
-            StopCoroutine(hitEvent.Value);
-        }
-        _hitEvents.Clear(); 
-    }
+    // private void OnEnable()
+    // {
+    //     var filter = new ContactFilter2D();
+    //     var results = new List<Collider2D>();
+    //     _collider.Overlap(filter, results);
+    //     foreach (var other in results)
+    //     {
+    //         OnTriggerEnter2D(other);
+    //     }
+    // }
+    //
+    // private void OnDisable()
+    // {
+    //     foreach (var hitEvent in _hitEvents)
+    //     {
+    //         StopCoroutine(hitEvent.Value);
+    //     }
+    //     _hitEvents.Clear(); 
+    // }
 }
