@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class ProjectileBehaviour : BasicBehaviour, IDamageDealt
@@ -7,15 +8,28 @@ public class ProjectileBehaviour : BasicBehaviour, IDamageDealt
     private Collider2D _collision;
     
     public float speed = 4.5f;
-    Rigidbody2D _body;
+    private Rigidbody2D _body;
     
     #region 発射物の関数
+
+    protected override void OnAwake()
+    {
+        base.OnAwake();
+        _body = GetComponent<Rigidbody2D>();
+        _collision = _collisionObject.GetComponentInChildren<Collider2D>();
+    }
 
     protected override void OnStart()
     {
         base.OnStart();
-        _body = GetComponent<Rigidbody2D>();
-        _collision = _collisionObject.GetComponent<Collider2D>();
+        _collision.enabled = false;
+        StartCoroutine(DelayEnableCollision(0.5f));
+    }
+
+    private IEnumerator DelayEnableCollision(float delay)
+    {
+        yield return new WaitForSeconds(delay); 
+        _collision.enabled = true;
     }
 
     protected override void OnUpdate()

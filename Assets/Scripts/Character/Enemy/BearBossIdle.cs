@@ -1,16 +1,54 @@
+using System;
 using System.Collections;
 using IceMilkTea.StateMachine;
 using UnityEngine;
+using UnityEngine.Assertions;
+using Assert = NUnit.Framework.Assert;
+using Random = UnityEngine.Random;
 
-public partial class BearBoss : Enemy, IDamageable
+public partial class BearBoss
 {
+    private static readonly int ParameterState = Animator.StringToHash("state");
+
     private class BearBossIdle : ImtStateMachine<BearBoss>.State
     {
         private IEnumerator IdleCoroutine()
         {
-            Context._bearAnimator.Play("BearBossIdle");
-            yield return new WaitForAnimation(Context._bearAnimator, 0, "BearBossIdle");
-            stateMachine.SendEvent((int)StateEvent.SlamEnter);
+            Context.FaceTarget();
+            
+            int maxCount = Enum.GetNames(typeof(AttackPattern)).Length;
+            var randomValue = (AttackPattern)Random.Range(0, maxCount);
+            Context._bearAnimator.SetInteger(ParameterState, (int)BearAnimationState.Idle);
+            if (Context._useAttackPatternOverride)
+            {
+                randomValue = Context._attackPatternOverride;
+            }
+            switch (randomValue)
+            {
+                case AttackPattern.BodyBlowToSlam:
+                    Context._actionQueue.Enqueue(ActionType.BodyBlow);
+                    Context._actionQueue.Enqueue(ActionType.Slam);
+                    Context._actionQueue.Enqueue(ActionType.Weakness);
+                    break;
+                case AttackPattern.SlamToHipDrop:
+                    Context._actionQueue.Enqueue(ActionType.Slam);
+                    Context._actionQueue.Enqueue(ActionType.HipDrop);
+                    Context._actionQueue.Enqueue(ActionType.Weakness);
+                    break;
+                case AttackPattern.HipDropToBodyBlow:
+                    Context._actionQueue.Enqueue(ActionType.HipDrop);
+                    Context._actionQueue.Enqueue(ActionType.BodyBlow);
+                    Context._actionQueue.Enqueue(ActionType.Weakness);
+                    break;
+                default:
+                    Assert.IsTrue(false, "Unknown state " + randomValue + "    error!");
+                    break;
+            }
+            
+            var actionType = Context.EvaluateEvent(Context._actionQueue.Dequeue());
+            stateMachine.SendEvent((int)actionType);
+            
+            yield return new WaitForSeconds(1.5f);
         }
         
         // 状態へ突入時の処理はこのEnterで行う
