@@ -30,6 +30,7 @@ public class DestoryableObject : BasicBehaviour, IDamageable
         base.OnUpdate();
         if (this.Hp <= 0)
         {
+            SoundManagerSingleton.Instance.PlaySound("Break");
             Destroy(this.gameObject);
         }
     }

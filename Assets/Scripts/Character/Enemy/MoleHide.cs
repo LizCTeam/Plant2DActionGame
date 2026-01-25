@@ -8,7 +8,7 @@ public partial class Mole : Enemy, IDamageable
         protected internal override void Enter()
         {
             Context.hurtbox.collider.enabled = false;
-            Context._moleAnimator.Play("MoleHideOn");
+            Context._moleAnimator.SetBool("isHide", true);
         }
         
         protected internal override void Update()
@@ -26,7 +26,7 @@ public partial class Mole : Enemy, IDamageable
         protected internal override void Exit()
         {
             Context.hurtbox.collider.enabled = true;
-            Context._moleAnimator.Play("MoleHideOff");
+            Context._moleAnimator.SetBool("isHide", false);
         }
     }
 }

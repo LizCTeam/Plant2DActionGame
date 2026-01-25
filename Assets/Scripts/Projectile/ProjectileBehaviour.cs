@@ -23,7 +23,7 @@ public class ProjectileBehaviour : BasicBehaviour, IDamageDealt
     {
         base.OnStart();
         _collision.enabled = false;
-        StartCoroutine(DelayEnableCollision(0.5f));
+        StartCoroutine(DelayEnableCollision(0.1f));
     }
 
     private IEnumerator DelayEnableCollision(float delay)

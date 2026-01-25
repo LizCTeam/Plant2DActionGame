@@ -6,7 +6,8 @@ public class GameResultSingleton : BasicBehaviour
     
     public int KillCount { get; private set; }
     public int MilkCount { get; private set; }
-    public int SecretCount { get; private set; }
+    public int MaxSecretCount { get; set; }
+    public int SecretCount { get; set; }
     public float ResultTime { get; private set; }
     
     private bool _isTimerRunning; 
