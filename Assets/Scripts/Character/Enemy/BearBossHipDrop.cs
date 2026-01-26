@@ -21,7 +21,7 @@ public partial class BearBoss : Enemy, IDamageable
             yield return new WaitUntil(() => Context.isGrounded());
 
             Context._bearAnimator.SetInteger(ParameterState, (int)BearAnimationState.Jump);
-            yield return new WaitWhile(() => Context._bearAnimator.GetCurrentAnimatorStateInfo(0).IsName("BearBossJump"));
+            yield return new WaitUntil(() => Context._bearAnimator.GetCurrentAnimatorStateInfo(0).IsName("BearBossJump"));
             yield return new WaitUntil(() => Context.IsJumpReady);
 
             var playerPos = Context._player.transform.position;
@@ -41,7 +41,7 @@ public partial class BearBoss : Enemy, IDamageable
             });
 
             Context._bearAnimator.SetInteger(ParameterState, (int)BearAnimationState.HipDrop);
-            yield return new WaitWhile(() => Context._bearAnimator.GetCurrentAnimatorStateInfo(0).IsName("BearBossHipDrop"));
+            yield return new WaitUntil(() => Context._bearAnimator.GetCurrentAnimatorStateInfo(0).IsName("BearBossHipDrop"));
             yield return new WaitForAnimation(Context._bearAnimator, 0, "BearBossHipDrop");
 
             yield return new WaitUntil(() => Context.isGrounded());
