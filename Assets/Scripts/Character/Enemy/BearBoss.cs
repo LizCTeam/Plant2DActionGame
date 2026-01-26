@@ -140,7 +140,7 @@ public partial class BearBoss : Enemy, IDamageable
             var stoneBody = stone.GetComponent<Rigidbody2D>();
             var randomAngle = Common.Rotate(Vector2.up, Mathf.Deg2Rad * Random.Range(-45f, 45f));
             
-            stoneBody?.AddForce(randomAngle * 10f, ForceMode2D.Impulse);
+            stoneBody?.AddForce(randomAngle * 20f, ForceMode2D.Impulse);
         }
     }
 

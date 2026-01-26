@@ -78,7 +78,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: -3207797012474617965, guid: 3d1bf424cd2a23b48928a3628c89c766, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -430,7 +430,6 @@ MonoBehaviour:
     m_Bits: 64
   _body: {fileID: 3382863708218456686}
   _maxHp: 2
-  hurtSound: {fileID: 1118518523950047001}
   _player: {fileID: 0}
   _foxAnimator: {fileID: 8422623945843758329}
   VisualRoot: {fileID: 7832742799662957422}
@@ -519,11 +518,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 41c79c83344445b4f97663bdca4312f4, type: 3}
---- !u!82 &1118518523950047001 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 8077596501730599014, guid: 41c79c83344445b4f97663bdca4312f4, type: 3}
-  m_PrefabInstance: {fileID: 9195406591877955455}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2936095007965579372 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6279072629944858387, guid: 41c79c83344445b4f97663bdca4312f4, type: 3}

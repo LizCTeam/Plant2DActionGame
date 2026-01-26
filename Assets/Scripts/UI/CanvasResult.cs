@@ -4,12 +4,15 @@ public class CanvasResult : BasicBehaviour
 {
     private static readonly int IsGameClear = Animator.StringToHash("isGameClear");
     private static readonly int IsGameOver = Animator.StringToHash("isGameOver");
-    private Animator _animator;
+    private static readonly int IsFade = Animator.StringToHash("isFade");
+
+    [HideInInspector]
+    public Animator animator;
 
     protected override void OnAwake()
     {
         base.OnAwake();
-        _animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
     }
     
     protected override void OnStart()
@@ -29,12 +32,22 @@ public class CanvasResult : BasicBehaviour
 
     public void GameClear()
     {
-        _animator.SetBool(IsGameClear, true);
+        animator.SetBool(IsGameClear, true);
     }
 
     public void GameOver()
     {
-        _animator.SetBool(IsGameOver, true);
+        animator.SetBool(IsGameOver, true);
+    }
+
+    public void FadeIn()
+    {
+        animator.SetBool(IsFade, true);
+    }
+    
+    public void FadeOut()
+    {
+        animator.SetBool(IsFade, false);
     }
     
     public void GameEnd()

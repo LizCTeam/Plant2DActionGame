@@ -29,10 +29,11 @@ Transform:
   m_GameObject: {fileID: 426694987999134209}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.67, y: -1.37, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 4572704021897684337}
   - {fileID: 1339346711076140948}
   - {fileID: 60468703333152497}
   - {fileID: 443865299119211243}
@@ -78,7 +79,6 @@ MonoBehaviour:
     m_Bits: 64
   _body: {fileID: 0}
   _maxHp: 5
-  hurtSound: {fileID: 0}
   _velPower: 0.5
   _accelPower: 4
   _deaccelPower: 1
@@ -86,12 +86,11 @@ MonoBehaviour:
   _fallingRocks: {fileID: 0}
   _stone: {fileID: 1535273453308771460, guid: b377687a3f5521c4a97bdd415999ade8, type: 3}
   VisualRoot: {fileID: 1330407766756652629}
-  _hipDropPos: {fileID: 3261421852217252637}
   _headPos: {fileID: 6206812011452395590}
   _attackPatternOverride: 0
   _useAttackPatternOverride: 0
   IsJumpReady: 0
-  JumpHeight: 10
+  JumpHeight: 15
   minStoneAmount: 3
   maxStoneAmount: 5
 --- !u!50 &6232142430721583515
@@ -387,6 +386,91 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1339346711076140948}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7643527135220250588
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4572704021897684337}
+  - component: {fileID: 780639606121127858}
+  - component: {fileID: 3265125566128317008}
+  m_Layer: 13
+  m_Name: Hitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &4572704021897684337
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7643527135220250588}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0.70710576, w: 0.70710784}
+  m_LocalPosition: {x: -0.45659447, y: -0.62, z: 0}
+  m_LocalScale: {x: 3.5714288, y: 3.5714288, z: 3.5714288}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1118945451909928524}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+--- !u!114 &780639606121127858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7643527135220250588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f2b524d0d4fcfd4fa22c938656aecfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Hitbox
+  damage: 1
+  owner: {fileID: 426694987999134209}
+  isContinuousDamage: 0
+--- !u!70 &3265125566128317008
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7643527135220250588}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: -0.027970862, y: 0.03869507}
+  m_Size: {x: 0.8291271, y: 1.0492058}
+  m_Direction: 0
 --- !u!1 &8530349111786631701
 GameObject:
   m_ObjectHideFlags: 0
@@ -465,7 +549,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 6988288166197042017, guid: 072b606ca7fef504f853445a83746d9b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

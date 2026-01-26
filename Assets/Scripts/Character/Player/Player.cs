@@ -117,6 +117,7 @@ public partial class Player : Character, IDamageable
         Hp = _maxHp;
         _stateMachine.Update();
         
+        BGMManager.Instance.PlayStageBGM();
         GameResultSingleton.Instance?.InitResult();
         GameResultSingleton.Instance?.StartTimer();
     }
