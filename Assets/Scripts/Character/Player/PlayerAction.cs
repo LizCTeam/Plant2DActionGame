@@ -138,9 +138,18 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Switching"",
+                    ""name"": ""LeftSwitching"",
                     ""type"": ""Button"",
                     ""id"": ""81a8c571-6d78-46d7-864d-8fcfabf4de77"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RightSwitching"",
+                    ""type"": ""Button"",
+                    ""id"": ""f7c17492-0b50-4928-a8a4-55b3bdc10e7e"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -384,29 +393,40 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Gamepad"",
-                    ""action"": ""Switching"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""b1b4d519-9b60-46cb-a8ec-56f30b30142e"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Switching"",
+                    ""action"": ""LeftSwitching"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
                     ""id"": ""4fc79628-0501-4b36-841d-4ad2083d1bc2"",
-                    ""path"": ""<Keyboard>/r"",
+                    ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Switching"",
+                    ""action"": ""LeftSwitching"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""afb2ae3f-c312-404f-8c1a-ba3489a89e39"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightSwitching"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1d122c80-ba22-4269-a3f3-ca4d198b34c3"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightSwitching"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -1021,7 +1041,8 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_UniqueAction = m_Player.FindAction("UniqueAction", throwIfNotFound: true);
-        m_Player_Switching = m_Player.FindAction("Switching", throwIfNotFound: true);
+        m_Player_LeftSwitching = m_Player.FindAction("LeftSwitching", throwIfNotFound: true);
+        m_Player_RightSwitching = m_Player.FindAction("RightSwitching", throwIfNotFound: true);
         m_Player_ExitAction = m_Player.FindAction("ExitAction", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
@@ -1121,7 +1142,8 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_UniqueAction;
-    private readonly InputAction m_Player_Switching;
+    private readonly InputAction m_Player_LeftSwitching;
+    private readonly InputAction m_Player_RightSwitching;
     private readonly InputAction m_Player_ExitAction;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
@@ -1155,9 +1177,13 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @UniqueAction => m_Wrapper.m_Player_UniqueAction;
         /// <summary>
-        /// Provides access to the underlying input action "Player/Switching".
+        /// Provides access to the underlying input action "Player/LeftSwitching".
         /// </summary>
-        public InputAction @Switching => m_Wrapper.m_Player_Switching;
+        public InputAction @LeftSwitching => m_Wrapper.m_Player_LeftSwitching;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/RightSwitching".
+        /// </summary>
+        public InputAction @RightSwitching => m_Wrapper.m_Player_RightSwitching;
         /// <summary>
         /// Provides access to the underlying input action "Player/ExitAction".
         /// </summary>
@@ -1203,9 +1229,12 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
             @UniqueAction.started += instance.OnUniqueAction;
             @UniqueAction.performed += instance.OnUniqueAction;
             @UniqueAction.canceled += instance.OnUniqueAction;
-            @Switching.started += instance.OnSwitching;
-            @Switching.performed += instance.OnSwitching;
-            @Switching.canceled += instance.OnSwitching;
+            @LeftSwitching.started += instance.OnLeftSwitching;
+            @LeftSwitching.performed += instance.OnLeftSwitching;
+            @LeftSwitching.canceled += instance.OnLeftSwitching;
+            @RightSwitching.started += instance.OnRightSwitching;
+            @RightSwitching.performed += instance.OnRightSwitching;
+            @RightSwitching.canceled += instance.OnRightSwitching;
             @ExitAction.started += instance.OnExitAction;
             @ExitAction.performed += instance.OnExitAction;
             @ExitAction.canceled += instance.OnExitAction;
@@ -1235,9 +1264,12 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
             @UniqueAction.started -= instance.OnUniqueAction;
             @UniqueAction.performed -= instance.OnUniqueAction;
             @UniqueAction.canceled -= instance.OnUniqueAction;
-            @Switching.started -= instance.OnSwitching;
-            @Switching.performed -= instance.OnSwitching;
-            @Switching.canceled -= instance.OnSwitching;
+            @LeftSwitching.started -= instance.OnLeftSwitching;
+            @LeftSwitching.performed -= instance.OnLeftSwitching;
+            @LeftSwitching.canceled -= instance.OnLeftSwitching;
+            @RightSwitching.started -= instance.OnRightSwitching;
+            @RightSwitching.performed -= instance.OnRightSwitching;
+            @RightSwitching.canceled -= instance.OnRightSwitching;
             @ExitAction.started -= instance.OnExitAction;
             @ExitAction.performed -= instance.OnExitAction;
             @ExitAction.canceled -= instance.OnExitAction;
@@ -1577,12 +1609,19 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnUniqueAction(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Switching" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "LeftSwitching" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnSwitching(InputAction.CallbackContext context);
+        void OnLeftSwitching(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "RightSwitching" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnRightSwitching(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "ExitAction" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

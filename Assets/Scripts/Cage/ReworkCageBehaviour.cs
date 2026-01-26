@@ -50,7 +50,8 @@ public partial class ReworkCageBehaviour : BasicBehaviour
     } 
     
     public event Action<InputAction.CallbackContext> UniqueAction;
-    public event Action<InputAction.CallbackContext> SwitchAction;
+    public event Action<InputAction.CallbackContext> LeftSwitchAction;
+    public event Action<InputAction.CallbackContext> RightSwitchAction;
     public event Action<InputAction.CallbackContext> Fire;
     
     private Dictionary<VegetableType, IHasAbility> _abilities = new Dictionary<VegetableType, IHasAbility>();
@@ -103,7 +104,19 @@ public partial class ReworkCageBehaviour : BasicBehaviour
         stateMachine.Update();
     }
     
-    public void SwitchSeed()
+    public void LeftSwitchSeed()
+    {
+        Timer = 0f;
+        var maxTypeCount = PlantAttributeData.Count;
+        var plantKeys = PlantAttributeData.Keys;
+        var plantTypes = new VegetableType[maxTypeCount];
+        var index = ((int)CurrentVegetableType - 1) % maxTypeCount;
+        index = index < 0 ? index + maxTypeCount : index;
+        plantKeys.CopyTo(plantTypes, 0);
+        CurrentVegetableType = plantTypes[index];
+    }
+    
+    public void RightSwitchSeed()
     {
         Timer = 0f;
         var maxTypeCount = PlantAttributeData.Count;
@@ -118,9 +131,14 @@ public partial class ReworkCageBehaviour : BasicBehaviour
         _abilities[CurrentVegetableType]?.UseAbility(Player);
     }
     
-    public virtual void OnSwitchAction(InputAction.CallbackContext obj)
+    public virtual void OnLeftSwitchAction(InputAction.CallbackContext obj)
     {
-        if(!Player.Controller.isPaused) SwitchAction?.Invoke(obj);
+        if(!Player.Controller.isPaused) LeftSwitchAction?.Invoke(obj);
+    }
+    
+    public virtual void OnRightSwitchAction(InputAction.CallbackContext obj)
+    {
+        if(!Player.Controller.isPaused) RightSwitchAction?.Invoke(obj);
     }
     
     public virtual void OnUniqueAction(InputAction.CallbackContext obj)
