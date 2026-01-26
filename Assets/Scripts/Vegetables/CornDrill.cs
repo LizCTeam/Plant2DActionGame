@@ -40,6 +40,7 @@ public class CornDrill : BasicBehaviour
     protected override void OnStart()
     {
         base.OnStart();
+        SoundManagerSingleton.Instance.PlaySound("Shoot");
         GameObject _playerObject = GameObject.FindWithTag("Player");
         _player = _playerObject?.GetComponent<Player>();
         _playerController = _playerObject?.GetComponent<PlayerController>();
@@ -84,6 +85,14 @@ public class CornDrill : BasicBehaviour
 
         //シーケンス完了時にコールバックを設定
         sequence.OnComplete(OnDestroy);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            OnDestroy();
+        }
     }
 
     private void OnDestroy()

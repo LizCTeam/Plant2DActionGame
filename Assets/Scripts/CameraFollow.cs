@@ -3,6 +3,7 @@ using UnityEngine;
 public class CameraFollow : BasicBehaviour
 {
     [SerializeField] private Transform player;
+    [SerializeField] private float _offsetX = 0f;
     [SerializeField] private float _minY = 0f;
     [SerializeField] private float _thresholdY = 10f;
     [SerializeField] private float _smoothSpeed = 5f;
@@ -22,8 +23,8 @@ public class CameraFollow : BasicBehaviour
         Vector3 targetPos = transform.position;
         float lerpTargetY = 0;
 
-        // xŽ²‚Íí‚É’Ç]
-        targetPos.x = player.position.x + 6f;
+        // xï¿½ï¿½ï¿½Íï¿½É’Ç]
+        targetPos.x = player.position.x + _offsetX;
 
         //if(player.position.y > _thresholdY)
         //{

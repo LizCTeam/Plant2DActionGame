@@ -40,6 +40,7 @@ public class CarrotMissile : ProjectileBehaviour
         protected internal override void Enter()
         {
             //goal_position = parent.global_position.y - goal_position
+            SoundManagerSingleton.Instance.PlaySound("Shoot");
             goalPosition = 5;
             goalPosition = this.Context.transform.position.y + goalPosition;
             this.Context.transform.DOMoveY(goalPosition, 0.8f)
