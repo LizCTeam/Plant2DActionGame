@@ -80,10 +80,15 @@ public class PlayerController : BasicBehaviour
         playerAct.UniqueAction.started += OnUniqueAction;
         playerAct.UniqueAction.performed += OnUniqueAction;
         playerAct.UniqueAction.canceled += OnUniqueAction;
-
-        playerAct.Switching.started += OnSwitching;
-        playerAct.Switching.performed += OnSwitching;
-        playerAct.Switching.canceled += OnSwitching;
+        
+        playerAct.LeftSwitching.started += OnLeftSwitching;
+        playerAct.LeftSwitching.performed += OnLeftSwitching;
+        playerAct.LeftSwitching.canceled += OnLeftSwitching;
+        
+        playerAct.RightSwitching.started += OnRightSwitching;
+        playerAct.RightSwitching.performed += OnRightSwitching;
+        playerAct.RightSwitching.canceled += OnRightSwitching;
+        
 
         playerAct.ExitAction.started += OnExitAction;
         playerAct.ExitAction.performed += OnExitAction;
@@ -108,9 +113,13 @@ public class PlayerController : BasicBehaviour
         playerAct.UniqueAction.performed -= OnUniqueAction;
         playerAct.UniqueAction.canceled -= OnUniqueAction;
 
-        playerAct.Switching.started -= OnSwitching;
-        playerAct.Switching.performed -= OnSwitching;
-        playerAct.Switching.canceled -= OnSwitching;
+        playerAct.LeftSwitching.started -= OnLeftSwitching;
+        playerAct.LeftSwitching.performed -= OnLeftSwitching;
+        playerAct.LeftSwitching.canceled -= OnLeftSwitching;
+        
+        playerAct.RightSwitching.started -= OnRightSwitching;
+        playerAct.RightSwitching.performed -= OnRightSwitching;
+        playerAct.RightSwitching.canceled -= OnRightSwitching;
 
         playerAct.ExitAction.started -= OnExitAction;
         playerAct.ExitAction.performed -= OnExitAction;
@@ -154,12 +163,22 @@ public class PlayerController : BasicBehaviour
         cage.OnUniqueAction(context);
     }
 
-    public void OnSwitching(InputAction.CallbackContext context)
+    public void OnLeftSwitching(InputAction.CallbackContext context)
     {
         if (_player.IsClear) return;
         if (!isPaused && !_player.IsDead && context.started)
         {
-            cage.OnSwitchAction(context);
+            cage.OnLeftSwitchAction(context);
+            soundSeedChange.Play();
+        }
+    }
+    
+    public void OnRightSwitching(InputAction.CallbackContext context)
+    {
+        if (_player.IsClear) return;
+        if (!isPaused && !_player.IsDead && context.started)
+        {
+            cage.OnRightSwitchAction(context);
             soundSeedChange.Play();
         }
     }

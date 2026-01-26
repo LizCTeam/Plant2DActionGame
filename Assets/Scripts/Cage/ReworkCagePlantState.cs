@@ -9,7 +9,8 @@ public partial class ReworkCageBehaviour
     {
         protected internal override void Enter()
         {
-            Context.SwitchAction += SwitchAction;
+            Context.LeftSwitchAction += LeftSwitchAction;
+            Context.RightSwitchAction += RightSwitchAction;
             Context.Fire += Fire;
             Context.IsGrowing = true;
         }
@@ -35,16 +36,25 @@ public partial class ReworkCageBehaviour
         
         protected internal override void Exit()
         {
-            Context.SwitchAction -= SwitchAction;
+            Context.LeftSwitchAction -= LeftSwitchAction;
+            Context.RightSwitchAction -= RightSwitchAction;
             Context.Fire -= Fire;
             Context.IsGrowing = false;
         }
         
-        private void SwitchAction(InputAction.CallbackContext context)
+        private void LeftSwitchAction(InputAction.CallbackContext context)
         {
             if (context.phase == InputActionPhase.Started)
             {
-                Context.SwitchSeed();
+                Context.LeftSwitchSeed();
+            }
+        }
+        
+        private void RightSwitchAction(InputAction.CallbackContext context)
+        {
+            if (context.phase == InputActionPhase.Started)
+            {
+                Context.RightSwitchSeed();
             }
         }
 

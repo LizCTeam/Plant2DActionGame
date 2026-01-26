@@ -52,9 +52,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Switching",
+                    "name": "LeftSwitching",
                     "type": "Button",
                     "id": "81a8c571-6d78-46d7-864d-8fcfabf4de77",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RightSwitching",
+                    "type": "Button",
+                    "id": "f7c17492-0b50-4928-a8a4-55b3bdc10e7e",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -298,29 +307,40 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
-                    "action": "Switching",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b1b4d519-9b60-46cb-a8ec-56f30b30142e",
-                    "path": "<Gamepad>/rightShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Switching",
+                    "action": "LeftSwitching",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "4fc79628-0501-4b36-841d-4ad2083d1bc2",
-                    "path": "<Keyboard>/r",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Switching",
+                    "action": "LeftSwitching",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "afb2ae3f-c312-404f-8c1a-ba3489a89e39",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightSwitching",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1d122c80-ba22-4269-a3f3-ca4d198b34c3",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightSwitching",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
