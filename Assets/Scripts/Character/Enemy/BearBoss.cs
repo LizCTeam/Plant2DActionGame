@@ -26,7 +26,7 @@ public partial class BearBoss : Enemy, IDamageable
 
     [HideInInspector] public bool IsJumpReady;
 
-    private const float WallCheckDistance = 1f;
+    private const float WallCheckDistance = 4f;
     private Vector2 _raycastOffset = new Vector2(0.0f, 0.0f);
     private Animator _bearAnimator;
     private Hurtbox _hurtbox;

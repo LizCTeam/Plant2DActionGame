@@ -39,6 +39,13 @@ public partial class BearBoss
 
             Context.SpriteFlip();
 
+            if (Context.IsWallAhead(new Vector2(playerToDirection.x, 0).normalized, WallCheckDistance))
+            {
+                var actionType = Context.EvaluateEvent(Context._actionQueue.Dequeue());
+                stateMachine.SendEvent((int)actionType);
+                return;
+            } 
+
             switch (_hasPassPlayer)
             {
                 case false when _previousPlayerToDirection.x * playerToDirection.x < 0f:
