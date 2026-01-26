@@ -26,7 +26,7 @@ public partial class BearBoss : Enemy, IDamageable
 
     [HideInInspector] public bool IsJumpReady;
 
-    protected float _wallCheckDistance = 20f;
+    private const float WallCheckDistance = 1f;
     private Vector2 _raycastOffset = new Vector2(0.0f, 0.0f);
     private Animator _bearAnimator;
     private Hurtbox _hurtbox;
@@ -193,12 +193,11 @@ public partial class BearBoss : Enemy, IDamageable
         }
     }
 
-    private bool IsWallAhead()
+    private bool IsWallAhead(Vector2 dir, float length)
     {
-        Vector2 origin = (Vector2)transform.position + _raycastOffset;
-        Vector2 dir = new Vector2(_body.linearVelocityX, 0f);
-        RaycastHit2D hit = Physics2D.Raycast(origin, dir, _wallCheckDistance, GroundLayer);
+        var origin = (Vector2)transform.position;
+        var hit = Physics2D.Raycast(origin, dir.normalized, length, GroundLayer);
 
-        return hit.collider != null;
+        return hit.collider;
     }
 }

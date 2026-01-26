@@ -9,16 +9,18 @@ public class Character : BasicBehaviour
     
     public LayerMask GroundLayer;
     public Rigidbody2D _body; //改名したいけど使っている場所が多いから変更しないよ
+    private Collider2D _collider;
 
     protected override void OnAwake()
     {
         base.OnAwake();
+        _body = GetComponent<Rigidbody2D>();
+        _collider = GetComponent<Collider2D>();
     }
 
     protected override void OnStart()
     {
-        base.OnAwake();
-        _body = GetComponent<Rigidbody2D>();
+        base.OnStart();
     }
     
     protected override void OnUpdate()
@@ -30,7 +32,14 @@ public class Character : BasicBehaviour
     public bool isGrounded()
     {
         //BoxColliderにあるCastを使って地面の判定をboolで返します。
-        Collider2D c = GetComponent<Collider2D>();
-        return Physics2D.BoxCast(c.bounds.center, c.bounds.size, 0f, Vector2.down, .1f, GroundLayer);
+        var hit = Physics2D.BoxCast(
+            _collider.bounds.center, 
+            _collider.bounds.size, 
+            0f, 
+            Vector2.down, 
+            .1f, 
+            GroundLayer
+        );
+        return hit && Vector2.Dot(hit.normal, Vector2.up) > 0.5;
     }
 }

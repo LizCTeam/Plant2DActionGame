@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using IceMilkTea.StateMachine;
 using DG.Tweening;
 using UnityEngine;
@@ -17,18 +18,27 @@ public partial class BearBoss : Enemy, IDamageable
     {
         private IEnumerator HipDropCoroutine()
         {
+            yield return new WaitUntil(() => Context.isGrounded());
+
             Context._bearAnimator.SetInteger(ParameterState, (int)BearAnimationState.Jump);
             yield return new WaitWhile(() => Context._bearAnimator.GetCurrentAnimatorStateInfo(0).IsName("BearBossJump"));
             yield return new WaitUntil(() => Context.IsJumpReady);
 
             var playerPos = Context._player.transform.position;
             var targetPos = new Vector3(playerPos.x, Context.transform.position.y + Context.JumpHeight, Context.transform.position.z);
+            var horizontalDir = Math.Sign((targetPos - Context.transform.position).x);
 
-            var isJumpFinish = false;
-            Context.transform.DOMove(targetPos, 1f)
-                .SetEase(Ease.OutQuart)
-                .OnComplete(() => isJumpFinish = true);
-            yield return new WaitUntil(() => isJumpFinish);
+            var moveTween = Context.transform
+                .DOMove(targetPos, 1f)
+                .SetEase(Ease.OutQuart);
+            yield return new WaitWhile(() => {
+                if (Context.IsWallAhead(new Vector2(horizontalDir, 0), WallCheckDistance))
+                {
+                    moveTween.Kill();
+                    return false;
+                }
+                return moveTween.IsPlaying();
+            });
 
             Context._bearAnimator.SetInteger(ParameterState, (int)BearAnimationState.HipDrop);
             yield return new WaitWhile(() => Context._bearAnimator.GetCurrentAnimatorStateInfo(0).IsName("BearBossHipDrop"));
