@@ -16,7 +16,7 @@ public partial class BearBoss : Enemy, IDamageable
     [SerializeField] protected float _deaccelPower = 0.1f;
     [SerializeField] protected float _maxSpeed = 10f;
 
-    [Header("必須設定項目")] [SerializeField] protected GameObject _fallingRocks;
+    [Header("必須設定項目")] [SerializeField] public GameObject _fallingRocks;
     [SerializeField] protected GameObject _stone;
     [SerializeField] protected GameObject VisualRoot;
     [SerializeField] protected GameObject _headPos;
@@ -35,6 +35,8 @@ public partial class BearBoss : Enemy, IDamageable
 
     private ImtStateMachine<BearBoss> stateMachine;
 
+    public bool IsDead = false;
+    
     public enum StateEvent
     {
         BodyBlowEnter,
@@ -93,8 +95,6 @@ public partial class BearBoss : Enemy, IDamageable
         stateMachine.AddTransition<BearBossWeakness, BearBossDead>((int)StateEvent.Dead);
 
         stateMachine.SetStartState<BearBossIdle>();
-
-        _hurtbox.gameObject.SetActive(false);
     }
 
     protected override void OnStart()
@@ -108,6 +108,12 @@ public partial class BearBoss : Enemy, IDamageable
     {
         base.OnUpdate();
         stateMachine.Update();
+
+        if (_hp <= 0)
+        {
+            BGMManager.Instance.PlayStageBGM();
+            GameManager.Instance.IsBossDead = true;
+        }
     }
 
     protected override void OnFixedUpdate()
@@ -118,7 +124,9 @@ public partial class BearBoss : Enemy, IDamageable
 
     public void OnDamaged(int damage)
     {
-        this._hp -= damage;
+        SoundManagerSingleton.Instance.PlaySound("Hurt");
+        EffectManager.Instance.PlayEffect(transform.position);
+        _hp -= damage;
     }
 
     public void SlamStone()

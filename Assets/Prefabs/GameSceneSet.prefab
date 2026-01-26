@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab9a53d00bd423745915ecdfa1937044, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  IsBossDead: 0
+  Goal: {fileID: 1905230776509058962}
 --- !u!1 &929118792222993095
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,7 +20,6 @@ public partial class BearBoss : Enemy, IDamageable
         // 状態へ突入時の処理はこのEnterで行う
         protected internal override void Enter()
         {
-            Context._hurtbox.gameObject.SetActive(true);
             Context.StartCoroutine(WeaknessCoroutine());
         }
 
@@ -32,7 +31,7 @@ public partial class BearBoss : Enemy, IDamageable
         // 状態から脱出する時の処理はこのExitで行う
         protected internal override void Exit()
         {
-            Context._hurtbox.gameObject.SetActive(false);
+            
         }
     }
 }
