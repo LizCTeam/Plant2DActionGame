@@ -71,8 +71,11 @@ public partial class ReworkCageBehaviour : BasicBehaviour
         Mature
     }
     
+    private static readonly int DoReady = Animator.StringToHash("DoReady");
     private static readonly int Level = Animator.StringToHash("GrowthLevel");
     private ImtStateMachine<ReworkCageBehaviour> stateMachine;
+    private GrowthStage _prevGrowthStage;
+    private bool _hasAttackReadyPlayed = false;
     
     
     protected override void OnAwake()
@@ -106,7 +109,7 @@ public partial class ReworkCageBehaviour : BasicBehaviour
     
     public void LeftSwitchSeed()
     {
-        Timer = 0f;
+        InitPlantState();
         var maxTypeCount = PlantAttributeData.Count;
         var plantKeys = PlantAttributeData.Keys;
         var plantTypes = new VegetableType[maxTypeCount];
@@ -118,12 +121,19 @@ public partial class ReworkCageBehaviour : BasicBehaviour
     
     public void RightSwitchSeed()
     {
-        Timer = 0f;
+        InitPlantState();
         var maxTypeCount = PlantAttributeData.Count;
         var plantKeys = PlantAttributeData.Keys;
         var plantTypes = new VegetableType[maxTypeCount];
         plantKeys.CopyTo(plantTypes, 0);
         CurrentVegetableType = plantTypes[(int)(CurrentVegetableType + 1) % maxTypeCount];
+    }
+    
+    private void InitPlantState()
+    {
+        _hasAttackReadyPlayed = false;
+        _prevGrowthStage = GrowthStage.Nothing;
+        Timer = 0f;
     }
     
     public void AbilityUse()

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -9,6 +10,9 @@ public class CornDrill : BasicBehaviour
     private float _useTimer;
     [SerializeField]
     private float _distance = 10f;
+
+    [SerializeField] 
+    private float _delay = 0.1f;
     [HideInInspector]
     public float _scaleMultiplier = 1f;
     
@@ -30,16 +34,19 @@ public class CornDrill : BasicBehaviour
     
     private Player _player;
     private PlayerController _playerController;
+    private Collider2D _collider2D;
 
     protected override void OnAwake()
     {
         base.OnAwake();
         OwnerHitbox = GetComponentInChildren<Hitbox>();
+        _collider2D = GetComponentInChildren<Collider2D>();
     }
 
     protected override void OnStart()
     {
         base.OnStart();
+        _collider2D.enabled = false;
         SoundManagerSingleton.Instance.PlaySound("Shoot");
         GameObject _playerObject = GameObject.FindWithTag("Player");
         _player = _playerObject?.GetComponent<Player>();
@@ -48,9 +55,16 @@ public class CornDrill : BasicBehaviour
         var playerFireAct = _playerController.playerAct.Fire;
         if (playerFireAct != null)
         {
+            StartCoroutine(DelayEnableCollision(_delay));
             Shoot();
         }
         //_player.speedMultiplier = this._speedMultiplier;
+    }
+
+    private IEnumerator DelayEnableCollision(float delay)
+    {
+        yield return new WaitForSeconds(delay); 
+        _collider2D.enabled = true;
     }
 
     private void Shoot()

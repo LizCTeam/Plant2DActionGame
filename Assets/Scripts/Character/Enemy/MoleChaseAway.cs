@@ -6,7 +6,7 @@ using UnityEngine;
 public partial class Mole : Enemy, IDamageable
 {
     private float _throwCooldown = 0.5f;
-    private float _maxCooldown = 1.0f;
+    private float _maxCooldown = 2.0f;
     
     private class MoleChaseAway : ImtStateMachine<Mole>.State
     {

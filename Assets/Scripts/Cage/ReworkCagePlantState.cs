@@ -5,8 +5,11 @@ using UnityEngine.InputSystem;
 
 public partial class ReworkCageBehaviour
 {
+
     private class PlantState : ImtStateMachine<ReworkCageBehaviour>.State
     {
+
+        
         protected internal override void Enter()
         {
             Context.LeftSwitchAction += LeftSwitchAction;
@@ -17,20 +20,29 @@ public partial class ReworkCageBehaviour
         
         protected internal override void Update()
         {
+            var currentGrowthStage = Context.GrowthLevel;
             float maxTime = Context.PlantAttributeData[Context.CurrentVegetableType].MaxGrowthDuration;
-            if (Context.Timer < maxTime)
+            if (Context.Timer <= maxTime)
             {
                 Context.Timer += Time.deltaTime;
                 Context.Timer = Mathf.Clamp(Context.Timer, 0, maxTime);
-                Context._vegeAnimatior.SetInteger(Level, (int)Context.GrowthLevel);
+                Context._vegeAnimatior.SetInteger(Level, (int)currentGrowthStage);
             }
+
+            if (Context._prevGrowthStage == GrowthStage.Nothing && currentGrowthStage != GrowthStage.Nothing && !Context._hasAttackReadyPlayed)
+            {
+                Context.Player.AttackReadyAnimator.SetTrigger(DoReady);
+                Context._hasAttackReadyPlayed = true;
+            }
+            
+            Context._prevGrowthStage = currentGrowthStage;
         }
         
         private void Fire(InputAction.CallbackContext context)
         {
             if(Context.GrowthLevel == GrowthStage.Nothing) return;
             Context.AbilityUse();
-            InitPlantState();
+            Context.InitPlantState();
             Context._vegeAnimatior.SetInteger(Level, (int)Context.GrowthLevel);
         }
         
@@ -56,11 +68,6 @@ public partial class ReworkCageBehaviour
             {
                 Context.RightSwitchSeed();
             }
-        }
-
-        private void InitPlantState()
-        {
-            Context.Timer = 0f;
         }
     }
 }

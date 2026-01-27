@@ -300,6 +300,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CornDrill
   _useTimer: 3
   _distance: 15
+  _delay: 0.15
   _scaleMultiplier: 2
   OwnerHitbox: {fileID: 0}
 --- !u!1 &8479472205188074223

@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f98669c3133d40448833b09692ac744e, type: 3}
   m_Name: CornDrillData
   m_EditorClassIdentifier: Assembly-CSharp::PlantAttributeData
-  MaxGrowthDuration: 8
+  MaxGrowthDuration: 7
   VegetableType: 1
-  SeedingPercentage: 0.3
-  SproutPercentage: 0.6
+  SeedingPercentage: 0.35
+  SproutPercentage: 0.65
   SeedingDamage: 1
   SproutDamage: 2
   MatureDamage: 3

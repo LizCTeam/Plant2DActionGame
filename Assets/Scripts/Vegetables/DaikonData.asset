@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f98669c3133d40448833b09692ac744e, type: 3}
   m_Name: DaikonData
   m_EditorClassIdentifier: Assembly-CSharp::PlantAttributeData
-  MaxGrowthDuration: 4
+  MaxGrowthDuration: 5
   VegetableType: 2
-  SeedingPercentage: 0.3
-  SproutPercentage: 0.6
+  SeedingPercentage: 0.35
+  SproutPercentage: 0.65
   SeedingDamage: 2
   SproutDamage: 4
   MatureDamage: 15
